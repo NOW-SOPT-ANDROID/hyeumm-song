@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.now.databinding.ActivityLoginBinding
 
@@ -15,6 +16,9 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //회원가입에서 사용자 정보 받아옴
+        getUser()
+
         //회원가입 페이지로 넘어가기
         binding.signupBtn.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
@@ -22,7 +26,29 @@ class LoginActivity : AppCompatActivity() {
             resultLauncher.launch(intent)
         }
     }
-    private fun login(id: String, pw: String) :Boolean {
+    private fun getUser() { // 아쉬운 부분
+        var id = ""
+        var pw = ""
+        var nick = ""
+        resultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                id = result.data?.getStringExtra("id") ?: ""
+                pw = result.data?.getStringExtra("pw") ?: ""
+                nick = result.data?.getStringExtra("nick") ?: ""
+            }
+        }
+        binding.loginBtn.setOnClickListener {
+            if (login(id, pw)) {
+                val intent = Intent(this, MainActivity::class.java)
+                //메인 액티비티로 데이터를 보냄
+                intent.putExtra("id", id).putExtra("pw", pw).putExtra("nick", nick)
+                startActivity(intent)
+            }
+        }
+    }
+        private fun login(id: String, pw: String) :Boolean {
         var loginBool = false
         val userId = binding.getID.text.toString()
         val userPw = binding.getPw.text.toString()
