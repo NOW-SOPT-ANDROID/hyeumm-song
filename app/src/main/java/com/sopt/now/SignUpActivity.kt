@@ -1,5 +1,6 @@
 package com.sopt.now
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -14,6 +15,21 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.signup.setOnClickListener {
+            val id = binding.setID.text.toString()
+            val pw = binding.setPw.text.toString()
+            val nick = binding.setNick.text.toString()
+            val etc = binding.setEtc.text.toString()
+
+            if(SignUp(id,pw,nick,etc)) {
+                val intent= Intent(this,LoginActivity::class.java)
+                //로그인 액티비티로 데이터를 보냄
+                intent.putExtra("id",id).putExtra("pw",pw).putExtra("nick",nick)
+                setResult(RESULT_OK,intent)
+                finish()
+            }
+        }
     }
     //회원가입 가능한지 검사
     private fun SignUp(id:String,pw:String,nick:String,etc:String):Boolean {
