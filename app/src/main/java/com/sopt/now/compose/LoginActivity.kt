@@ -67,7 +67,7 @@ fun LoginUI() {
         Text(text = "비밀번호")
         TextField(
             value = pw,
-            onValueChange = {id = pw},
+            onValueChange = {pw = it},
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
