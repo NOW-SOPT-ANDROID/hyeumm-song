@@ -48,12 +48,11 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-        private fun login(id: String, pw: String) :Boolean {
+    private fun login(id: String, pw: String) :Boolean {
         var loginBool = false
         val userId = binding.getID.text.toString()
         val userPw = binding.getPw.text.toString()
         val message = when{
-            userId.isEmpty() || userPw.isEmpty() -> "아이디와 비밀번호를 입력해주세요"
             userId != id || userPw != pw -> "아이디 혹은 비밀번호가 일치하지 않습니다."
             else -> {
                 loginBool = true
