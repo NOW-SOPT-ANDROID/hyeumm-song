@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
@@ -28,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 
 class LoginActivity : ComponentActivity() {
@@ -49,6 +51,7 @@ class LoginActivity : ComponentActivity() {
         }
     }
 }
+//로그인 화면
 @Composable
 fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
     val context = LocalContext.current
@@ -56,12 +59,17 @@ fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
     var pw by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier.padding(30.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween
+        modifier = Modifier.fillMaxSize().padding(30.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Welcome to SOPT")
-        Text(text = "ID")
+        Text(
+            text = "Welcome to SOPT",
+            fontSize = 30.sp
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        Text(
+            text = "ID"
+        )
         TextField(
             value = id,
             onValueChange = {id = it},
@@ -72,6 +80,7 @@ fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
             singleLine = true,
             leadingIcon = { Icon(Icons.Filled.Person,contentDescription = "User Icon") }
             )
+        Spacer(modifier = Modifier.height(30.dp))
         Text(text = "비밀번호")
         TextField(
             value = pw,
@@ -83,6 +92,7 @@ fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
             singleLine = true,
             leadingIcon = { Icon(Icons.Filled.Person,contentDescription = "User Icon") },
         )
+        Spacer(modifier = Modifier.weight(1f))
         Button(
             onClick = {
                 val message = when{
@@ -101,6 +111,7 @@ fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
         ) {
             Text("로그인")
         }
+        Spacer(modifier = Modifier.height(20.dp))
         Button(
             onClick = {
                 val intent = Intent(context,SignUpActivity::class.java)
