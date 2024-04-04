@@ -15,8 +15,8 @@ class MainActivity : AppCompatActivity() {
         getUser()
     }
     private fun getUser() {
-        binding.nick.text = intent.getStringExtra("nick")
-        binding.myId.text = intent.getStringExtra("id")
-        binding.myPw.text = intent.getStringExtra("pw")
+        binding.tvMainNick.text = intent.getStringExtra("nick")
+        binding.tvMainId.text = intent.getStringExtra("id")
+        binding.tvMainPw.text = intent.getStringExtra("pw")
     }
 }

@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
         getUser()
 
         //회원가입 페이지로 넘어가기
-        binding.signupBtn.setOnClickListener {
+        binding.btnLoginSignIn.setOnClickListener {
             movetoSignUp()
         }
     }
@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
                 nick = result.data?.getStringExtra("nick") ?: ""
             }
         }
-        binding.loginBtn.setOnClickListener {
+        binding.btnLogin.setOnClickListener {
             sendData(id,pw,nick)
         }
     }
@@ -48,8 +48,8 @@ class LoginActivity : AppCompatActivity() {
     }
     private fun login(id: String, pw: String) :Boolean {
         var loginBool = false
-        val userId = binding.getID.text.toString()
-        val userPw = binding.getPw.text.toString()
+        val userId = binding.etvLoginId.text.toString()
+        val userPw = binding.etvLoginPw.text.toString()
         val message = when{
             userId != id || userPw != pw -> "아이디 혹은 비밀번호가 일치하지 않습니다."
             else -> {

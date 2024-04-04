@@ -16,11 +16,11 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.signup.setOnClickListener {
-            val id = binding.setID.text.toString()
-            val pw = binding.setPw.text.toString()
-            val nick = binding.setNick.text.toString()
-            val etc = binding.setEtc.text.toString()
+        binding.btnSignIn.setOnClickListener {
+            val id = binding.etvSignInId.text.toString()
+            val pw = binding.etvSignInPw.text.toString()
+            val nick = binding.etvSignInNick.text.toString()
+            val etc = binding.etvSignInEtc.text.toString()
 
             if(SignUp(id,pw,nick,etc)) {
                 val intent= Intent(this,LoginActivity::class.java)
