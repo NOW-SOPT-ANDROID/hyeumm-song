@@ -21,9 +21,7 @@ class LoginActivity : AppCompatActivity() {
 
         //회원가입 페이지로 넘어가기
         binding.signupBtn.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            //회원가입 데이터를 받아오기 위해 startActivity가 아닌 resultLauncher사용
-            resultLauncher.launch(intent)
+            movetoSignUp()
         }
     }
     private fun getUser() { // 아쉬운 부분
@@ -40,13 +38,13 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         binding.loginBtn.setOnClickListener {
-            if (login(id, pw)) {
-                val intent = Intent(this, MainActivity::class.java)
-                //메인 액티비티로 데이터를 보냄
-                intent.putExtra("id", id).putExtra("pw", pw).putExtra("nick", nick)
-                startActivity(intent)
-            }
+            sendData(id,pw)
         }
+    }
+    private fun movetoSignUp(){
+        val intent = Intent(this, SignUpActivity::class.java)
+        //회원가입 데이터를 받아오기 위해 startActivity가 아닌 resultLauncher사용
+        resultLauncher.launch(intent)
     }
     private fun login(id: String, pw: String) :Boolean {
         var loginBool = false
@@ -61,5 +59,13 @@ class LoginActivity : AppCompatActivity() {
         }
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
         return loginBool
+    }
+    private fun sendData(id:String,pw:String){
+        if (login(id, pw)) {
+            val intent = Intent(this, MainActivity::class.java)
+            //메인 액티비티로 데이터를 보냄
+            intent.putExtra("id", id).putExtra("pw", pw).putExtra("nick", nick)
+            startActivity(intent)
+        }
     }
 }
