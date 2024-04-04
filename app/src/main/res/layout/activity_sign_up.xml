@@ -7,17 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
 
-
     <TextView
         android:id="@+id/tv_sign_in_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:padding="30dp"
         android:text="SIGN UP"
-        android:textColor="#BBEA00"
+        android:textColor="@color/color_sopt"
         android:textSize="35sp"
         android:textStyle="bold"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"/>
     <EditText
         android:id="@+id/etv_sign_in_id"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="아이디를 입력해주세요"
         android:singleLine="true"
@@ -72,7 +72,7 @@
         app:layout_constraintStart_toStartOf="parent"/>
     <EditText
         android:id="@+id/etv_sign_in_pw"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="비밀번호를 입력해주세요"
         android:singleLine="true"
@@ -102,7 +102,7 @@
         app:layout_constraintStart_toStartOf="parent"/>
     <EditText
         android:id="@+id/etv_sign_in_nick"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="닉네임을 입력해주세요"
         android:singleLine="true"
@@ -132,7 +132,7 @@
         app:layout_constraintStart_toStartOf="parent"/>
     <EditText
         android:id="@+id/etv_sign_in_etc"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="하고싶은 말을 입력해주세요"
         android:singleLine="true"
@@ -142,11 +142,11 @@
         app:layout_constraintEnd_toEndOf="parent"/>
     <Button
         android:id="@+id/btn_sign_in"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginBottom="60dp"
-        android:backgroundTint="#BCEB00"
+        android:backgroundTint="@color/color_sopt"
         android:text="회원가입 하기"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
