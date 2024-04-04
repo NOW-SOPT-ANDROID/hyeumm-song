@@ -8,7 +8,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/topText"
+        android:id="@+id/tv_main_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/bottomText"
+        android:id="@+id/tv_main_title2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="10dp"
@@ -32,10 +32,10 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/topText" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_main_title" />
 
     <ImageView
-        android:id="@+id/image"
+        android:id="@+id/iv_main_user_img"
         android:layout_width="200dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
@@ -44,10 +44,10 @@
         app:layout_constraintDimensionRatio="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bottomText" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_main_title2" />
 
     <TextView
-        android:id="@+id/nick"
+        android:id="@+id/tv_main_nick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -56,9 +56,9 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image" />
+        app:layout_constraintTop_toBottomOf="@id/iv_main_user_img" />
     <TextView
-        android:id="@+id/id"
+        android:id="@+id/tv_main_title_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -67,19 +67,19 @@
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nick" />
+        app:layout_constraintTop_toBottomOf="@id/tv_main_nick" />
     <TextView
-        android:id="@+id/myId"
+        android:id="@+id/tv_main_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/id" />
+        app:layout_constraintTop_toBottomOf="@id/tv_main_title_id" />
 
     <TextView
-        android:id="@+id/pw"
+        android:id="@+id/tv_main_title_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -88,15 +88,15 @@
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/myId" />
+        app:layout_constraintTop_toBottomOf="@id/tv_main_id" />
 
     <TextView
-        android:id="@+id/myPw"
+        android:id="@+id/tv_main_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000000"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pw" />
+        app:layout_constraintTop_toBottomOf="@id/tv_main_title_pw" />
 </androidx.constraintlayout.widget.ConstraintLayout>
