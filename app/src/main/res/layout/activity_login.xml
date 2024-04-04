@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/tv_login_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:padding="30dp"
         android:text="Welcome to SOPT"
         android:textColor="#BBEA00"
@@ -19,7 +19,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/tv_login_id"
         android:layout_width="wrap_content"
@@ -33,7 +32,7 @@
         android:layout_marginTop="30dp"/>
     <EditText
         android:id="@+id/etv_login_id"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="아이디를 입력해주세요"
         android:singleLine="true"
@@ -41,7 +40,6 @@
         app:layout_constraintTop_toBottomOf="@id/tv_login_id"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
     <TextView
         android:id="@+id/tv_login_pw"
         android:layout_width="wrap_content"
@@ -55,7 +53,7 @@
         android:layout_marginTop="30dp"/>
     <EditText
         android:id="@+id/etv_login_pw"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="비밀번호를 입력해주세요"
         android:singleLine="true"
@@ -64,10 +62,9 @@
         app:layout_constraintTop_toBottomOf="@id/tv_login_pw"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:layout_marginBottom="80dp"
@@ -79,13 +76,12 @@
         app:layout_constraintStart_toStartOf="parent" />
     <TextView
         android:id="@+id/btn_login_sign_in"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="아직 회원이 아니라면?\n회원가입하러가기 >"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@+id/btn_login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
