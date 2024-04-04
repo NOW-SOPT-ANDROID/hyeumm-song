@@ -3,7 +3,6 @@ package com.sopt.now.compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -28,14 +27,17 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainUI()
+                    val userId = intent.getStringExtra("userId")
+                    val userPw = intent.getStringExtra("userPw")
+                    val userNick = intent.getStringExtra("userNick")
+                    MainUI(userId,userPw,userNick)
                 }
             }
         }
     }
 }
 @Composable
-fun MainUI(){
+fun MainUI(userId: String?="", userPw:String?="", userNick:String?=""){
     Column(
         modifier = Modifier.padding(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -44,9 +46,11 @@ fun MainUI(){
         Text(text = "NOW SOPT")
         Text(text = "SHOUT OUR PASSION TOGETHER")
         Text(text = "ID")
-        Text(text = "아이디 테스트")
+        Text(text = userId.toString())
         Text(text = "비밀번호")
-        Text(text = "비밀번호 테스트")
+        Text(text = userPw.toString())
+        Text(text = "닉네임")
+        Text(text = userNick.toString())
     }
 }
 @Preview(showBackground = true)

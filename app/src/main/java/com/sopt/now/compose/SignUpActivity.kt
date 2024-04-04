@@ -47,9 +47,9 @@ class SignUpActivity : ComponentActivity() {
     fun SignUpUI() {
     val context = LocalContext.current
     var id by remember { mutableStateOf("") }
-        var pw by remember { mutableStateOf("") }
-        var nick by remember { mutableStateOf("") }
-        var etc by remember { mutableStateOf("") }
+    var pw by remember { mutableStateOf("") }
+    var nick by remember { mutableStateOf("") }
+    var etc by remember { mutableStateOf("") }
 
     Column (
             modifier = Modifier.padding(10.dp),
@@ -96,6 +96,7 @@ class SignUpActivity : ComponentActivity() {
                     etc.length !in 1..Int.MAX_VALUE -> "하고싶은 말을 다시 설정하세요."
                     else -> {
                         val intent = Intent(context,LoginActivity::class.java)
+                        intent.putExtra("userId", id).putExtra("userPw", pw).putExtra("userNick", nick)
                         context.startActivity(intent)
                         "회원가입에 성공했습니다."
                     }

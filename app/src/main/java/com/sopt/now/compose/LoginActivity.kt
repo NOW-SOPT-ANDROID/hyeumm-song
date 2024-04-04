@@ -2,6 +2,7 @@ package com.sopt.now.compose
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -39,14 +40,17 @@ class LoginActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    LoginUI()
+                    val userId = intent.getStringExtra("userId")
+                    val userPw = intent.getStringExtra("userPw")
+                    val userNick = intent.getStringExtra("userNick")
+                    LoginUI(userId,userPw,userNick)
                 }
             }
         }
     }
 }
 @Composable
-fun LoginUI() {
+fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
     val context = LocalContext.current
     var id by remember { mutableStateOf("") }
     var pw by remember { mutableStateOf("") }
@@ -80,7 +84,18 @@ fun LoginUI() {
             leadingIcon = { Icon(Icons.Filled.Person,contentDescription = "User Icon") },
         )
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                val message = when{
+                    userId != id || userPw != pw -> "아이디 혹은 비밀번호가 일치하지 않습니다."
+                    else -> {
+                        val intent = Intent(context, MainActivity::class.java)
+                        intent.putExtra("userId",userId).putExtra("userPw", userPw).putExtra("userNick", userNick)
+                        context.startActivity(intent)
+                        "로그인에 성공했습니다."
+                    }
+                }
+                Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
+                      },
             modifier = Modifier
                 .fillMaxWidth()
         ) {
