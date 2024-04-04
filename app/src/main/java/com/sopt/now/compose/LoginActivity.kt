@@ -1,5 +1,6 @@
 package com.sopt.now.compose
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -23,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
@@ -45,6 +47,7 @@ class LoginActivity : ComponentActivity() {
 }
 @Composable
 fun LoginUI() {
+    val context = LocalContext.current
     var id by remember { mutableStateOf("") }
     var pw by remember { mutableStateOf("") }
 
@@ -84,7 +87,10 @@ fun LoginUI() {
             Text("로그인")
         }
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                val intent = Intent(context,SignUpActivity::class.java)
+                context.startActivity(intent)
+                      },
             modifier = Modifier
                 .fillMaxWidth()
         ) {
