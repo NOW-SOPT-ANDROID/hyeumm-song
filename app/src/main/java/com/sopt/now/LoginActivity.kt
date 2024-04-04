@@ -20,9 +20,8 @@ class LoginActivity : AppCompatActivity() {
         getUser()
 
         //회원가입 페이지로 넘어가기
-        binding.btnLoginSignIn.setOnClickListener {
-            movetoSignUp()
-        }
+        moveToSignUp()
+
     }
     private fun getUser() { // 아쉬운 부분
         var id = ""
@@ -41,12 +40,14 @@ class LoginActivity : AppCompatActivity() {
             sendData(id,pw,nick)
         }
     }
-    private fun movetoSignUp(){
-        val intent = Intent(this, SignUpActivity::class.java)
-        //회원가입 데이터를 받아오기 위해 startActivity가 아닌 resultLauncher사용
-        resultLauncher.launch(intent)
+    private fun moveToSignUp(){
+        binding.btnLoginSignIn.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            //회원가입 데이터를 받아오기 위해 startActivity가 아닌 resultLauncher사용
+            resultLauncher.launch(intent)
+        }
     }
-    private fun login(id: String, pw: String) :Boolean {
+    private fun isLoginAvailable(id: String, pw: String) :Boolean {
         var loginBool = false
         val userId = binding.etvLoginId.text.toString()
         val userPw = binding.etvLoginPw.text.toString()
@@ -61,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
         return loginBool
     }
     private fun sendData(id:String,pw:String,nick:String){
-        if (login(id, pw)) {
+        if (isLoginAvailable(id, pw)) {
             val intent = Intent(this, MainActivity::class.java)
             //메인 액티비티로 데이터를 보냄
             intent.putExtra("id", id).putExtra("pw", pw).putExtra("nick", nick)

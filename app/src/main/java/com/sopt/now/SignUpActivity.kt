@@ -3,10 +3,7 @@ package com.sopt.now
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.sopt.now.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
@@ -16,23 +13,30 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //사용자 정보 가져오기
+        getUserInfo()
+    }
+    private fun getUserInfo() {
         binding.btnSignIn.setOnClickListener {
             val id = binding.etvSignInId.text.toString()
             val pw = binding.etvSignInPw.text.toString()
             val nick = binding.etvSignInNick.text.toString()
             val etc = binding.etvSignInEtc.text.toString()
 
-            if(SignUp(id,pw,nick,etc)) {
-                val intent= Intent(this,LoginActivity::class.java)
-                //로그인 액티비티로 데이터를 보냄
-                intent.putExtra("id",id).putExtra("pw",pw).putExtra("nick",nick)
-                setResult(RESULT_OK,intent)
-                finish()
-            }
+            sendUserInfo(id,pw,nick,etc)
+        }
+    }
+    private fun sendUserInfo(id:String,pw:String,nick:String,etc:String){
+        if(isSignUpAvailable(id,pw,nick,etc)) {
+            val intent= Intent(this,LoginActivity::class.java)
+            //로그인 액티비티로 데이터를 보냄
+            intent.putExtra("id",id).putExtra("pw",pw).putExtra("nick",nick)
+            setResult(RESULT_OK,intent)
+            finish()
         }
     }
     //회원가입 가능한지 검사
-    private fun SignUp(id:String,pw:String,nick:String,etc:String):Boolean {
+    private fun isSignUpAvailable(id:String,pw:String,nick:String,etc:String):Boolean {
         var signUpBool = false
         val message = when {
             id.isEmpty() || pw.isEmpty() || nick.isEmpty() || etc.isEmpty() -> "모든 항목을 입력해주세요."

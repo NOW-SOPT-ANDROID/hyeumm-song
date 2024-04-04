@@ -12,9 +12,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //로그인화면에서 받아온 id/pw 화면에 출력
-        getUser()
+        getUserInfo()
     }
-    private fun getUser() {
+    private fun getUserInfo() {
         binding.tvMainNick.text = intent.getStringExtra("nick")
         binding.tvMainId.text = intent.getStringExtra("id")
         binding.tvMainPw.text = intent.getStringExtra("pw")
