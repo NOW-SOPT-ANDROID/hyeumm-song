@@ -27,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -90,6 +91,7 @@ fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
                 .padding(10.dp),
             placeholder = {Text("비밀번호를 입력하세요.")},
             singleLine = true,
+            visualTransformation = PasswordVisualTransformation(),
             leadingIcon = { Icon(Icons.Filled.Person,contentDescription = "User Icon") },
         )
         Spacer(modifier = Modifier.weight(1f))
