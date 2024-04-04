@@ -38,7 +38,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         binding.loginBtn.setOnClickListener {
-            sendData(id,pw)
+            sendData(id,pw,nick)
         }
     }
     private fun movetoSignUp(){
@@ -60,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
         return loginBool
     }
-    private fun sendData(id:String,pw:String){
+    private fun sendData(id:String,pw:String,nick:String){
         if (login(id, pw)) {
             val intent = Intent(this, MainActivity::class.java)
             //메인 액티비티로 데이터를 보냄
