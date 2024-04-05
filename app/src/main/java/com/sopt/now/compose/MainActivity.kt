@@ -45,15 +45,17 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainUI(userId: String?="", userPw:String?="", userNick:String?=""){
     Column(
-        modifier = Modifier.fillMaxSize().padding(30.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(30.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "NOW SOPT",
+            text = stringResource(R.string.app_name),
             fontSize = 30.sp
         )
         Text(
-            text = "SHOUT OUR PASSION TOGETHER",
+            text = stringResource(R.string.text_main_title2),
             fontSize = 20.sp
         )
         Spacer(modifier = Modifier.height(50.dp),)
@@ -72,7 +74,7 @@ fun MainUI(userId: String?="", userPw:String?="", userNick:String?=""){
         )
         Spacer(modifier = Modifier.height(50.dp),)
         Text(
-            text = "비밀번호",
+            text = stringResource(R.string.text_pw),
             fontSize = 20.sp
         )
         Text(
@@ -81,7 +83,7 @@ fun MainUI(userId: String?="", userPw:String?="", userNick:String?=""){
         )
         Spacer(modifier = Modifier.height(50.dp),)
         Text(
-            text = "닉네임",
+            text = stringResource(R.string.text_nick),
             fontSize = 20.sp
         )
         Text(

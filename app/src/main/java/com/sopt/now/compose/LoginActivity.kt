@@ -27,6 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -60,16 +61,18 @@ fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
     var pw by remember { mutableStateOf("") }
 
     Column(
-        modifier = Modifier.fillMaxSize().padding(30.dp),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(30.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Welcome to SOPT",
+            text = stringResource(R.string.text_login_title),
             fontSize = 30.sp
         )
         Spacer(modifier = Modifier.weight(1f))
         Text(
-            text = "ID"
+            text = stringResource(R.string.text_id)
         )
         TextField(
             value = id,
@@ -77,19 +80,19 @@ fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
-            placeholder = {Text("아이디를 입력하세요.")},
+            placeholder = {Text(stringResource(R.string.tf_login_id))},
             singleLine = true,
             leadingIcon = { Icon(Icons.Filled.Person,contentDescription = "User Icon") }
             )
         Spacer(modifier = Modifier.height(30.dp))
-        Text(text = "비밀번호")
+        Text(text = stringResource(R.string.text_pw))
         TextField(
             value = pw,
             onValueChange = {pw = it},
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
-            placeholder = {Text("비밀번호를 입력하세요.")},
+            placeholder = {Text(stringResource(R.string.tf_login_pw))},
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
             leadingIcon = { Icon(Icons.Filled.Person,contentDescription = "User Icon") },
@@ -98,12 +101,12 @@ fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
         Button(
             onClick = {
                 val message = when{
-                    userId != id || userPw != pw -> "아이디 혹은 비밀번호가 일치하지 않습니다."
+                    userId != id || userPw != pw -> context.getString(R.string.login_error)
                     else -> {
                         val intent = Intent(context, MainActivity::class.java)
                         intent.putExtra("userId",userId).putExtra("userPw", userPw).putExtra("userNick", userNick)
                         context.startActivity(intent)
-                        "로그인에 성공했습니다."
+                        context.getString(R.string.login_success)
                     }
                 }
                 Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
@@ -111,7 +114,7 @@ fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Text("로그인")
+            Text(stringResource(R.string.btn_login))
         }
         Spacer(modifier = Modifier.height(20.dp))
         Button(
@@ -122,7 +125,7 @@ fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Text("회원가입")
+            Text(stringResource(R.string.btn_sign_up))
         }
     }
 }

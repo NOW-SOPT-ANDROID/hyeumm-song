@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -57,7 +58,9 @@ class SignUpActivity : ComponentActivity() {
     var etc by remember { mutableStateOf("") }
 
     Column (
-            modifier = Modifier.fillMaxSize().padding(30.dp),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(30.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
         Text(
@@ -70,31 +73,31 @@ class SignUpActivity : ComponentActivity() {
             fontSize = 20.sp)
         TextField(
                 value = id,
-                label = { Text("6-10자 입력해주세요") },
+                label = { Text(stringResource(R.string.tf_label_id)) },
                 onValueChange = { id = it },
-                placeholder = {Text("아이디를 입력하세요.")},
+                placeholder = {Text(stringResource(R.string.tf_ph_id))},
                 singleLine = true
             )
         Spacer(modifier = Modifier.height(50.dp),)
         Text(
-            text = "비밀번호",
+            text = stringResource(R.string.text_pw),
             fontSize = 20.sp)
         TextField(
                 value = pw,
-                label = { Text("8-12자 입력해주세요") },
+                label = { Text(stringResource(R.string.tf_label_pw)) },
                 onValueChange = { pw = it },
-                placeholder = {Text("비밀번호를 입력하세요.")},
+                placeholder = {Text(stringResource(R.string.tf_ph_pw))},
                 singleLine = true
             )
         Spacer(modifier = Modifier.height(50.dp),)
         Text(
-            text = "닉네임",
+            text = stringResource(R.string.text_nick),
             fontSize = 20.sp)
         TextField(
                 value = nick,
-                label = { Text("한 글자 이상 입력해주세요") },
+                label = { Text(stringResource(R.string.tf_label_nick)) },
                 onValueChange = { nick = it },
-                placeholder = {Text("닉네임을 입력하세요.")},
+                placeholder = {Text(stringResource(R.string.tf_ph_nick))},
                 singleLine = true
             )
         Spacer(modifier = Modifier.height(50.dp),)
@@ -103,9 +106,9 @@ class SignUpActivity : ComponentActivity() {
             fontSize = 20.sp)
         TextField(
                 value = etc,
-                label = { Text("한 글자 이상 입력해주세요") },
+                label = { Text(stringResource(R.string.tf_label_etc)) },
                 onValueChange = { etc = it },
-                placeholder = {Text("하고싶은 말을 입력하세요.")},
+                placeholder = {Text(stringResource(R.string.tf_ph_etc))},
                 singleLine = true
             )
         Spacer(modifier = Modifier.weight(1f))
@@ -113,23 +116,25 @@ class SignUpActivity : ComponentActivity() {
             onClick = {
                 //회원가입 조건에 맞는지 검사
                 val message = when {
-                    id.isEmpty() || pw.isEmpty() || nick.isEmpty() || etc.isEmpty() -> "모든 항목을 입력해주세요."
-                    id.length !in 6..10 -> "아이디를 다시 설정하세요."
-                    pw.length !in 8..12 -> "비밀번호를 다시 설정하세요."
-                    nick.isBlank() || nick.length != nick.trim().length -> "닉네임을 다시 설정하세요."
-                    etc.length !in 1..Int.MAX_VALUE -> "하고싶은 말을 다시 설정하세요."
+                    id.isEmpty() || pw.isEmpty() || nick.isEmpty() || etc.isEmpty() -> context.getString(
+                        R.string.sign_up_blank_error
+                    )
+                    id.length !in 6..10 -> context.getString(R.string.sign_up_id_error)
+                    pw.length !in 8..12 -> context.getString(R.string.sign_up_pw_error)
+                    nick.isBlank() || nick.length != nick.trim().length -> context.getString(R.string.sign_up_nick_error)
+                    etc.length !in 1..Int.MAX_VALUE -> context.getString(R.string.sign_up_etc_error)
                     else -> {
                         val intent = Intent(context,LoginActivity::class.java)
                         intent.putExtra("userId", id).putExtra("userPw", pw).putExtra("userNick", nick)
                         context.startActivity(intent)
-                        "회원가입에 성공했습니다."
+                        context.getString(R.string.sign_up_success)
                     }
                 }
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                       },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("회원가입")
+            Text(stringResource(R.string.btn_sign_up))
         }
         }
     }
