@@ -5,44 +5,29 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.now.databinding.FragmentMyPageBinding
 
 class MyPageFragment : Fragment() {
-    private lateinit var binding:FragmentMyPageBinding
+    private lateinit var binding: FragmentMyPageBinding
 
-    private val mockFriendList = listOf<Friend>(
-        Friend(
-            profileImage = R.drawable.ic_home_white_24,
-            name = "이의경",
-            selfDescription = "다들 빨리 끝내고 뒤풀이 가고 싶지? ㅎㅎ 아직 반도 안왔어 ^&^",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_home_white_24,
-            name = "우상욱",
-            selfDescription = "나보다 안드 잘하는 사람 있으면 나와봐",
-        ),
-        Friend(
-            profileImage = R.drawable.ic_home_white_24,
-            name = "배지현",
-            selfDescription = "표정 풀자 ^^",
-        ),
-    )
+    private var param1: String? = null
+    private var param2: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding=FragmentMyPageBinding.inflate(inflater)
+        getUserInfo()
         return binding.root
     }
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val friendAdapter = FriendAdapter()
-        binding.rvFriends.run {
-            adapter = friendAdapter
-            layoutManager = LinearLayoutManager(requireContext())
-        }
-        friendAdapter.setFriendList(mockFriendList)
+    private fun getUserInfo() {
+        binding.tvMainNick.text = arguments?.getString("nick")
+        binding.tvMainId.text = arguments?.getString("id")
+        binding.tvMainPw.text = arguments?.getString("pw")
     }
-
 }

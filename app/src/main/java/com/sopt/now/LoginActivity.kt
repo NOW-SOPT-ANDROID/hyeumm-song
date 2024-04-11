@@ -37,6 +37,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         binding.btnLogin.setOnClickListener {
+            startMainActivity()
             sendData(id,pw,nick)
         }
     }
@@ -61,12 +62,18 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
         return loginBool
     }
+    private fun startMainActivity(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
     private fun sendData(id:String,pw:String,nick:String){
         if (isLoginAvailable(id, pw)) {
-            val intent = Intent(this, MainActivity::class.java)
-            //메인 액티비티로 데이터를 보냄
-            intent.putExtra("id", id).putExtra("pw", pw).putExtra("nick", nick)
-            startActivity(intent)
+            var mypagefragment = MyPageFragment()
+            var bundle = Bundle()
+            bundle.putString("id",id)
+            bundle.putString("pw",pw)
+            bundle.putString("nick",nick)
+            mypagefragment.arguments = bundle
         }
     }
 }
