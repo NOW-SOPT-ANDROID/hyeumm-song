@@ -68,8 +68,8 @@ class LoginActivity : AppCompatActivity() {
     }
     private fun sendData(id:String,pw:String,nick:String){
         if (isLoginAvailable(id, pw)) {
-            var mypagefragment = MyPageFragment()
-            var bundle = Bundle()
+            val mypagefragment = MyPageFragment()
+            val bundle = Bundle()
             bundle.putString("id",id)
             bundle.putString("pw",pw)
             bundle.putString("nick",nick)
