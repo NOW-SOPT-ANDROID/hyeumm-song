@@ -37,7 +37,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         binding.btnLogin.setOnClickListener {
-            startMainActivity()
             sendData(id,pw,nick)
         }
     }
@@ -53,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
         val userId = binding.etvLoginId.text.toString()
         val userPw = binding.etvLoginPw.text.toString()
         val message = when{
+            userId == "" || userPw == "" -> "모든 항목을 입력해주세요."
             userId != id || userPw != pw -> "아이디 혹은 비밀번호가 일치하지 않습니다."
             else -> {
                 loginBool = true
@@ -62,18 +62,16 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
         return loginBool
     }
-    private fun startMainActivity(){
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-    }
     private fun sendData(id:String,pw:String,nick:String){
         if (isLoginAvailable(id, pw)) {
+            val intent = Intent(this, MainActivity::class.java)
             val mypagefragment = MyPageFragment()
             val bundle = Bundle()
             bundle.putString("id",id)
             bundle.putString("pw",pw)
             bundle.putString("nick",nick)
             mypagefragment.arguments = bundle
+            startActivity(intent)
         }
     }
 }
