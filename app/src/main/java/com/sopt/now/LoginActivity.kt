@@ -37,7 +37,7 @@ class LoginActivity : AppCompatActivity() {
             }
         }
         binding.btnLogin.setOnClickListener {
-            sendData(id,pw,nick)
+            moveToMain(id,pw,nick)
         }
     }
     private fun moveToSignUp(){
@@ -62,16 +62,23 @@ class LoginActivity : AppCompatActivity() {
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
         return loginBool
     }
-    private fun sendData(id:String,pw:String,nick:String){
+    private fun moveToMain(id:String,pw:String,nick:String){
         if (isLoginAvailable(id, pw)) {
             val intent = Intent(this, MainActivity::class.java)
-            val mypagefragment = MyPageFragment()
-            val bundle = Bundle()
-            bundle.putString("id",id)
-            bundle.putString("pw",pw)
-            bundle.putString("nick",nick)
-            mypagefragment.arguments = bundle
+            saveUserInfo(id,pw,nick)
             startActivity(intent)
+        }
+    }
+    private fun saveUserInfo(id:String,pw:String,nick:String) {
+    if (isLoginAvailable(id, pw)) {
+        val sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+
+        editor
+            .putString("userId", id)
+            .putString("userPw", pw)
+            .putString("userNick", nick)
+            .apply()
         }
     }
 }
