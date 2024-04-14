@@ -20,8 +20,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         clickBottomNavigation()
-        //로그인화면에서 받아온 id/pw 화면에 출력
-        //getUserInfo()
     }
     private fun clickBottomNavigation() {
         binding.bnvHome.setOnItemSelectedListener{
@@ -50,9 +48,4 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fcv_home, fragment)
             .commit()
     }
-//    private fun getUserInfo() {
-//        binding.tvMainNick.text = intent.getStringExtra("nick")
-//        binding.tvMainId.text = intent.getStringExtra("id")
-//        binding.tvMainPw.text = intent.getStringExtra("pw")
-//    }
 }

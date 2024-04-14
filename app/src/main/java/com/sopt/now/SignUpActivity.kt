@@ -39,14 +39,14 @@ class SignUpActivity : AppCompatActivity() {
     private fun isSignUpAvailable(id:String,pw:String,nick:String,etc:String):Boolean {
         var signUpBool = false
         val message = when {
-            id.isEmpty() || pw.isEmpty() || nick.isEmpty() || etc.isEmpty() -> "모든 항목을 입력해주세요."
-            id.length !in 6..10 -> "아이디를 다시 설정하세요."
-            pw.length !in 8..12 -> "비밀번호를 다시 설정하세요."
-            nick.isBlank() || nick.length != nick.trim().length -> "닉네임을 다시 설정하세요."
-            etc.length !in 1..Int.MAX_VALUE -> "하고싶은 말을 다시 설정하세요."
+            id.isEmpty() || pw.isEmpty() || nick.isEmpty() || etc.isEmpty() -> getString(R.string.sign_up_error_blank)
+            id.length !in 6..10 -> getString(R.string.sign_up_error_id)
+            pw.length !in 8..12 -> getString(R.string.sign_up_error_pw)
+            nick.isBlank() || nick.length != nick.trim().length -> getString(R.string.sign_up_error_nick)
+            etc.length !in 1..Int.MAX_VALUE -> getString(R.string.sign_up_error_etc)
             else -> {
                 signUpBool = true
-                "회원가입에 성공했습니다."
+                getString(R.string.sign_up_success)
             }
         }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()

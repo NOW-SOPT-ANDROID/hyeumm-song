@@ -79,7 +79,7 @@
         android:id="@+id/btn_login_sign_in"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/sign_in_btn"
+        android:text="@string/sign_up_btn"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@+id/btn_login"
         app:layout_constraintStart_toStartOf="parent"

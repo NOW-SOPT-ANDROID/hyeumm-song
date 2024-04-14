@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
         moveToSignUp()
 
     }
-    private fun getUser() { // 아쉬운 부분
+    private fun getUser() {
         var id = ""
         var pw = ""
         var nick = ""
@@ -47,21 +47,6 @@ class LoginActivity : AppCompatActivity() {
             resultLauncher.launch(intent)
         }
     }
-    private fun isLoginAvailable(id: String, pw: String) :Boolean {
-        var loginBool = false
-        val userId = binding.etvLoginId.text.toString()
-        val userPw = binding.etvLoginPw.text.toString()
-        val message = when{
-            userId == "" || userPw == "" -> "모든 항목을 입력해주세요."
-            userId != id || userPw != pw -> "아이디 혹은 비밀번호가 일치하지 않습니다."
-            else -> {
-                loginBool = true
-                "로그인에 성공했습니다."
-            }
-        }
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
-        return loginBool
-    }
     private fun moveToMain(id:String,pw:String,nick:String){
         if (isLoginAvailable(id, pw)) {
             val intent = Intent(this, MainActivity::class.java)
@@ -70,15 +55,27 @@ class LoginActivity : AppCompatActivity() {
         }
     }
     private fun saveUserInfo(id:String,pw:String,nick:String) {
-    if (isLoginAvailable(id, pw)) {
         val sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-
         editor
             .putString("userId", id)
             .putString("userPw", pw)
             .putString("userNick", nick)
             .apply()
+    }
+    private fun isLoginAvailable(id: String, pw: String) :Boolean {
+        var loginBool = false
+        val userId = binding.etvLoginId.text.toString()
+        val userPw = binding.etvLoginPw.text.toString()
+        val message = when{
+            userId == "" || userPw == "" -> getString(R.string.login_error_blank)
+            userId != id || userPw != pw -> getString(R.string.login_error_different)
+            else -> {
+                loginBool = true
+                getString(R.string.login_success)
+            }
         }
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
+        return loginBool
     }
 }
