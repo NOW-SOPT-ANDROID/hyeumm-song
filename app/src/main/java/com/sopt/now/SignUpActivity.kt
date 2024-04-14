@@ -8,6 +8,7 @@ import com.sopt.now.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding:ActivitySignUpBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
@@ -40,8 +41,8 @@ class SignUpActivity : AppCompatActivity() {
         var signUpBool = false
         val message = when {
             id.isEmpty() || pw.isEmpty() || nick.isEmpty() || etc.isEmpty() -> getString(R.string.sign_up_error_blank)
-            id.length !in 6..10 -> getString(R.string.sign_up_error_id)
-            pw.length !in 8..12 -> getString(R.string.sign_up_error_pw)
+            id.length !in MIN_ID_LENGTH..MAX_ID_LENGTH -> getString(R.string.sign_up_error_id)
+            pw.length !in MIN_PW_LENGTH..MAX_PW_LENGTH -> getString(R.string.sign_up_error_pw)
             nick.isBlank() || nick.length != nick.trim().length -> getString(R.string.sign_up_error_nick)
             etc.length !in 1..Int.MAX_VALUE -> getString(R.string.sign_up_error_etc)
             else -> {
@@ -51,5 +52,12 @@ class SignUpActivity : AppCompatActivity() {
         }
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         return signUpBool
+    }
+    companion object {
+        //회원가입 조건 상수화
+        const val MIN_ID_LENGTH = 6
+        const val MAX_ID_LENGTH = 10
+        const val MIN_PW_LENGTH = 8
+        const val MAX_PW_LENGTH = 12
     }
 }
