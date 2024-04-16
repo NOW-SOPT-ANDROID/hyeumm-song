@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
                     val userId = intent.getStringExtra("userId")
                     val userPw = intent.getStringExtra("userPw")
                     val userNick = intent.getStringExtra("userNick")
-                    ScaffoldExample(userId, userPw, userNick)
+                    MainUi(userId, userPw, userNick)
                 }
             }
         }
@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ScaffoldExample(userId: String? = "", userPw: String? = "", userNick: String? = "") {
+fun MainUi(userId: String? = "", userPw: String? = "", userNick: String? = "") {
     var selectedItem by remember { mutableIntStateOf(0) }
     val items = listOf(
         BottomNavigationItem(
@@ -135,6 +135,6 @@ fun ScaffoldExample(userId: String? = "", userPw: String? = "", userNick: String
 @Composable
 fun GreetingPreview() {
     NOWSOPTAndroidTheme {
-        ScaffoldExample()
+        MainUi()
     }
 }
