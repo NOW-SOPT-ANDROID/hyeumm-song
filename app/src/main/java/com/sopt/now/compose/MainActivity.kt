@@ -55,71 +55,72 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainUi(userId: String? = "", userPw: String? = "", userNick: String? = "") {
-    var selectedItem by remember { mutableIntStateOf(0) }
-    val items = listOf(
-        BottomNavigationItem(
-            icon = Icons.Filled.Home,
-            label = "Home"
-        ),
-        BottomNavigationItem(
-            icon = Icons.Filled.Search,
-            label = "Search"
-        ),
-        BottomNavigationItem(
-            icon = Icons.Filled.Person,
-            label = "Profile"
-        )
-    )
-
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                colors = topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
-                ),
-                title = {
-                    Text(
-                        text = stringResource(R.string.app_name),
-                        fontSize = 30.sp,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
+fun MainUi(userId: String?, userPw: String?, userNick: String?) {
+    if(userId!=null&&userPw!=null&&userNick!=null) {
+        var selectedItem by remember { mutableIntStateOf(0) }
+        val items = listOf(
+            BottomNavigationItem(
+                icon = Icons.Filled.Home,
+                label = "Home"
+            ),
+            BottomNavigationItem(
+                icon = Icons.Filled.Search,
+                label = "Search"
+            ),
+            BottomNavigationItem(
+                icon = Icons.Filled.Person,
+                label = "Profile"
             )
-        },
-        bottomBar = {
-            NavigationBar {
-                items.forEachIndexed { index, item ->
-                    NavigationBarItem(
-                        icon = { Icon(item.icon, contentDescription = item.label) },
-                        label = { Text(item.label) },
-                        selected = selectedItem == index,
-                        onClick = { selectedItem = index }
-                    )
+        )
+
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    colors = topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        titleContentColor = MaterialTheme.colorScheme.primary,
+                    ),
+                    title = {
+                        Text(
+                            text = stringResource(R.string.app_name),
+                            fontSize = 30.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                )
+            },
+            bottomBar = {
+                NavigationBar {
+                    items.forEachIndexed { index, item ->
+                        NavigationBarItem(
+                            icon = { Icon(item.icon, contentDescription = item.label) },
+                            label = { Text(item.label) },
+                            selected = selectedItem == index,
+                            onClick = { selectedItem = index }
+                        )
+                    }
+                }
+            },
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .padding(innerPadding),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                when (selectedItem) {
+                    0 -> {
+                        HomeUi()
+                    }
+
+                    1 -> {
+                        Text(text = "Search")
+                    }
+
+                    2 -> {
+                        ProfileUi(userId, userPw, userNick)
+                    }
                 }
             }
-        },
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .padding(innerPadding),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
-            when (selectedItem) {
-                0 -> {
-                    HomeUi()
-                }
-
-                1 -> {
-                    Text(text = "Search")
-                }
-
-                2 -> {
-                    ProfileUi(userId, userPw, userNick)
-                }
-            }
-
         }
     }
 }
@@ -127,6 +128,6 @@ fun MainUi(userId: String? = "", userPw: String? = "", userNick: String? = "") {
 @Composable
 fun GreetingPreview() {
     NOWSOPTAndroidTheme {
-        MainUi()
+        MainUi("아이디","비밀번호","닉네임")
     }
 }

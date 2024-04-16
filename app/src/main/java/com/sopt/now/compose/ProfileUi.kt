@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun ProfileUi(userId: String? = "", userPw: String? = "", userNick: String? = "") {
+fun ProfileUi(userId: String, userPw: String, userNick: String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -33,7 +33,7 @@ fun ProfileUi(userId: String? = "", userPw: String? = "", userNick: String? = ""
             fontSize = 20.sp
         )
         Text(
-            text = "$userId",
+            text = userId,
             fontSize = 15.sp
         )
         Spacer(modifier = Modifier.height(50.dp))
@@ -42,7 +42,7 @@ fun ProfileUi(userId: String? = "", userPw: String? = "", userNick: String? = ""
             fontSize = 20.sp
         )
         Text(
-            text = "$userPw",
+            text = userPw,
             fontSize = 15.sp
         )
         Spacer(modifier = Modifier.height(50.dp))
@@ -51,7 +51,7 @@ fun ProfileUi(userId: String? = "", userPw: String? = "", userNick: String? = ""
             fontSize = 20.sp
         )
         Text(
-            text = "$userNick",
+            text = userNick,
             fontSize = 15.sp
         )
     }
