@@ -7,9 +7,12 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -23,6 +26,7 @@ fun HomeUi() {
         LazyColumn {
             items(userList) {
                 UserProfileItem(it)
+                HorizontalDivider(thickness = 1.dp, color = Color.DarkGray)
             }
             items(friendList) {
                 FriendProfileItem(it)
