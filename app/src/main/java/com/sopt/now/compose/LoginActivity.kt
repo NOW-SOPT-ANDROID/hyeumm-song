@@ -55,27 +55,6 @@ class LoginActivity : ComponentActivity() {
     }
 }
 
-fun isLoginAvailable(
-    context: Context,
-    userId: String?,
-    userPw: String?,
-    userNick: String?,
-    id: String?,
-    pw: String?
-) {
-    val message = when {
-        userId != id || userPw != pw -> R.string.login_error
-        else -> {
-            val intent = Intent(context, MainActivity::class.java)
-            intent.putExtra("userId", userId).putExtra("userPw", userPw)
-                .putExtra("userNick", userNick)
-            context.startActivity(intent)
-            R.string.login_success
-        }
-    }
-    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-}
-
 @Composable
 fun LoginUI(userId: String?, userPw: String?, userNick: String?) {
     val context = LocalContext.current
@@ -143,6 +122,26 @@ fun LoginUI(userId: String?, userPw: String?, userNick: String?) {
     }
 }
 
+fun isLoginAvailable(
+    context: Context,
+    userId: String?,
+    userPw: String?,
+    userNick: String?,
+    id: String?,
+    pw: String?
+) {
+    val message = when {
+        userId != id || userPw != pw -> R.string.login_error
+        else -> {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra("userId", userId).putExtra("userPw", userPw)
+                .putExtra("userNick", userNick)
+            context.startActivity(intent)
+            R.string.login_success
+        }
+    }
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+}
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview2() {
