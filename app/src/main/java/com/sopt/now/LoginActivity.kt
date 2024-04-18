@@ -31,9 +31,11 @@ class LoginActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
             if (result.resultCode == RESULT_OK) {
-                id = result.data?.getStringExtra("id") ?: ""
-                pw = result.data?.getStringExtra("pw") ?: ""
-                nick = result.data?.getStringExtra("nick") ?: ""
+                result.data?.let { data ->
+                    id = data.getStringExtra("id") ?: ""
+                    pw = data.getStringExtra("pw") ?: ""
+                    nick = data.getStringExtra("nick") ?: ""
+                }
             }
         }
         binding.btnLogin.setOnClickListener {
