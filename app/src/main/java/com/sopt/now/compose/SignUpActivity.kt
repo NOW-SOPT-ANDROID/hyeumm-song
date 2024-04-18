@@ -49,7 +49,6 @@ class SignUpActivity : ComponentActivity() {
 }
 
 fun isSignUpAvailable(context: Context,id: String,pw: String,nick: String,etc: String) {
-    val intent = Intent(context, LoginActivity::class.java)
     val message = when {
         id.isEmpty() || pw.isEmpty() || nick.isEmpty() || etc.isEmpty() -> R.string.sign_up_blank_error
         id.length !in 6..10 -> R.string.sign_up_id_error
@@ -57,6 +56,7 @@ fun isSignUpAvailable(context: Context,id: String,pw: String,nick: String,etc: S
         nick.isBlank() || nick.length != nick.trim().length -> R.string.sign_up_nick_error
         etc.length !in 1..Int.MAX_VALUE -> R.string.sign_up_etc_error
         else -> {
+            val intent = Intent(context, LoginActivity::class.java)
             intent.putExtra("userId", id).putExtra("userPw", pw).putExtra("userNick", nick)
             context.startActivity(intent)
             R.string.sign_up_success

@@ -1,5 +1,6 @@
 package com.sopt.now.compose
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -47,15 +48,36 @@ class LoginActivity : ComponentActivity() {
                     val userId = intent.getStringExtra("userId")
                     val userPw = intent.getStringExtra("userPw")
                     val userNick = intent.getStringExtra("userNick")
-                    LoginUI(userId,userPw,userNick)
+                    LoginUI(userId, userPw, userNick)
                 }
             }
         }
     }
 }
-//로그인 화면
+
+fun isLoginAvailable(
+    context: Context,
+    userId: String?,
+    userPw: String?,
+    userNick: String?,
+    id: String?,
+    pw: String?
+) {
+    val message = when {
+        userId != id || userPw != pw -> R.string.login_error
+        else -> {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.putExtra("userId", userId).putExtra("userPw", userPw)
+                .putExtra("userNick", userNick)
+            context.startActivity(intent)
+            R.string.login_success
+        }
+    }
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+}
+
 @Composable
-fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
+fun LoginUI(userId: String?, userPw: String?, userNick: String?) {
     val context = LocalContext.current
     var id by remember { mutableStateOf("") }
     var pw by remember { mutableStateOf("") }
@@ -76,41 +98,32 @@ fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
         )
         TextField(
             value = id,
-            onValueChange = {id = it},
+            onValueChange = { id = it },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
-            placeholder = {Text(stringResource(R.string.tf_login_id))},
+            placeholder = { Text(stringResource(R.string.tf_login_id)) },
             singleLine = true,
-            leadingIcon = { Icon(Icons.Filled.Person,contentDescription = "User Icon") }
-            )
+            leadingIcon = { Icon(Icons.Filled.Person, contentDescription = "User Icon") }
+        )
         Spacer(modifier = Modifier.height(30.dp))
         Text(text = stringResource(R.string.text_pw))
         TextField(
             value = pw,
-            onValueChange = {pw = it},
+            onValueChange = { pw = it },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
-            placeholder = {Text(stringResource(R.string.tf_login_pw))},
+            placeholder = { Text(stringResource(R.string.tf_login_pw)) },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
-            leadingIcon = { Icon(Icons.Filled.Person,contentDescription = "User Icon") },
+            leadingIcon = { Icon(Icons.Filled.Person, contentDescription = "User Icon") },
         )
         Spacer(modifier = Modifier.weight(1f))
         Button(
             onClick = {
-                val message = when{
-                    userId != id || userPw != pw -> context.getString(R.string.login_error)
-                    else -> {
-                        val intent = Intent(context, MainActivity::class.java)
-                        intent.putExtra("userId",userId).putExtra("userPw", userPw).putExtra("userNick", userNick)
-                        context.startActivity(intent)
-                        context.getString(R.string.login_success)
-                    }
-                }
-                Toast.makeText(context,message,Toast.LENGTH_SHORT).show()
-                      },
+                isLoginAvailable(context, userId, userPw, userNick, id, pw)
+            },
             modifier = Modifier
                 .fillMaxWidth()
         ) {
@@ -119,9 +132,9 @@ fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
         Spacer(modifier = Modifier.height(20.dp))
         Button(
             onClick = {
-                val intent = Intent(context,SignUpActivity::class.java)
+                val intent = Intent(context, SignUpActivity::class.java)
                 context.startActivity(intent)
-                      },
+            },
             modifier = Modifier
                 .fillMaxWidth()
         ) {
@@ -129,10 +142,11 @@ fun LoginUI(userId: String?="", userPw:String?="", userNick:String?="") {
         }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview2() {
     NOWSOPTAndroidTheme {
-        LoginUI()
+        LoginUI("아이디", "비밀번호", "닉네임")
     }
 }
