@@ -2,7 +2,7 @@ package com.sopt.now
 
 import androidx.annotation.DrawableRes
 
-data class Friend(
+data class HomeList(
     @DrawableRes val profileImage: Int,
     val name: String,
     val selfDescription: String,

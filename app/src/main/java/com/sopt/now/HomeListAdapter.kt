@@ -6,18 +6,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.RuntimeException
 
-class FriendAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class HomeListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     // 임시의 빈 리스트
-    private var friendList: List<Friend> = emptyList()
+    private var homeListList: List<HomeList> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val adapterLayout : View?
         return when(viewType){
-            Friend.VIEW_TYPE_USER -> {
+            HomeList.VIEW_TYPE_USER -> {
                 adapterLayout = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_user,parent,false)
                 UserViewHolder(adapterLayout)
             }
-            Friend.VIEW_TYPE_FRIEND -> {
+            HomeList.VIEW_TYPE_FRIEND -> {
                 adapterLayout = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_friend,parent,false)
                 FriendViewHolder(adapterLayout)
@@ -27,15 +27,15 @@ class FriendAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = friendList[position]
+        val item = homeListList[position]
         when(item.viewType){
-            Friend.VIEW_TYPE_USER -> {
+            HomeList.VIEW_TYPE_USER -> {
                 (holder as UserViewHolder).ivProfile.setImageResource(item.profileImage)
                 holder.tvName.text = item.name
                 holder.tvSelfDescription.text = item.selfDescription
                 holder.setIsRecyclable(false)
             }
-            Friend.VIEW_TYPE_FRIEND -> {
+            HomeList.VIEW_TYPE_FRIEND -> {
                 (holder as FriendViewHolder).ivProfile.setImageResource(item.profileImage)
                 holder.tvName.text = item.name
                 holder.tvSelfDescription.text = item.selfDescription
@@ -45,12 +45,12 @@ class FriendAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    override fun getItemCount() = friendList.size
+    override fun getItemCount() = homeListList.size
     override fun getItemViewType(position: Int): Int {
-        return friendList[position].viewType
+        return homeListList[position].viewType
     }
-    fun setFriendList(friendList: List<Friend>) {
-        this.friendList = friendList.toList()
+    fun setFriendList(homeListList: List<HomeList>) {
+        this.homeListList = homeListList.toList()
         notifyDataSetChanged()
     }
 }

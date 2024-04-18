@@ -20,12 +20,12 @@ class HomeFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val friendAdapter = FriendAdapter()
+        val homeListAdapter = HomeListAdapter()
         binding.rvFriends.run {
-            adapter = friendAdapter
+            adapter = homeListAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
-        friendAdapter.setFriendList(MockFriendList.mockFriendList)
+        homeListAdapter.setFriendList(HomeListData.homeListData)
     }
 
 }
