@@ -48,7 +48,7 @@ class HomeListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemViewType(position: Int): Int {
         return homeListList[position].viewType
     }
-    fun setFriendList(homeListList: List<HomeList>) {
+    fun setHomeList(homeListList: List<HomeList>) {
         this.homeListList = homeListList.toList()
         notifyDataSetChanged()
     }

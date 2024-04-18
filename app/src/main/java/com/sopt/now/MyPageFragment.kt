@@ -16,14 +16,15 @@ class MyPageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding=FragmentMyPageBinding.inflate(inflater)
+        binding = FragmentMyPageBinding.inflate(inflater)
         getUserInfo()
         return binding.root
     }
+
     private fun getUserInfo() {
-        val userInfo = activity?.getSharedPreferences("userInfo",Context.MODE_PRIVATE)
-        binding.tvMainNick.text = userInfo?.getString("userNick","")
-        binding.tvMainId.text = userInfo?.getString("userId","")
-        binding.tvMainPw.text = userInfo?.getString("userPw","")
+        val userInfo = activity?.getSharedPreferences("userInfo", Context.MODE_PRIVATE)
+        binding.tvMainNick.text = userInfo?.getString("userNick", "")
+        binding.tvMainId.text = userInfo?.getString("userId", "")
+        binding.tvMainPw.text = userInfo?.getString("userPw", "")
     }
 }

@@ -16,11 +16,11 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getUser()
+        getUserInfo()
 
         moveToSignUp()
     }
-    private fun getUser() {
+    private fun getUserInfo() {
         var id = ""
         var pw = ""
         var nick = ""

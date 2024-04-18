@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.sopt.now.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
-    private lateinit var binding:ActivitySignUpBinding
+    private lateinit var binding: ActivitySignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +16,7 @@ class SignUpActivity : AppCompatActivity() {
 
         getUserInfo()
     }
+
     private fun getUserInfo() {
         binding.btnSignIn.setOnClickListener {
             val id = binding.etvSignInId.text.toString()
@@ -23,18 +24,20 @@ class SignUpActivity : AppCompatActivity() {
             val nick = binding.etvSignInNick.text.toString()
             val etc = binding.etvSignInEtc.text.toString()
 
-            sendUserInfo(id,pw,nick,etc)
+            sendUserInfo(id, pw, nick, etc)
         }
     }
-    private fun sendUserInfo(id:String,pw:String,nick:String,etc:String){
-        if(isSignUpAvailable(id,pw,nick,etc)) {
-            val intent= Intent(this,LoginActivity::class.java)
-            intent.putExtra("id",id).putExtra("pw",pw).putExtra("nick",nick)
-            setResult(RESULT_OK,intent)
+
+    private fun sendUserInfo(id: String, pw: String, nick: String, etc: String) {
+        if (isSignUpAvailable(id, pw, nick, etc)) {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.putExtra("id", id).putExtra("pw", pw).putExtra("nick", nick)
+            setResult(RESULT_OK, intent)
             finish()
         }
     }
-    private fun isSignUpAvailable(id:String,pw:String,nick:String,etc:String):Boolean {
+
+    private fun isSignUpAvailable(id: String, pw: String, nick: String, etc: String): Boolean {
         var signUpBool = false
         val message = when {
             id.isEmpty() || pw.isEmpty() || nick.isEmpty() || etc.isEmpty() -> getString(R.string.sign_up_error_blank)
@@ -50,6 +53,7 @@ class SignUpActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         return signUpBool
     }
+
     companion object {
         const val MIN_ID_LENGTH = 6
         const val MAX_ID_LENGTH = 10

@@ -15,9 +15,10 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding=FragmentHomeBinding.inflate(inflater)
+        binding = FragmentHomeBinding.inflate(inflater)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val homeListAdapter = HomeListAdapter()
@@ -25,7 +26,7 @@ class HomeFragment : Fragment() {
             adapter = homeListAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
-        homeListAdapter.setFriendList(HomeListData.homeListData)
+        homeListAdapter.setHomeList(HomeListData.homeListData)
     }
 
 }

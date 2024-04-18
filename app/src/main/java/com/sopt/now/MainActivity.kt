@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val currentFragment = supportFragmentManager.findFragmentById(binding.fcvHome.id)
@@ -21,20 +21,21 @@ class MainActivity : AppCompatActivity() {
 
         clickBottomNavigation()
     }
+
     private fun clickBottomNavigation() {
-        binding.bnvHome.setOnItemSelectedListener{
+        binding.bnvHome.setOnItemSelectedListener {
             when (it.itemId) {
-                R.id.menu_home-> {
+                R.id.menu_home -> {
                     replaceFragment(HomeFragment())
                     true
                 }
 
-                R.id.menu_search-> {
+                R.id.menu_search -> {
                     replaceFragment(SearchFragment())
                     true
                 }
 
-                R.id.menu_mypage-> {
+                R.id.menu_mypage -> {
                     replaceFragment(MyPageFragment())
                     true
                 }
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fcv_home, fragment)
