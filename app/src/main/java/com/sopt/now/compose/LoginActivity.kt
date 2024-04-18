@@ -133,9 +133,11 @@ fun isLoginAvailable(
     val message = when {
         userId != id || userPw != pw -> R.string.login_error
         else -> {
-            val intent = Intent(context, MainActivity::class.java)
-            intent.putExtra("userId", userId).putExtra("userPw", userPw)
-                .putExtra("userNick", userNick)
+            val intent = Intent(context, MainActivity::class.java).apply {
+                putExtra("userId", userId)
+                putExtra("userPw", userPw)
+                putExtra("userNick", userNick)
+            }
             context.startActivity(intent)
             R.string.login_success
         }

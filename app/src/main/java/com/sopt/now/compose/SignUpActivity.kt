@@ -133,8 +133,11 @@ fun isSignUpAvailable(context: Context,id: String,pw: String,nick: String,etc: S
         nick.isBlank() || nick.length != nick.trim().length -> R.string.sign_up_nick_error
         etc.length !in 1..Int.MAX_VALUE -> R.string.sign_up_etc_error
         else -> {
-            val intent = Intent(context, LoginActivity::class.java)
-            intent.putExtra("userId", id).putExtra("userPw", pw).putExtra("userNick", nick)
+            val intent = Intent(context, LoginActivity::class.java).apply{
+                putExtra("userId", id)
+                putExtra("userPw", pw)
+                putExtra("userNick", nick)
+            }
             context.startActivity(intent)
             R.string.sign_up_success
         }
