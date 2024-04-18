@@ -16,12 +16,9 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //회원가입에서 사용자 정보 받아옴
         getUser()
 
-        //회원가입 페이지로 넘어가기
         moveToSignUp()
-
     }
     private fun getUser() {
         var id = ""
@@ -45,7 +42,6 @@ class LoginActivity : AppCompatActivity() {
     private fun moveToSignUp(){
         binding.btnLoginSignIn.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
-            //회원가입 데이터를 받아오기 위해 startActivity가 아닌 resultLauncher사용
             resultLauncher.launch(intent)
         }
     }

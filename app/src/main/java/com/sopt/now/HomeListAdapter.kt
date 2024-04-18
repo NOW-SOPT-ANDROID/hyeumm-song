@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import java.lang.RuntimeException
 
 class HomeListAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    // 임시의 빈 리스트
     private var homeListList: List<HomeList> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val adapterLayout : View?

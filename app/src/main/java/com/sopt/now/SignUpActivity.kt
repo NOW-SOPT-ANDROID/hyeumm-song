@@ -14,7 +14,6 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //사용자 정보 가져오기
         getUserInfo()
     }
     private fun getUserInfo() {
@@ -30,13 +29,11 @@ class SignUpActivity : AppCompatActivity() {
     private fun sendUserInfo(id:String,pw:String,nick:String,etc:String){
         if(isSignUpAvailable(id,pw,nick,etc)) {
             val intent= Intent(this,LoginActivity::class.java)
-            //로그인 액티비티로 데이터를 보냄
             intent.putExtra("id",id).putExtra("pw",pw).putExtra("nick",nick)
             setResult(RESULT_OK,intent)
             finish()
         }
     }
-    //회원가입 가능한지 검사
     private fun isSignUpAvailable(id:String,pw:String,nick:String,etc:String):Boolean {
         var signUpBool = false
         val message = when {
@@ -54,7 +51,6 @@ class SignUpActivity : AppCompatActivity() {
         return signUpBool
     }
     companion object {
-        //회원가입 조건 상수화
         const val MIN_ID_LENGTH = 6
         const val MAX_ID_LENGTH = 10
         const val MIN_PW_LENGTH = 8
