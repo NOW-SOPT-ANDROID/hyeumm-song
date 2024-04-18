@@ -1,5 +1,6 @@
 package com.sopt.now.compose
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -46,96 +47,102 @@ class SignUpActivity : ComponentActivity() {
         }
     }
 }
-//회원가입 화면
+
+fun isSignUpAvailable(context: Context,id: String,pw: String,nick: String,etc: String) {
+    val intent = Intent(context, LoginActivity::class.java)
+    val message = when {
+        id.isEmpty() || pw.isEmpty() || nick.isEmpty() || etc.isEmpty() -> R.string.sign_up_blank_error
+        id.length !in 6..10 -> R.string.sign_up_id_error
+        pw.length !in 8..12 -> R.string.sign_up_pw_error
+        nick.isBlank() || nick.length != nick.trim().length -> R.string.sign_up_nick_error
+        etc.length !in 1..Int.MAX_VALUE -> R.string.sign_up_etc_error
+        else -> {
+            intent.putExtra("userId", id).putExtra("userPw", pw).putExtra("userNick", nick)
+            context.startActivity(intent)
+            R.string.sign_up_success
+        }
+    }
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+}
+
 @Composable
-    fun SignUpUI() {
+fun SignUpUI() {
     val context = LocalContext.current
     var id by remember { mutableStateOf("") }
     var pw by remember { mutableStateOf("") }
     var nick by remember { mutableStateOf("") }
     var etc by remember { mutableStateOf("") }
 
-    Column (
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(30.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ){
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(30.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text(
             text = "SIGN UP",
             fontSize = 30.sp
         )
-        Spacer(modifier = Modifier.height(50.dp),)
+        Spacer(modifier = Modifier.height(50.dp))
         Text(
             text = "ID",
-            fontSize = 20.sp)
+            fontSize = 20.sp
+        )
         TextField(
-                value = id,
-                label = { Text(stringResource(R.string.tf_label_id)) },
-                onValueChange = { id = it },
-                placeholder = {Text(stringResource(R.string.tf_ph_id))},
-                singleLine = true
-            )
-        Spacer(modifier = Modifier.height(50.dp),)
+            value = id,
+            label = { Text(stringResource(R.string.tf_label_id)) },
+            onValueChange = { id = it },
+            placeholder = { Text(stringResource(R.string.tf_ph_id)) },
+            singleLine = true
+        )
+        Spacer(modifier = Modifier.height(50.dp))
         Text(
             text = stringResource(R.string.text_pw),
-            fontSize = 20.sp)
+            fontSize = 20.sp
+        )
         TextField(
-                value = pw,
-                label = { Text(stringResource(R.string.tf_label_pw)) },
-                onValueChange = { pw = it },
-                placeholder = {Text(stringResource(R.string.tf_ph_pw))},
-                singleLine = true
-            )
-        Spacer(modifier = Modifier.height(50.dp),)
+            value = pw,
+            label = { Text(stringResource(R.string.tf_label_pw)) },
+            onValueChange = { pw = it },
+            placeholder = { Text(stringResource(R.string.tf_ph_pw)) },
+            singleLine = true
+        )
+        Spacer(modifier = Modifier.height(50.dp))
         Text(
             text = stringResource(R.string.text_nick),
-            fontSize = 20.sp)
+            fontSize = 20.sp
+        )
         TextField(
-                value = nick,
-                label = { Text(stringResource(R.string.tf_label_nick)) },
-                onValueChange = { nick = it },
-                placeholder = {Text(stringResource(R.string.tf_ph_nick))},
-                singleLine = true
-            )
-        Spacer(modifier = Modifier.height(50.dp),)
+            value = nick,
+            label = { Text(stringResource(R.string.tf_label_nick)) },
+            onValueChange = { nick = it },
+            placeholder = { Text(stringResource(R.string.tf_ph_nick)) },
+            singleLine = true
+        )
+        Spacer(modifier = Modifier.height(50.dp))
         Text(
             text = "하고싶은 말",
-            fontSize = 20.sp)
+            fontSize = 20.sp
+        )
         TextField(
-                value = etc,
-                label = { Text(stringResource(R.string.tf_label_etc)) },
-                onValueChange = { etc = it },
-                placeholder = {Text(stringResource(R.string.tf_ph_etc))},
-                singleLine = true
-            )
+            value = etc,
+            label = { Text(stringResource(R.string.tf_label_etc)) },
+            onValueChange = { etc = it },
+            placeholder = { Text(stringResource(R.string.tf_ph_etc)) },
+            singleLine = true
+        )
         Spacer(modifier = Modifier.weight(1f))
         Button(
             onClick = {
-                //회원가입 조건에 맞는지 검사
-                val message = when {
-                    id.isEmpty() || pw.isEmpty() || nick.isEmpty() || etc.isEmpty() -> context.getString(
-                        R.string.sign_up_blank_error
-                    )
-                    id.length !in 6..10 -> context.getString(R.string.sign_up_id_error)
-                    pw.length !in 8..12 -> context.getString(R.string.sign_up_pw_error)
-                    nick.isBlank() || nick.length != nick.trim().length -> context.getString(R.string.sign_up_nick_error)
-                    etc.length !in 1..Int.MAX_VALUE -> context.getString(R.string.sign_up_etc_error)
-                    else -> {
-                        val intent = Intent(context,LoginActivity::class.java)
-                        intent.putExtra("userId", id).putExtra("userPw", pw).putExtra("userNick", nick)
-                        context.startActivity(intent)
-                        context.getString(R.string.sign_up_success)
-                    }
-                }
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-                      },
+                isSignUpAvailable(context,id,pw,nick,etc)
+            },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(stringResource(R.string.btn_sign_up))
         }
-        }
     }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview3() {
