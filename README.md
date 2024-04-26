@@ -1,4 +1,5 @@
 # Now Sopt Android
+ feat/#5-week2_xml
 
 - **[FEAT]** : 새로운 기능 구현
 - **[MOD]** : 코드 수정 및 내부 파일 수정
