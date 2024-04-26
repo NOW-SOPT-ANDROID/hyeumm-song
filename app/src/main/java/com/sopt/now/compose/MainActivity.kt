@@ -3,6 +3,7 @@ package com.sopt.now.compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,6 +36,7 @@ import androidx.compose.ui.unit.sp
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 
 class MainActivity : ComponentActivity() {
+    private val viewModel by viewModels<HomeViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -109,7 +111,7 @@ fun MainUi(userId: String?, userPw: String?, userNick: String?) {
             ) {
                 when (selectedItem) {
                     0 -> {
-                        HomeUi()
+                        HomeUi(HomeViewModel())
                     }
 
                     1 -> {
