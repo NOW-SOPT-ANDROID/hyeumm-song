@@ -29,16 +29,20 @@ class HomeListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         if (item != null) {
             when(item.viewType){
                 HomeList.VIEW_TYPE_USER -> {
-                    (holder as UserViewHolder).ivProfile.setImageResource(item.profileImage)
-                    holder.tvName.text = item.name
-                    holder.tvSelfDescription.text = item.selfDescription
-                    holder.setIsRecyclable(false)
+                    with(holder as UserViewHolder) {
+                        ivProfile.setImageResource(item.profileImage)
+                        tvName.text = item.name
+                        tvSelfDescription.text = item.selfDescription
+                        setIsRecyclable(false)
+                    }
                 }
                 else -> {
-                    (holder as FriendViewHolder).ivProfile.setImageResource(item.profileImage)
-                    holder.tvName.text = item.name
-                    holder.tvSelfDescription.text = item.selfDescription
-                    holder.setIsRecyclable(false)
+                    with(holder as FriendViewHolder) {
+                        ivProfile.setImageResource(item.profileImage)
+                        tvName.text = item.name
+                        tvSelfDescription.text = item.selfDescription
+                        setIsRecyclable(false)
+                    }
                 }
             }
         }
