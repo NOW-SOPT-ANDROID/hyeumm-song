@@ -143,18 +143,20 @@ fun isSignUpAvailable(context: Context,id: String,pw: String,nick: String,etc: S
         nick.isBlank() || nick.length != nick.trim().length -> R.string.sign_up_nick_error
         etc.length !in 1..Int.MAX_VALUE -> R.string.sign_up_etc_error
         else -> {
-            val intent = Intent(context, LoginActivity::class.java).apply{
-                putExtra("userId", id)
-                putExtra("userPw", pw)
-                putExtra("userNick", nick)
-            }
-            context.startActivity(intent)
+            sendUserInfo(context,id,pw,nick)
             R.string.sign_up_success
         }
     }
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
-
+fun sendUserInfo(context: Context,id: String,pw: String,nick:String){
+    val intent = Intent(context, LoginActivity::class.java).apply{
+        putExtra("userId", id)
+        putExtra("userPw", pw)
+        putExtra("userNick", nick)
+    }
+    context.startActivity(intent)
+}
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview3() {
