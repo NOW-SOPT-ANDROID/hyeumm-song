@@ -1,49 +1,34 @@
 package com.sopt.now
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import java.lang.RuntimeException
+import com.sopt.now.databinding.ItemFriendBinding
+import com.sopt.now.databinding.ItemUserBinding
 
 class HomeListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var homeListList: List<HomeList> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val adapterLayout : View?
+        val inflater = LayoutInflater.from(parent.context)
+        val bindingUser = ItemUserBinding.inflate(inflater, parent, false)
+        val bindingFriend = ItemFriendBinding.inflate(inflater, parent, false)
         return when(viewType){
             HomeList.VIEW_TYPE_USER -> {
-                adapterLayout = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_user,parent,false)
-                UserViewHolder(adapterLayout)
+                UserViewHolder(bindingUser)
             }
             else -> {
-                adapterLayout = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_friend,parent,false)
-                FriendViewHolder(adapterLayout)
+                FriendViewHolder(bindingFriend)
             }
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = homeListList.getOrNull(position)
-        if (item != null) {
-            when(item.viewType){
-                HomeList.VIEW_TYPE_USER -> {
-                    with(holder as UserViewHolder) {
-                        ivProfile.setImageResource(item.profileImage)
-                        tvName.text = item.name
-                        tvSelfDescription.text = item.selfDescription
-                        setIsRecyclable(false)
-                    }
-                }
-                else -> {
-                    with(holder as FriendViewHolder) {
-                        ivProfile.setImageResource(item.profileImage)
-                        tvName.text = item.name
-                        tvSelfDescription.text = item.selfDescription
-                        setIsRecyclable(false)
-                    }
-                }
+        when(homeListList.getOrNull(position)?.viewType){
+            HomeList.VIEW_TYPE_USER -> {
+                (holder as UserViewHolder).onBind(homeListList[position])
+            }
+            else -> {
+                (holder as FriendViewHolder).onBind(homeListList[position])
             }
         }
     }
