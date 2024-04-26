@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
         val userId = binding.etvLoginId.text.toString()
         val userPw = binding.etvLoginPw.text.toString()
         val message = when{
-            userId == "" || userPw == "" -> getString(R.string.login_error_blank)
+            userId.isBlank() || userPw.isBlank() -> getString(R.string.login_error_blank)
             userId != id || userPw != pw -> getString(R.string.login_error_different)
             else -> {
                 loginBool = true
