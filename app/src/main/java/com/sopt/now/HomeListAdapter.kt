@@ -16,31 +16,31 @@ class HomeListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     .inflate(R.layout.item_user,parent,false)
                 UserViewHolder(adapterLayout)
             }
-            HomeList.VIEW_TYPE_FRIEND -> {
+            else -> {
                 adapterLayout = LayoutInflater.from(parent.context)
                     .inflate(R.layout.item_friend,parent,false)
                 FriendViewHolder(adapterLayout)
             }
-            else -> throw RuntimeException("알 수 없는 뷰타입입니다.")
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = homeListList[position]
-        when(item.viewType){
-            HomeList.VIEW_TYPE_USER -> {
-                (holder as UserViewHolder).ivProfile.setImageResource(item.profileImage)
-                holder.tvName.text = item.name
-                holder.tvSelfDescription.text = item.selfDescription
-                holder.setIsRecyclable(false)
+        val item = homeListList.getOrNull(position)
+        if (item != null) {
+            when(item.viewType){
+                HomeList.VIEW_TYPE_USER -> {
+                    (holder as UserViewHolder).ivProfile.setImageResource(item.profileImage)
+                    holder.tvName.text = item.name
+                    holder.tvSelfDescription.text = item.selfDescription
+                    holder.setIsRecyclable(false)
+                }
+                else -> {
+                    (holder as FriendViewHolder).ivProfile.setImageResource(item.profileImage)
+                    holder.tvName.text = item.name
+                    holder.tvSelfDescription.text = item.selfDescription
+                    holder.setIsRecyclable(false)
+                }
             }
-            HomeList.VIEW_TYPE_FRIEND -> {
-                (holder as FriendViewHolder).ivProfile.setImageResource(item.profileImage)
-                holder.tvName.text = item.name
-                holder.tvSelfDescription.text = item.selfDescription
-                holder.setIsRecyclable(false)
-            }
-            else -> throw RuntimeException("알 수 없는 뷰타입입니다.")
         }
     }
 
