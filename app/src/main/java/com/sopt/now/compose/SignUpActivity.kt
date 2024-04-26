@@ -29,6 +29,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.sopt.now.compose.SignUpActivity.Companion.MAX_ID_LENGTH
+import com.sopt.now.compose.SignUpActivity.Companion.MAX_PW_LENGTH
+import com.sopt.now.compose.SignUpActivity.Companion.MIN_ID_LENGTH
+import com.sopt.now.compose.SignUpActivity.Companion.MIN_PW_LENGTH
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 
 class SignUpActivity : ComponentActivity() {
@@ -45,6 +49,12 @@ class SignUpActivity : ComponentActivity() {
                 }
             }
         }
+    }
+    companion object {
+        const val MIN_ID_LENGTH = 6
+        const val MAX_ID_LENGTH = 10
+        const val MIN_PW_LENGTH = 8
+        const val MAX_PW_LENGTH = 12
     }
 }
 
@@ -128,8 +138,8 @@ fun SignUpUI() {
 fun isSignUpAvailable(context: Context,id: String,pw: String,nick: String,etc: String) {
     val message = when {
         id.isEmpty() || pw.isEmpty() || nick.isEmpty() || etc.isEmpty() -> R.string.sign_up_blank_error
-        id.length !in 6..10 -> R.string.sign_up_id_error
-        pw.length !in 8..12 -> R.string.sign_up_pw_error
+        id.length !in MIN_ID_LENGTH..MAX_ID_LENGTH -> R.string.sign_up_id_error
+        pw.length !in MIN_PW_LENGTH..MAX_PW_LENGTH -> R.string.sign_up_pw_error
         nick.isBlank() || nick.length != nick.trim().length -> R.string.sign_up_nick_error
         etc.length !in 1..Int.MAX_VALUE -> R.string.sign_up_etc_error
         else -> {
