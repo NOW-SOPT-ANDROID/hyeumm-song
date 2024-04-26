@@ -1,6 +1,8 @@
 package com.sopt.now
 
-object HomeListData {
+import androidx.lifecycle.ViewModel
+
+class HomeViewModel : ViewModel() {
     val homeListData = listOf(
         HomeList(
             profileImage = R.drawable.main,
