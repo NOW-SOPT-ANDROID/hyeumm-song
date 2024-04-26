@@ -7,16 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.sopt.now.databinding.FragmentHomeBinding
 import com.sopt.now.databinding.FragmentMyPageBinding
 
 class MyPageFragment : Fragment() {
-    private lateinit var binding: FragmentMyPageBinding
+    private val binding: FragmentMyPageBinding
+        get()= requireNotNull(_binding){"_binding이 null이 아닌 경우만 _binding 반환"}
+    private var _binding: FragmentMyPageBinding?= null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMyPageBinding.inflate(inflater)
+        _binding = FragmentMyPageBinding.inflate(inflater,container,false)
         getUserInfo()
         return binding.root
     }
@@ -26,5 +29,10 @@ class MyPageFragment : Fragment() {
         binding.tvMainNick.text = userInfo?.getString("userNick", "")
         binding.tvMainId.text = userInfo?.getString("userId", "")
         binding.tvMainPw.text = userInfo?.getString("userPw", "")
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

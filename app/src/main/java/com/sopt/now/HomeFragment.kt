@@ -9,13 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.now.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
+    private val binding:FragmentHomeBinding
+        get()= requireNotNull(_binding){"_binding이 null이 아닌 경우만 _binding 반환"}
+    private var _binding: FragmentHomeBinding ?= null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentHomeBinding.inflate(inflater)
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater,container,false)
         return binding.root
     }
 
@@ -27,6 +29,11 @@ class HomeFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
         }
         homeListAdapter.setHomeList(HomeListData.homeListData)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
