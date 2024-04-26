@@ -47,8 +47,9 @@ class LoginActivity : AppCompatActivity() {
     }
     private fun moveToMain(id:String,pw:String,nick:String){
         if (isLoginAvailable(id, pw)) {
-            val intent = Intent(this, MainActivity::class.java)
-            saveUserInfo(id,pw,nick)
+            val intent = Intent(this, MainActivity::class.java).apply {
+                saveUserInfo(id, pw, nick)
+            }
             startActivity(intent)
         }
     }
