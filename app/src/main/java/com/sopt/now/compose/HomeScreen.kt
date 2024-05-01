@@ -26,7 +26,7 @@ fun HomeUi(viewModel: HomeViewModel) {
                 HorizontalDivider(thickness = 1.dp, color = Color.DarkGray)
             }
             items(viewModel.friendList) {
-                FriendProfileItem(it)
+                FriendProfileItem(it.profileImage,it.name,it.selfDescription)
             }
         }
     }

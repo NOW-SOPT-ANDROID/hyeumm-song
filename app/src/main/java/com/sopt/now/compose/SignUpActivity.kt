@@ -40,16 +40,29 @@ class SignUpActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NOWSOPTAndroidTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SignUpUI()
+                    var id by remember { mutableStateOf("") }
+                    var pw by remember { mutableStateOf("") }
+                    var nick by remember { mutableStateOf("") }
+                    var etc by remember { mutableStateOf("") }
+
+                    SignUpScreen(
+                        id,
+                        pw,
+                        nick,
+                        etc,
+                        onIdChange = { id = it },
+                        onPwChange = { pw = it },
+                        onNickChange = { nick = it },
+                        onEtcChange = { etc = it })
                 }
             }
         }
     }
+
     companion object {
         const val MIN_ID_LENGTH = 6
         const val MAX_ID_LENGTH = 10
@@ -59,12 +72,17 @@ class SignUpActivity : ComponentActivity() {
 }
 
 @Composable
-fun SignUpUI() {
+fun SignUpScreen(
+    id: String,
+    pw: String,
+    nick: String,
+    etc: String,
+    onIdChange: (String) -> Unit,
+    onPwChange: (String) -> Unit,
+    onNickChange: (String) -> Unit,
+    onEtcChange: (String) -> Unit
+) {
     val context = LocalContext.current
-    var id by remember { mutableStateOf("") }
-    var pw by remember { mutableStateOf("") }
-    var nick by remember { mutableStateOf("") }
-    var etc by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -84,7 +102,7 @@ fun SignUpUI() {
         TextField(
             value = id,
             label = { Text(stringResource(R.string.tf_label_id)) },
-            onValueChange = { id = it },
+            onValueChange = onIdChange,
             placeholder = { Text(stringResource(R.string.tf_ph_id)) },
             singleLine = true
         )
@@ -96,7 +114,7 @@ fun SignUpUI() {
         TextField(
             value = pw,
             label = { Text(stringResource(R.string.tf_label_pw)) },
-            onValueChange = { pw = it },
+            onValueChange = onPwChange,
             placeholder = { Text(stringResource(R.string.tf_ph_pw)) },
             singleLine = true
         )
@@ -108,7 +126,7 @@ fun SignUpUI() {
         TextField(
             value = nick,
             label = { Text(stringResource(R.string.tf_label_nick)) },
-            onValueChange = { nick = it },
+            onValueChange = onNickChange,
             placeholder = { Text(stringResource(R.string.tf_ph_nick)) },
             singleLine = true
         )
@@ -120,14 +138,14 @@ fun SignUpUI() {
         TextField(
             value = etc,
             label = { Text(stringResource(R.string.tf_label_etc)) },
-            onValueChange = { etc = it },
+            onValueChange = onEtcChange,
             placeholder = { Text(stringResource(R.string.tf_ph_etc)) },
             singleLine = true
         )
         Spacer(modifier = Modifier.weight(1f))
         Button(
             onClick = {
-                isSignUpAvailable(context,id,pw,nick,etc)
+                isSignUpAvailable(context, id, pw, nick, etc)
             },
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -135,7 +153,8 @@ fun SignUpUI() {
         }
     }
 }
-fun isSignUpAvailable(context: Context,id: String,pw: String,nick: String,etc: String) {
+
+fun isSignUpAvailable(context: Context, id: String, pw: String, nick: String, etc: String) {
     val message = when {
         id.isEmpty() || pw.isEmpty() || nick.isEmpty() || etc.isEmpty() -> R.string.sign_up_blank_error
         id.length !in MIN_ID_LENGTH..MAX_ID_LENGTH -> R.string.sign_up_id_error
@@ -143,24 +162,35 @@ fun isSignUpAvailable(context: Context,id: String,pw: String,nick: String,etc: S
         nick.isBlank() || nick.length != nick.trim().length -> R.string.sign_up_nick_error
         etc.length !in 1..Int.MAX_VALUE -> R.string.sign_up_etc_error
         else -> {
-            sendUserInfo(context,id,pw,nick)
+            sendUserInfo(context, id, pw, nick)
             R.string.sign_up_success
         }
     }
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
-fun sendUserInfo(context: Context,id: String,pw: String,nick:String){
-    val intent = Intent(context, LoginActivity::class.java).apply{
+
+fun sendUserInfo(context: Context, id: String, pw: String, nick: String) {
+    val intent = Intent(context, LoginActivity::class.java).apply {
         putExtra("userId", id)
         putExtra("userPw", pw)
         putExtra("userNick", nick)
     }
     context.startActivity(intent)
 }
+
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview3() {
+fun SignUpPreview() {
     NOWSOPTAndroidTheme {
-        SignUpUI()
+        SignUpScreen(
+            id = "아이디",
+            pw = "비밀번호",
+            nick = "닉네임",
+            etc = "기타 할 말",
+            onIdChange = {},
+            onPwChange = {},
+            onNickChange = {},
+            onEtcChange = {}
+        )
     }
 }

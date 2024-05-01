@@ -3,9 +3,6 @@ package com.sopt.now.compose
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.lifecycle.ViewModel
-import com.sopt.now.compose.Friend
-import com.sopt.now.compose.R
-import com.sopt.now.compose.User
 
 class HomeViewModel : ViewModel() {
 

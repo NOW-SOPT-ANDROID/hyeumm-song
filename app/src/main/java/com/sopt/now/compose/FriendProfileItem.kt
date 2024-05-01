@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -18,7 +19,7 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun FriendProfileItem(friend: Friend) {
+fun FriendProfileItem(friendImg: ImageVector, friendName: String, friendDescription: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -27,12 +28,12 @@ fun FriendProfileItem(friend: Friend) {
     ) {
         Icon(
             modifier = Modifier.size(50.dp),
-            imageVector = friend.profileImage,
+            imageVector = friendImg,
             contentDescription = null
         )
         Spacer(modifier = Modifier.width(10.dp))
         Text(
-            text = friend.name,
+            text = friendName,
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
             overflow = TextOverflow.Ellipsis,
@@ -41,7 +42,7 @@ fun FriendProfileItem(friend: Friend) {
         Spacer(modifier = Modifier.width(30.dp))
         Spacer(modifier = Modifier.weight(1f))
         Text(
-            text = friend.selfDescription,
+            text = friendDescription,
             fontSize = 10.sp,
             overflow = TextOverflow.Ellipsis,
             maxLines = 1

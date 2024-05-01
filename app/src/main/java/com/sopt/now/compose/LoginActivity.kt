@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
@@ -40,7 +41,6 @@ class LoginActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NOWSOPTAndroidTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -48,7 +48,17 @@ class LoginActivity : ComponentActivity() {
                     val userId = intent.getStringExtra("userId")
                     val userPw = intent.getStringExtra("userPw")
                     val userNick = intent.getStringExtra("userNick")
-                    LoginUI(userId, userPw, userNick)
+                    var id by remember { mutableStateOf("") }
+                    var pw by remember { mutableStateOf("") }
+
+                    LoginScreen(
+                        userId,
+                        userPw,
+                        userNick,
+                        id,
+                        pw,
+                        onIdChange = { id = it },
+                        onPwChange = { pw = it })
                 }
             }
         }
@@ -56,10 +66,16 @@ class LoginActivity : ComponentActivity() {
 }
 
 @Composable
-fun LoginUI(userId: String?, userPw: String?, userNick: String?) {
+fun LoginScreen(
+    userId: String?,
+    userPw: String?,
+    userNick: String?,
+    id: String,
+    pw: String,
+    onIdChange: (String) -> Unit,
+    onPwChange: (String) -> Unit
+) {
     val context = LocalContext.current
-    var id by remember { mutableStateOf("") }
-    var pw by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier
@@ -77,7 +93,7 @@ fun LoginUI(userId: String?, userPw: String?, userNick: String?) {
         )
         TextField(
             value = id,
-            onValueChange = { id = it },
+            onValueChange = onIdChange,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
@@ -89,14 +105,14 @@ fun LoginUI(userId: String?, userPw: String?, userNick: String?) {
         Text(text = stringResource(R.string.text_pw))
         TextField(
             value = pw,
-            onValueChange = { pw = it },
+            onValueChange = onPwChange,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp),
             placeholder = { Text(stringResource(R.string.tf_login_pw)) },
             singleLine = true,
             visualTransformation = PasswordVisualTransformation(),
-            leadingIcon = { Icon(Icons.Filled.Person, contentDescription = "User Icon") },
+            leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = "Lock Icon") },
         )
         Spacer(modifier = Modifier.weight(1f))
         Button(
@@ -144,10 +160,11 @@ fun isLoginAvailable(
     }
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
+
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview2() {
+fun LoginPreview() {
     NOWSOPTAndroidTheme {
-        LoginUI("아이디", "비밀번호", "닉네임")
+        LoginScreen("아이디", "비밀번호", "닉네임","","", onIdChange = {}, onPwChange = {})
     }
 }

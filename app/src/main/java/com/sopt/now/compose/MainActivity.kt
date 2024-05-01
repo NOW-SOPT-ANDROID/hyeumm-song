@@ -3,7 +3,6 @@ package com.sopt.now.compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -36,7 +35,6 @@ import androidx.compose.ui.unit.sp
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 
 class MainActivity : ComponentActivity() {
-    private val viewModel by viewModels<HomeViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -48,7 +46,11 @@ class MainActivity : ComponentActivity() {
                     val userId = intent.getStringExtra("userId")
                     val userPw = intent.getStringExtra("userPw")
                     val userNick = intent.getStringExtra("userNick")
-                    MainUi(userId, userPw, userNick)
+                    MainScreen(
+                        userId,
+                        userPw,
+                        userNick
+                    )
                 }
             }
         }
@@ -57,8 +59,12 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainUi(userId: String?, userPw: String?, userNick: String?) {
-    if(userId!=null&&userPw!=null&&userNick!=null) {
+fun MainScreen(
+    userId: String?,
+    userPw: String?,
+    userNick: String?
+) {
+    if (userId != null && userPw != null && userNick != null) {
         var selectedItem by remember { mutableIntStateOf(0) }
         val items = listOf(
             BottomNavigationItem(
@@ -126,10 +132,11 @@ fun MainUi(userId: String?, userPw: String?, userNick: String?) {
         }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     NOWSOPTAndroidTheme {
-        MainUi("아이디","비밀번호","닉네임")
+        MainScreen("아이디", "비밀번호", "닉네임")
     }
 }
