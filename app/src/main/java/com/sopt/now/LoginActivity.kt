@@ -16,14 +16,11 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //회원가입에서 사용자 정보 받아옴
-        getUser()
+        getUserInfo()
 
-        //회원가입 페이지로 넘어가기
         moveToSignUp()
-
     }
-    private fun getUser() { // 아쉬운 부분
+    private fun getUserInfo() {
         var id = ""
         var pw = ""
         var nick = ""
@@ -31,42 +28,53 @@ class LoginActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
             if (result.resultCode == RESULT_OK) {
-                id = result.data?.getStringExtra("id") ?: ""
-                pw = result.data?.getStringExtra("pw") ?: ""
-                nick = result.data?.getStringExtra("nick") ?: ""
+                result.data?.let { data ->
+                    id = data.getStringExtra("id") ?: ""
+                    pw = data.getStringExtra("pw") ?: ""
+                    nick = data.getStringExtra("nick") ?: ""
+                }
             }
         }
         binding.btnLogin.setOnClickListener {
-            sendData(id,pw,nick)
+            moveToMain(id,pw,nick)
         }
     }
     private fun moveToSignUp(){
         binding.btnLoginSignIn.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
-            //회원가입 데이터를 받아오기 위해 startActivity가 아닌 resultLauncher사용
             resultLauncher.launch(intent)
         }
+    }
+    private fun moveToMain(id:String,pw:String,nick:String){
+        if (isLoginAvailable(id, pw)) {
+            val intent = Intent(this, MainActivity::class.java).apply {
+                saveUserInfo(id, pw, nick)
+            }
+            startActivity(intent)
+        }
+    }
+    private fun saveUserInfo(id:String,pw:String,nick:String) {
+        val sharedPreferences = getSharedPreferences("userInfo", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor
+            .putString("userId", id)
+            .putString("userPw", pw)
+            .putString("userNick", nick)
+            .apply()
     }
     private fun isLoginAvailable(id: String, pw: String) :Boolean {
         var loginBool = false
         val userId = binding.etvLoginId.text.toString()
         val userPw = binding.etvLoginPw.text.toString()
         val message = when{
-            userId != id || userPw != pw -> "아이디 혹은 비밀번호가 일치하지 않습니다."
+            userId.isBlank() || userPw.isBlank() -> getString(R.string.login_error_blank)
+            userId != id || userPw != pw -> getString(R.string.login_error_different)
             else -> {
                 loginBool = true
-                "로그인에 성공했습니다."
+                getString(R.string.login_success)
             }
         }
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
         return loginBool
-    }
-    private fun sendData(id:String,pw:String,nick:String){
-        if (isLoginAvailable(id, pw)) {
-            val intent = Intent(this, MainActivity::class.java)
-            //메인 액티비티로 데이터를 보냄
-            intent.putExtra("id", id).putExtra("pw", pw).putExtra("nick", nick)
-            startActivity(intent)
-        }
     }
 }
