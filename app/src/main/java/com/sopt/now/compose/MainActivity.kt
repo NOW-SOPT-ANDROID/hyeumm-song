@@ -3,20 +3,32 @@ package com.sopt.now.compose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,7 +39,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             NOWSOPTAndroidTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -35,67 +46,97 @@ class MainActivity : ComponentActivity() {
                     val userId = intent.getStringExtra("userId")
                     val userPw = intent.getStringExtra("userPw")
                     val userNick = intent.getStringExtra("userNick")
-                    MainUI(userId,userPw,userNick)
+                    MainScreen(
+                        userId,
+                        userPw,
+                        userNick
+                    )
                 }
             }
         }
     }
 }
-//메인화면
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainUI(userId: String?="", userPw:String?="", userNick:String?=""){
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(30.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = stringResource(R.string.app_name),
-            fontSize = 30.sp
+fun MainScreen(
+    userId: String?,
+    userPw: String?,
+    userNick: String?
+) {
+    if (userId != null && userPw != null && userNick != null) {
+        var selectedItem by remember { mutableIntStateOf(0) }
+        val items = listOf(
+            BottomNavigationItem(
+                icon = Icons.Filled.Home,
+                label = "Home"
+            ),
+            BottomNavigationItem(
+                icon = Icons.Filled.Search,
+                label = "Search"
+            ),
+            BottomNavigationItem(
+                icon = Icons.Filled.Person,
+                label = "Profile"
+            )
         )
-        Text(
-            text = stringResource(R.string.text_main_title2),
-            fontSize = 20.sp
-        )
-        Spacer(modifier = Modifier.height(50.dp),)
-        Image(
-            painter = painterResource(id = R.drawable.cute),
-            contentDescription = "귀여운 뱁새"
-        )
-        Spacer(modifier = Modifier.height(50.dp),)
-        Text(
-            text = "ID",
-            fontSize = 20.sp
-        )
-        Text(
-            text = "$userId",
-            fontSize = 15.sp
-        )
-        Spacer(modifier = Modifier.height(50.dp),)
-        Text(
-            text = stringResource(R.string.text_pw),
-            fontSize = 20.sp
-        )
-        Text(
-            text = "$userPw",
-            fontSize = 15.sp
-        )
-        Spacer(modifier = Modifier.height(50.dp),)
-        Text(
-            text = stringResource(R.string.text_nick),
-            fontSize = 20.sp
-        )
-        Text(
-            text = "$userNick",
-            fontSize = 15.sp
-        )
+
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    colors = topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        titleContentColor = MaterialTheme.colorScheme.primary,
+                    ),
+                    title = {
+                        Text(
+                            text = stringResource(R.string.app_name),
+                            fontSize = 30.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                )
+            },
+            bottomBar = {
+                NavigationBar {
+                    items.forEachIndexed { index, item ->
+                        NavigationBarItem(
+                            icon = { Icon(item.icon, contentDescription = item.label) },
+                            label = { Text(item.label) },
+                            selected = selectedItem == index,
+                            onClick = { selectedItem = index }
+                        )
+                    }
+                }
+            },
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .padding(innerPadding),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+            ) {
+                when (selectedItem) {
+                    0 -> {
+                        HomeUi(HomeViewModel())
+                    }
+
+                    1 -> {
+                        Text(text = "Search")
+                    }
+
+                    2 -> {
+                        ProfileUi(userId, userPw, userNick)
+                    }
+                }
+            }
+        }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     NOWSOPTAndroidTheme {
-        MainUI()
+        MainScreen("아이디", "비밀번호", "닉네임")
     }
 }
