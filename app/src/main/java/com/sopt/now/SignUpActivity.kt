@@ -1,11 +1,76 @@
 package com.sopt.now
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.now.databinding.ActivitySignUpBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
+class SignUpActivity : AppCompatActivity() {
+
+    private val binding by lazy { ActivitySignUpBinding.inflate(layoutInflater) }
+    private val authService by lazy { ServicePool.authService }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(binding.root)
+        initViews()
+    }
+
+    private fun initViews() {
+        binding.btnSignUp.setOnClickListener {
+            signUp()
+        }
+    }
+
+    private fun signUp() {
+        val signUpRequest = getSignUpRequestDto()
+        authService.signUp(signUpRequest).enqueue(object : Callback<ResponseSignUpDto> {
+            override fun onResponse(
+                call: Call<ResponseSignUpDto>,
+                response: Response<ResponseSignUpDto>,
+            ) {
+                if (response.isSuccessful) {
+                    val data: ResponseSignUpDto? = response.body()
+                    val userId = response.headers()["location"]
+                    Toast.makeText(
+                        this@SignUpActivity,
+                        "회원가입 성공 userID는 $userId 입니다",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                    Log.d("SignUp", "data: $data, userId: $userId")
+                } else {
+                    val error = response.message()
+                    Toast.makeText(
+                        this@SignUpActivity,
+                        "회원가입에 실패했습니다.$error",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
+                Toast.makeText(this@SignUpActivity, "서버 에러 발생 ", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun getSignUpRequestDto(): RequestSignUpDto {
+        val id = binding.etvSignUpId.text.toString()
+        val password = binding.etvSignUpPw.text.toString()
+        val nickname = binding.etvSignUpNick.text.toString()
+        val phoneNumber = binding.etvSignUpPhone.text.toString()
+        return RequestSignUpDto(
+            authenticationId = id,
+            password = password,
+            nickname = nickname,
+            phone = phoneNumber
+        )
+    }
+}
+/**
 class SignUpActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignUpBinding
 
@@ -61,3 +126,4 @@ class SignUpActivity : AppCompatActivity() {
         const val MAX_PW_LENGTH = 12
     }
 }
+        */
