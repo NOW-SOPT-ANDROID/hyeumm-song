@@ -28,6 +28,11 @@ class LoginActivity : AppCompatActivity() {
     private fun initObserver() {
         viewModel.liveData.observe(this) { LoginState ->
             if (LoginState.isSuccess) {
+                Toast.makeText(
+                    this@LoginActivity,
+                    LoginState.message,
+                    Toast.LENGTH_SHORT,
+                ).show()
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("userId", viewModel.userId )
                 startActivity(intent)
