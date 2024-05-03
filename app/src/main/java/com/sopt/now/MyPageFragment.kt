@@ -33,16 +33,15 @@ class MyPageFragment : Fragment() {
 
     private fun initObserver() {
         viewModel.liveData.observe(viewLifecycleOwner) { userInfoState ->
+            Toast.makeText(
+                activity,
+                userInfoState.message,
+                Toast.LENGTH_SHORT,
+            ).show()
             if (userInfoState.isSuccess) {
                 binding.tvMainNick.text=userInfoState.userNick
                 binding.tvMainId.text=userInfoState.userId
                 binding.tvMainPhone.text=userInfoState.userPhone
-            } else {
-                Toast.makeText(
-                    activity,
-                    userInfoState.message,
-                    Toast.LENGTH_SHORT,
-                ).show()
             }
         }
     }
