@@ -2,7 +2,6 @@ package com.sopt.now
 
 import retrofit2.Call
 import retrofit2.http.Body
-import retrofit2.http.PATCH
 import retrofit2.http.POST
 
 interface AuthService {
@@ -10,9 +9,9 @@ interface AuthService {
     fun signUp(
         @Body request: RequestSignUpDto
     ): Call<ResponseSignUpDto> //비동기->callback
+    @POST("member/login")
+    fun login(
+        @Body request : RequestLoginDto
+    ) : Call<ResponseLoginDto>
 
-    @PATCH("/member/password")
-    fun changePw(
-        @Body request : RequestChagePwDto
-    ) : Call<ResponseChangePwDto>
 }

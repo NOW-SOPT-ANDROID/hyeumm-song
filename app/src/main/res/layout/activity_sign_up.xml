@@ -114,7 +114,7 @@
         android:id="@+id/tv_sign_up_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/etc"
+        android:text="@string/phone"
         android:textStyle="bold"
         android:textSize="20sp"
         android:layout_marginHorizontal="30dp"

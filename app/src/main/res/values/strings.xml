@@ -35,4 +35,5 @@
     <string name="sign_up_error_etc">하고싶은 말을 다시 설정하세요.</string>
     <string name="sign_up_phone_text">*(-)하이픈을 포함해 입력해주세요.</string>
     <string name="sign_up_phone_hint">예시)010-0000-0000</string>
+    <string name="phone">전화번호</string>
 </resources>

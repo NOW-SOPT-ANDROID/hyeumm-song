@@ -3,7 +3,10 @@ package com.sopt.now
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.sopt.now.databinding.ActivitySignUpBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -12,49 +15,28 @@ import retrofit2.Response
 class SignUpActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivitySignUpBinding.inflate(layoutInflater) }
-    private val authService by lazy { ServicePool.authService }
+    private val viewModel by viewModels<SignUpViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initViews()
+        initObserver()
     }
 
     private fun initViews() {
         binding.btnSignUp.setOnClickListener {
-            signUp()
+            viewModel.signUp(getSignUpRequestDto())
         }
     }
 
-    private fun signUp() {
-        val signUpRequest = getSignUpRequestDto()
-        authService.signUp(signUpRequest).enqueue(object : Callback<ResponseSignUpDto> {
-            override fun onResponse(
-                call: Call<ResponseSignUpDto>,
-                response: Response<ResponseSignUpDto>,
-            ) {
-                if (response.isSuccessful) {
-                    val data: ResponseSignUpDto? = response.body()
-                    val userId = response.headers()["location"]
-                    Toast.makeText(
-                        this@SignUpActivity,
-                        "회원가입 성공 userID는 $userId 입니다",
-                        Toast.LENGTH_SHORT,
-                    ).show()
-                    Log.d("SignUp", "data: $data, userId: $userId")
-                } else {
-                    val error = response.message()
-                    Toast.makeText(
-                        this@SignUpActivity,
-                        "회원가입에 실패했습니다.$error",
-                        Toast.LENGTH_SHORT,
-                    ).show()
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
-                Toast.makeText(this@SignUpActivity, "서버 에러 발생 ", Toast.LENGTH_SHORT).show()
-            }
-        })
+    private fun initObserver() {
+        viewModel.liveData.observe(this) {
+            Toast.makeText(
+                this@SignUpActivity,
+                it.message,
+                Toast.LENGTH_SHORT,
+            ).show()
+        }
     }
 
     private fun getSignUpRequestDto(): RequestSignUpDto {
@@ -68,6 +50,48 @@ class SignUpActivity : AppCompatActivity() {
             nickname = nickname,
             phone = phoneNumber
         )
+    }
+}
+
+data class SignUpState(
+    val isSuccess: Boolean,
+    val message: String
+)
+
+class SignUpViewModel : ViewModel() {
+    private val authService by lazy { ServicePool.authService }
+    val liveData = MutableLiveData<SignUpState>()
+
+    fun signUp(request: RequestSignUpDto) {
+        authService.signUp(request).enqueue(object : Callback<ResponseSignUpDto> {
+            override fun onResponse(
+                call: Call<ResponseSignUpDto>,
+                response: Response<ResponseSignUpDto>,
+            ) {
+                if (response.isSuccessful) {
+                    val data: ResponseSignUpDto? = response.body()
+                    val userId = response.headers()["location"]
+                    liveData.value = SignUpState(
+                        isSuccess = true,
+                        message = "회원가입 성공 유저의 ID는 $userId 입니다"
+                    )
+                    Log.d("SignUp", "data: $data, userId: $userId")
+                } else {
+                    val error = response.message()
+                    liveData.value = SignUpState(
+                        isSuccess = false,
+                        message = "회원가입이 실패했습니다 $error"
+                    )
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
+                liveData.value = SignUpState(
+                    isSuccess = false,
+                    message = "서버에러"
+                )
+            }
+        })
     }
 }
 /**

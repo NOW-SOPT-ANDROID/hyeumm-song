@@ -1,38 +1,58 @@
 package com.sopt.now
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.sopt.now.databinding.FragmentHomeBinding
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.sopt.now.databinding.FragmentMyPageBinding
 
 class MyPageFragment : Fragment() {
     private val binding: FragmentMyPageBinding
-        get()= requireNotNull(_binding){"_binding이 null이 아닌 경우만 _binding 반환"}
-    private var _binding: FragmentMyPageBinding?= null
+        get() = requireNotNull(_binding) { "_binding이 null이 아닌 경우만 _binding 반환" }
+    private var _binding: FragmentMyPageBinding? = null
+    private val viewModel by viewModels<UserInfoViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMyPageBinding.inflate(inflater,container,false)
-        getUserInfo()
+        _binding = FragmentMyPageBinding.inflate(inflater, container, false)
+        initViews()
+        initObserver()
         return binding.root
-    }
-
-    private fun getUserInfo() {
-        val userInfo = activity?.getSharedPreferences("userInfo", Context.MODE_PRIVATE)
-        binding.tvMainNick.text = userInfo?.getString("userNick", "")
-        binding.tvMainId.text = userInfo?.getString("userId", "")
-        binding.tvMainPw.text = userInfo?.getString("userPw", "")
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun initObserver() {
+        viewModel.liveData.observe(viewLifecycleOwner) { userInfoState ->
+            if (userInfoState.isSuccess) {
+                binding.tvMainNick.text=userInfoState.userNick
+                binding.tvMainId.text=userInfoState.userId
+                binding.tvMainPhone.text=userInfoState.userPhone
+            } else {
+                Toast.makeText(
+                    activity,
+                    userInfoState.message,
+                    Toast.LENGTH_SHORT,
+                ).show()
+            }
+        }
+    }
+
+    private fun initViews() {
+        val userId = requireActivity().intent.getStringExtra("userId")
+        Log.d("UserInfo", "userId: $userId")
+
+        if (userId != null) {
+            viewModel.userInfo(userId.toInt())
+        }
     }
 }

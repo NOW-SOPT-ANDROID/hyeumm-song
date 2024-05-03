@@ -52,11 +52,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_main_title_id" />
     <TextView
-        android:id="@+id/tv_main_title_pw"
+        android:id="@+id/tv_main_title_phone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/pw"
+        android:text="@string/phone"
         android:textColor="#000000"
         android:textSize="25sp"
         android:textAlignment="center"
@@ -64,7 +64,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_main_id" />
     <TextView
-        android:id="@+id/tv_main_pw"
+        android:id="@+id/tv_main_phone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="#000000"
@@ -72,6 +72,6 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_main_title_pw" />
+        app:layout_constraintTop_toBottomOf="@id/tv_main_title_phone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
