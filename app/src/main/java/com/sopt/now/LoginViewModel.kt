@@ -7,7 +7,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 data class LoginState(
     val isSuccess: Boolean,
     val message: String
@@ -16,7 +15,7 @@ data class LoginState(
 class LoginViewModel : ViewModel() {
     private val authService by lazy { ServicePool.authService }
     val liveData = MutableLiveData<LoginState>()
-    var userId : String?= ""
+    var userId: String? = ""
     fun login(request: RequestLoginDto) {
         authService.login(request).enqueue(object : Callback<ResponseLoginDto> {
             override fun onResponse(
@@ -26,6 +25,7 @@ class LoginViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val data: ResponseLoginDto? = response.body()
                     userId = response.headers()["location"]
+                    userId?.let { LoginActivity.prefs.setString("userId", it) }
                     liveData.value = LoginState(
                         isSuccess = true,
                         message = "로그인 성공 유저의 ID는 $userId 입니다"

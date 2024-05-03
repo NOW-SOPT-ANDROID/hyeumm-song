@@ -20,8 +20,8 @@ class UserInfoViewModel : ViewModel() {
     private val userService by lazy { ServicePool.userService }
     val liveData = MutableLiveData<UserInfoState>()
 
-    fun userInfo(userId:Int) {
-        userService.userInfo(userId).enqueue(object : Callback<ResponseUserInfoDto> {
+    fun userInfo() {
+        userService.userInfo().enqueue(object : Callback<ResponseUserInfoDto> {
             override fun onResponse(
                 call: Call<ResponseUserInfoDto>,
                 response: Response<ResponseUserInfoDto>,
@@ -35,7 +35,7 @@ class UserInfoViewModel : ViewModel() {
                         userNick = data?.data?.nickname,
                         userPhone = data?.data?.phone
                     )
-                    Log.d("UserInfo", "data: $data, userId: $userId")
+                    Log.d("UserInfo", "data: $data")
                 } else {
                     val error = response.message()
                     liveData.value = UserInfoState(

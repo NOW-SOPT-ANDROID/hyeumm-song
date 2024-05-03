@@ -1,7 +1,6 @@
 package com.sopt.now
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,11 +46,6 @@ class MyPageFragment : Fragment() {
     }
 
     private fun initViews() {
-        val userId = requireActivity().intent.getStringExtra("userId")
-        Log.d("UserInfo", "userId: $userId")
-
-        if (userId != null) {
-            viewModel.userInfo(userId.toInt())
-        }
+            viewModel.userInfo()
     }
 }
