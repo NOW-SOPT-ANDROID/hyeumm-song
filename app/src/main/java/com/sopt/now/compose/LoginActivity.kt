@@ -54,23 +54,23 @@ class LoginActivity : ComponentActivity() {
                         pw,
                         onIdChange = { id = it },
                         onPwChange = { pw = it })
-
-                    initObserver()
                 }
             }
         }
+        initObserver()
     }
 
     private fun initObserver() {
-        viewModel.liveData.observe(this) { LoginState ->
+        viewModel.liveData.observe(this) { loginState ->
             Toast.makeText(
                 this@LoginActivity,
-                LoginState.message,
+                loginState.message,
                 Toast.LENGTH_SHORT
             ).show()
 
-            if (LoginState.isSuccess) {
+            if (loginState.isSuccess) {
                 intent = Intent(this@LoginActivity,MainActivity::class.java)
+                intent.putExtra("userId", viewModel.userId)
                 startActivity(intent)
             }
         }
