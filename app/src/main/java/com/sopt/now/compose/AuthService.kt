@@ -9,4 +9,9 @@ interface AuthService {
     fun signUp(
         @Body request: RequestSignUpDto
     ): Call<ResponseSignUpDto> //비동기->callback
+
+    @POST("member/login")
+    fun login(
+        @Body request : RequestLoginDto
+    ) : Call<ResponseLoginDto>
 }
