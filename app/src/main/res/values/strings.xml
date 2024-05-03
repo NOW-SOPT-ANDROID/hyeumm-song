@@ -22,6 +22,8 @@
     <string name="tf_ph_nick">닉네임을 입력하세요.</string>
     <string name="tf_label_etc">한 글자 이상 입력해주세요.</string>
     <string name="tf_ph_etc">하고싶은 말을 입력하세요.</string>
+    <string name="tf_label_phone">전화번호</string>
+    <string name="tf_ph_phone">예시)010-0000-0000</string>
     <!--에러-->
     <string name="login_error">아이디 혹은 비밀번호가 일치하지 않습니다.</string>
     <string name="sign_up_id_error">아이디를 다시 설정하세요.</string>
@@ -30,4 +32,5 @@
     <string name="sign_up_etc_error">하고싶은 말을 다시 설정하세요.</string>
     <string name="sign_up_blank_error">모든 항목을 입력해주세요.</string>
     <string name="sign_up_success">회원가입에 성공했습니다.</string>
+    <string name="text_phone">전화번호</string>
 </resources>
