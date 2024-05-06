@@ -1,4 +1,4 @@
-package com.sopt.now.presentation.main.mypage
+package com.sopt.now.presentation.auth.changepassword
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.sopt.now.R
 import com.sopt.now.databinding.FragmentMyPageBinding
 
 class ChangePasswordFragment : Fragment() {

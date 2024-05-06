@@ -1,4 +1,4 @@
-package com.sopt.now.presentation.main.mypage
+package com.sopt.now.presentation.auth.changepassword
 
 data class ChangePasswordState(
     val isSuccess: Boolean,

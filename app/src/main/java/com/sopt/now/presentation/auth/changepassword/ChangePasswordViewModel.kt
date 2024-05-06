@@ -1,10 +1,11 @@
-package com.sopt.now.presentation.main.mypage
+package com.sopt.now.presentation.auth.changepassword
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sopt.now.ServicePool
 import com.sopt.now.data.remote.dto.response.ResponseUserInfoDto
+import com.sopt.now.presentation.main.mypage.UserInfoState
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
