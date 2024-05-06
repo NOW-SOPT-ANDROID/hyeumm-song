@@ -23,7 +23,7 @@ class LoginViewModel : ViewModel() {
             ) {
                 if (response.isSuccessful) {
                     val data: ResponseLoginDto? = response.body()
-                    userId = response.headers()["location"]
+                    userId = response.headers()[LOCATION]
                     userId?.let { LoginActivity.prefs.setString(USER_ID, it) }
                     liveData.value = LoginState(
                         isSuccess = true,
@@ -47,6 +47,7 @@ class LoginViewModel : ViewModel() {
         })
     }
     companion object {
-        const val USER_ID:String = "userId"
+        const val USER_ID = "userId"
+        const val LOCATION = "location"
     }
 }

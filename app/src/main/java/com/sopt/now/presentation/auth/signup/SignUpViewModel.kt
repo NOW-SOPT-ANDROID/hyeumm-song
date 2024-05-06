@@ -23,7 +23,7 @@ class SignUpViewModel : ViewModel() {
             ) {
                 if (response.isSuccessful) {
                     val data: ResponseSignUpDto? = response.body()
-                    val userId = response.headers()["location"]
+                    val userId = response.headers()[LOCATION]
                     liveData.value = SignUpState(
                         isSuccess = true,
                         message = "회원가입 성공 유저의 ID는 $userId 입니다"
@@ -44,5 +44,8 @@ class SignUpViewModel : ViewModel() {
                 )
             }
         })
+    }
+    companion object {
+        const val LOCATION = "location"
     }
 }

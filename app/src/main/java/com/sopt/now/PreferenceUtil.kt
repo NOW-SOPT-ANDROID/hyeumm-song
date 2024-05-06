@@ -16,6 +16,6 @@ class PreferenceUtil(context: Context) {
     }
 
     companion object {
-        const val USER_ID:String = "userId"
+        const val USER_ID = "userId"
     }
 }
