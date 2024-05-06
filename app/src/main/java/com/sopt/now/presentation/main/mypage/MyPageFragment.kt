@@ -24,6 +24,7 @@ class MyPageFragment : Fragment() {
         _binding = FragmentMyPageBinding.inflate(inflater, container, false)
         initViews()
         initObserver()
+        moveToChangePassword()
         return binding.root
     }
 
