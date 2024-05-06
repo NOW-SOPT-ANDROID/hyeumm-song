@@ -26,7 +26,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initViews() {
         binding.btnLogin.setOnClickListener {
-            viewModel.login(getLoginRequestDto())
+            viewModel.login(
+                RequestLoginDto(
+                    authenticationId = binding.etvLoginId.text.toString(),
+                    password = binding.etvLoginPw.text.toString()
+                )
+            )
         }
     }
 
@@ -42,15 +47,6 @@ class LoginActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-    }
-
-    private fun getLoginRequestDto(): RequestLoginDto {
-        val id = binding.etvLoginId.text.toString()
-        val password = binding.etvLoginPw.text.toString()
-        return RequestLoginDto(
-            authenticationId = id,
-            password = password
-        )
     }
 
     private fun moveToSignUp() {
