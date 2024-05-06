@@ -16,6 +16,7 @@ import java.io.IOException
 
 object ApiFactory {
     private const val BASE_URL: String = BuildConfig.AUTH_BASE_URL
+    const val USER_ID:String = "userId"
 
     val retrofit: Retrofit by lazy {
         Retrofit.Builder()
@@ -39,7 +40,7 @@ object ApiFactory {
     class HeaderInterceptor : Interceptor {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response = with(chain) {
-            val accessToken = LoginActivity.prefs.getString("userId", "")
+            val accessToken = LoginActivity.prefs.getString(USER_ID, "")
             Log.d("Login", accessToken)
             val newRequest = request().newBuilder()
                 .addHeader("memberId", accessToken)
@@ -56,3 +57,5 @@ object ServicePool {
     val userService = ApiFactory.createUser<UserService>()
     val followerService = ApiFactory.create<FollwerService>()
 }
+
+
