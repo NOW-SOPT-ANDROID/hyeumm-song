@@ -4,43 +4,40 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sopt.now.ServicePool
-import com.sopt.now.data.remote.dto.response.ResponseUserInfoDto
-import com.sopt.now.presentation.main.mypage.UserInfoState
+import com.sopt.now.data.remote.dto.request.RequestChagePwDto
+import com.sopt.now.data.remote.dto.response.ResponseChangePwDto
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ChangePasswordViewModel  : ViewModel() {
     private val userService by lazy { ServicePool.userService }
-    val liveData = MutableLiveData<UserInfoState>()
+    val liveData = MutableLiveData<ChangePasswordState>()
 
-    fun userInfo() {
-        userService.userInfo().enqueue(object : Callback<ResponseUserInfoDto> {
+    fun changePassword(request : RequestChagePwDto) {
+        userService.changePassword(request).enqueue(object : Callback<ResponseChangePwDto> {
             override fun onResponse(
-                call: Call<ResponseUserInfoDto>,
-                response: Response<ResponseUserInfoDto>,
+                call: Call<ResponseChangePwDto>,
+                response: Response<ResponseChangePwDto>,
             ) {
                 if (response.isSuccessful) {
-                    val data: ResponseUserInfoDto? = response.body()
-                    liveData.value = UserInfoState(
+                    val data: ResponseChangePwDto? = response.body()
+                    liveData.value = ChangePasswordState(
                         isSuccess = true,
-                        message = "회원 정보 불러오기에 성공했습니다.",
-                        userId = data?.data?.authenticationId,
-                        userNick = data?.data?.nickname,
-                        userPhone = data?.data?.phone
+                        message = "비밀번호가 성공적으로 변경되었습니다. 재로그인이 필요합니다."
                     )
                     Log.d("UserInfo", "data: $data")
                 } else {
                     val error = response.message()
-                    liveData.value = UserInfoState(
+                    liveData.value = ChangePasswordState(
                         isSuccess = false,
-                        message = "회원 정보 불러오기에 실패했습니다.  $error"
+                        message = "비밀번호 변경에 실패했습니다.  $error"
                     )
                 }
             }
 
-            override fun onFailure(call: Call<ResponseUserInfoDto>, t: Throwable) {
-                liveData.value = UserInfoState(
+            override fun onFailure(call: Call<ResponseChangePwDto>, t: Throwable) {
+                liveData.value = ChangePasswordState(
                     isSuccess = false,
                     message = "서버에러"
                 )

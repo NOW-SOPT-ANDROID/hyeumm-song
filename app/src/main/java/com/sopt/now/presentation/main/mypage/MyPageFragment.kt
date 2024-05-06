@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.sopt.now.databinding.FragmentMyPageBinding
-import com.sopt.now.presentation.auth.changepassword.ChangePasswordFragment
+import com.sopt.now.presentation.auth.changepassword.ChangePasswordActivity
 
 class MyPageFragment : Fragment() {
     private val binding: FragmentMyPageBinding
@@ -53,9 +53,11 @@ class MyPageFragment : Fragment() {
     }
 
     private fun moveToChangePassword(){
-        Intent(activity, ChangePasswordFragment::class.java).apply{
-            startActivity(this)
-            activity?.finish()
+        binding.tvChangePassword.setOnClickListener {
+            Intent(activity, ChangePasswordActivity::class.java).apply{
+                startActivity(this)
+                activity?.finish()
+            }
         }
     }
 }

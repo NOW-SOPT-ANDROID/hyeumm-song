@@ -21,9 +21,4 @@ interface AuthService {
         @Body request : RequestLoginDto
     ) : Call<ResponseLoginDto>
 
-    @PATCH("member/password")
-    fun changePassword(
-        @Body request : RequestChagePwDto
-    ) : Call<ResponseChangePwDto>
-
 }
