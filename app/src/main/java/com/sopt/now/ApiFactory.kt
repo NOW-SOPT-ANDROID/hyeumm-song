@@ -41,7 +41,6 @@ object ApiFactory {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response = with(chain) {
             val accessToken = LoginActivity.prefs.getString(USER_ID, "")
-            Log.d("Login", accessToken)
             val newRequest = request().newBuilder()
                 .addHeader("memberId", accessToken)
                 .build()

@@ -28,7 +28,6 @@ class UserInfoViewModel : ViewModel() {
                         userNick = data?.data?.nickname,
                         userPhone = data?.data?.phone
                     )
-                    Log.d("UserInfo", "data: $data")
                 } else {
                     val error = response.message()
                     liveData.value = UserInfoState(

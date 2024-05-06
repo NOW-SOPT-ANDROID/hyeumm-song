@@ -28,7 +28,6 @@ class SignUpViewModel : ViewModel() {
                         isSuccess = true,
                         message = "회원가입 성공 유저의 ID는 $userId 입니다"
                     )
-                    Log.d("SignUp", "data: $data, userId: $userId")
                 } else {
                     val error = response.message()
                     liveData.value = SignUpState(

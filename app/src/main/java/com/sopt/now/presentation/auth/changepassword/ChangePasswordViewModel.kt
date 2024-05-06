@@ -26,7 +26,6 @@ class ChangePasswordViewModel  : ViewModel() {
                         isSuccess = true,
                         message = "비밀번호가 성공적으로 변경되었습니다. 재로그인이 필요합니다."
                     )
-                    Log.d("UserInfo", "data: $data")
                 } else {
                     val error = response.message()
                     liveData.value = ChangePasswordState(

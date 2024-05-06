@@ -29,7 +29,6 @@ class LoginViewModel : ViewModel() {
                         isSuccess = true,
                         message = "로그인 성공 유저의 ID는 $userId 입니다"
                     )
-                    Log.d("Login", "data: $data, userId: $userId")
                 } else {
                     val error = response.message()
                     liveData.value = LoginState(
