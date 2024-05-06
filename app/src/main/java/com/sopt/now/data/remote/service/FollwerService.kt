@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface FollwerService {
     @GET("/api/users")
-    fun followerInfo(
+    fun getFollowerInfo(
        @Query ("page") page : Int
     ) : Call<ResponseFollowerDto>
 }

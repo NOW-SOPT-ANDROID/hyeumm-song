@@ -13,7 +13,7 @@ class FollowerViewModel : ViewModel() {
     val liveData = MutableLiveData<FollowerState>()
 
     fun followerInfo(page:Int) {
-        followerService.followerInfo(page).enqueue(object : Callback<ResponseFollowerDto> {
+        followerService.getFollowerInfo(page).enqueue(object : Callback<ResponseFollowerDto> {
             override fun onResponse(
                 call: Call<ResponseFollowerDto>,
                 response: Response<ResponseFollowerDto>,

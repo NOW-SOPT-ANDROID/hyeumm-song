@@ -14,7 +14,7 @@ class UserInfoViewModel : ViewModel() {
     val liveData = MutableLiveData<UserInfoState>()
 
     fun userInfo() {
-        userService.userInfo().enqueue(object : Callback<ResponseUserInfoDto> {
+        userService.getUserInfo().enqueue(object : Callback<ResponseUserInfoDto> {
             override fun onResponse(
                 call: Call<ResponseUserInfoDto>,
                 response: Response<ResponseUserInfoDto>,

@@ -10,10 +10,10 @@ import retrofit2.http.PATCH
 
 interface UserService {
     @GET("/member/info")
-    fun userInfo() : Call<ResponseUserInfoDto>
+    fun getUserInfo() : Call<ResponseUserInfoDto>
 
     @PATCH("member/password")
-    fun changePassword(
+    fun patchChangePassword(
         @Body request : RequestChagePwDto
     ) : Call<ResponseChangePwDto>
 }

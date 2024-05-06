@@ -15,7 +15,7 @@ class ChangePasswordViewModel  : ViewModel() {
     val liveData = MutableLiveData<ChangePasswordState>()
 
     fun changePassword(request : RequestChagePwDto) {
-        userService.changePassword(request).enqueue(object : Callback<ResponseChangePwDto> {
+        userService.patchChangePassword(request).enqueue(object : Callback<ResponseChangePwDto> {
             override fun onResponse(
                 call: Call<ResponseChangePwDto>,
                 response: Response<ResponseChangePwDto>,
