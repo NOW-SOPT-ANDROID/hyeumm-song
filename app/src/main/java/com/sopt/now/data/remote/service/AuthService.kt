@@ -1,11 +1,14 @@
 package com.sopt.now.data.remote.service
 
+import com.sopt.now.data.remote.dto.request.RequestChagePwDto
 import com.sopt.now.data.remote.dto.request.RequestLoginDto
 import com.sopt.now.data.remote.dto.request.RequestSignUpDto
+import com.sopt.now.data.remote.dto.response.ResponseChangePwDto
 import com.sopt.now.data.remote.dto.response.ResponseLoginDto
 import com.sopt.now.data.remote.dto.response.ResponseSignUpDto
 import retrofit2.Call
 import retrofit2.http.Body
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 
 interface AuthService {
@@ -17,5 +20,10 @@ interface AuthService {
     fun login(
         @Body request : RequestLoginDto
     ) : Call<ResponseLoginDto>
+
+    @PATCH("member/password")
+    fun changePassword(
+        @Body request : RequestChagePwDto
+    ) : Call<ResponseChangePwDto>
 
 }
