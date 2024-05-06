@@ -43,16 +43,18 @@ class LoginActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT,
             ).show()
             if (loginState.isSuccess) {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
+                Intent(this, MainActivity::class.java).apply {
+                    startActivity(this)
+                }
             }
         }
     }
 
     private fun moveToSignUp() {
         binding.btnLoginSignIn.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
+            Intent(this, SignUpActivity::class.java).apply {
+                startActivity(this)
+            }
         }
     }
 
