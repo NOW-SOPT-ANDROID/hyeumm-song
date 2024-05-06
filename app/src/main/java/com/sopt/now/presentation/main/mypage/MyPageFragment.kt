@@ -41,9 +41,11 @@ class MyPageFragment : Fragment() {
                 Toast.LENGTH_SHORT,
             ).show()
             if (userInfoState.isSuccess) {
-                binding.tvMainNick.text=userInfoState.userNick
-                binding.tvMainId.text=userInfoState.userId
-                binding.tvMainPhone.text=userInfoState.userPhone
+                with(binding){
+                    tvMainNick.text=userInfoState.userNick
+                    tvMainId.text=userInfoState.userId
+                    tvMainPhone.text=userInfoState.userPhone
+                }
             }
         }
     }
