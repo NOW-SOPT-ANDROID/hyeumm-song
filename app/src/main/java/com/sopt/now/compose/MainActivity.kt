@@ -43,7 +43,7 @@ import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 class MainActivity : ComponentActivity() {
     private val viewModel by viewModels<UserInfoViewModel>()
     private var userId: String = ""
-    private var userNick: String = ""
+    private var userNickname: String = ""
     private var userPhone: String = ""// 변수를 이렇게 여기에 선언해도 괜찮은지...
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity() {
             ).show()
             if (userInfoState.isSuccess) {
                 userId = userInfoState.userId ?: ""
-                userNick = userInfoState.userNick ?: ""
+                userNickname = userInfoState.userNickname ?: ""
                 userPhone = userInfoState.userPhone ?: ""
             }
         }
@@ -145,7 +145,7 @@ class MainActivity : ComponentActivity() {
 
                     2 -> {
                         initObserver()
-                        ProfileScreen(userNick, userId, userPhone)
+                        ProfileScreen(userNickname, userId, userPhone)
                     }
                 }
             }

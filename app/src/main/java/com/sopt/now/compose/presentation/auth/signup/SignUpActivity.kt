@@ -43,17 +43,17 @@ class SignUpActivity : ComponentActivity() {
                 ) {
                     var id by remember { mutableStateOf("") }
                     var pw by remember { mutableStateOf("") }
-                    var nick by remember { mutableStateOf("") }
+                    var nickname by remember { mutableStateOf("") }
                     var phone by remember { mutableStateOf("") }
 
                     SignUpScreen(
                         id,
                         pw,
-                        nick,
+                        nickname,
                         phone,
                         onIdChange = { id = it },
                         onPwChange = { pw = it },
-                        onNickChange = { nick = it },
+                        onNicknameChange = { nickname = it },
                         onPhoneChange = { phone = it })
 
                     initObserver()
@@ -79,13 +79,13 @@ class SignUpActivity : ComponentActivity() {
     private fun getSignUpRequestDto(
         id: String,
         pw: String,
-        nick: String,
+        nickname: String,
         phone: String
     ): RequestSignUpDto {
         return RequestSignUpDto(
             authenticationId = id,
             password = pw,
-            nickname = nick,
+            nickname = nickname,
             phone = phone
         )
     }
@@ -94,11 +94,11 @@ class SignUpActivity : ComponentActivity() {
     fun SignUpScreen(
         id: String,
         pw: String,
-        nick: String,
+        nickname: String,
         phone: String,
         onIdChange: (String) -> Unit,
         onPwChange: (String) -> Unit,
-        onNickChange: (String) -> Unit,
+        onNicknameChange: (String) -> Unit,
         onPhoneChange: (String) -> Unit
     ) {
         Column(
@@ -137,14 +137,14 @@ class SignUpActivity : ComponentActivity() {
             )
             Spacer(modifier = Modifier.height(50.dp))
             Text(
-                text = stringResource(R.string.text_nick),
+                text = stringResource(R.string.text_nickname),
                 fontSize = 20.sp
             )
             TextField(
-                value = nick,
-                label = { Text(stringResource(R.string.tf_label_nick)) },
-                onValueChange = onNickChange,
-                placeholder = { Text(stringResource(R.string.tf_ph_nick)) },
+                value = nickname,
+                label = { Text(stringResource(R.string.tf_label_nickname)) },
+                onValueChange = onNicknameChange,
+                placeholder = { Text(stringResource(R.string.tf_ph_nickname)) },
                 singleLine = true
             )
             Spacer(modifier = Modifier.height(50.dp))
@@ -162,7 +162,7 @@ class SignUpActivity : ComponentActivity() {
             Spacer(modifier = Modifier.weight(1f))
             Button(
                 onClick = {
-                    viewModel.signUp(getSignUpRequestDto(id, pw, nick, phone))
+                    viewModel.signUp(getSignUpRequestDto(id, pw, nickname, phone))
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -178,11 +178,11 @@ class SignUpActivity : ComponentActivity() {
             SignUpScreen(
                 id = "아이디",
                 pw = "비밀번호",
-                nick = "닉네임",
+                nickname = "닉네임",
                 phone = "전화번호",
                 onIdChange = {},
                 onPwChange = {},
-                onNickChange = {},
+                onNicknameChange = {},
                 onPhoneChange = {}
             )
         }

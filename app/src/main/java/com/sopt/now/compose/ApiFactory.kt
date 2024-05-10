@@ -1,7 +1,6 @@
 package com.sopt.now.compose
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.sopt.now.BuildConfig
 import com.sopt.now.compose.data.remote.service.AuthService
 import com.sopt.now.compose.data.remote.service.UserService
 import kotlinx.serialization.json.Json

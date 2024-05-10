@@ -30,7 +30,7 @@ fun ProfileScreen(userNick: String, userId: String, userPhone: String) {
         )
         Spacer(modifier = Modifier.height(50.dp))
         Text(
-            text = stringResource(R.string.text_nick),
+            text = stringResource(R.string.text_nickname),
             fontSize = 20.sp
         )
         Text(
