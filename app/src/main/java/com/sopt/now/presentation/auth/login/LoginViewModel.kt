@@ -1,6 +1,7 @@
 package com.sopt.now.presentation.auth.login
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sopt.now.ServicePool
@@ -13,8 +14,11 @@ import retrofit2.Response
 
 class LoginViewModel : ViewModel() {
     private val authService by lazy { ServicePool.authService }
-    val liveData = MutableLiveData<LoginState>()
+    private val _liveData = MutableLiveData<LoginState>()
+    val liveData : LiveData<LoginState>
+        get() = _liveData
     var userId: String? = ""
+
     fun login(request: RequestLoginDto) {
         authService.postLogin(request).enqueue(object : Callback<ResponseLoginDto> {
             override fun onResponse(
@@ -25,13 +29,13 @@ class LoginViewModel : ViewModel() {
                     val data: ResponseLoginDto? = response.body()
                     userId = response.headers()[LOCATION]
                     userId?.let { LoginActivity.prefs.setString(USER_ID, it) }
-                    liveData.value = LoginState(
+                    _liveData.value = LoginState(
                         isSuccess = true,
                         message = "로그인 성공 유저의 ID는 $userId 입니다"
                     )
                 } else {
                     val error = response.message()
-                    liveData.value = LoginState(
+                    _liveData.value = LoginState(
                         isSuccess = false,
                         message = "로그인이 실패했습니다 $error"
                     )
@@ -39,7 +43,7 @@ class LoginViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ResponseLoginDto>, t: Throwable) {
-                liveData.value = LoginState(
+                _liveData.value = LoginState(
                     isSuccess = false,
                     message = "서버에러"
                 )
