@@ -1,27 +1,14 @@
 package com.sopt.now.presentation.main.search
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import com.sopt.now.R
+import com.sopt.now.BindingFragment
 import com.sopt.now.databinding.FragmentSearchBinding
 
-class SearchFragment : Fragment() {
-    private val binding: FragmentSearchBinding
-        get()= requireNotNull(_binding){"_binding이 null이 아닌 경우만 _binding 반환"}
-    private var _binding: FragmentSearchBinding?= null
+class SearchFragment : BindingFragment<FragmentSearchBinding>() {
+    override fun fragmentBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentSearchBinding = FragmentSearchBinding.inflate(inflater, container, false)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }
