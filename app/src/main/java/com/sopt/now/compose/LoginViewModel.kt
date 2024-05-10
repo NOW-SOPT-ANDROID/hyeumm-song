@@ -8,15 +8,10 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-data class LoginState(
-    val isSuccess: Boolean,
-    val message: String
-)
-
 class LoginViewModel : ViewModel() {
     private val authService by lazy { ServicePool.authService }
     val liveData = MutableLiveData<LoginState>()
-    var userId : String?= ""
+    var userId: String? = ""
     fun login(request: RequestLoginDto) {
         authService.postLogin(request).enqueue(object : Callback<ResponseLoginDto> {
             override fun onResponse(

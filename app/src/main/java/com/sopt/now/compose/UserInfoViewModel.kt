@@ -7,18 +7,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-data class UserInfoState(
-    val isSuccess: Boolean,
-    val message: String,
-    val userId : String? = "",
-    val userNick : String? = "",
-    val userPhone : String? = ""
-)
 class UserInfoViewModel : ViewModel() {
     private val userService by lazy { ServicePool.userService }
     val liveData = MutableLiveData<UserInfoState>()
 
-    fun userInfo(userId:Int) {
+    fun userInfo(userId: Int) {
         userService.getUserInfo(userId).enqueue(object : Callback<ResponseUserInfoDto> {
             override fun onResponse(
                 call: Call<ResponseUserInfoDto>,
