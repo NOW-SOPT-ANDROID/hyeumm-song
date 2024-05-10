@@ -33,7 +33,7 @@ class MyPageFragment : BindingFragment<FragmentMyPageBinding>() {
             ).show()
             if (userInfoState.isSuccess) {
                 with(binding) {
-                    tvMainNick.text = userInfoState.userNick
+                    tvMainNickname.text = userInfoState.userNickname
                     tvMainId.text = userInfoState.userId
                     tvMainPhone.text = userInfoState.userPhone
                 }

@@ -8,7 +8,7 @@
     <string name="login_btn">로그인 하기</string>
     <string name="main_title">NOW SOPT</string>
     <string name="main_title2">SHOUT OUR PASSION TOGETHER</string>
-    <string name="nick">닉네임</string>
+    <string name="nickname">닉네임</string>
     <string name="etc">하고싶은 말</string>
     <string name="phone">전화번호</string>
     <!--LOGIN-->
@@ -23,8 +23,8 @@
     <string name="sign_up_id_hint">아이디를 입력해주세요</string>
     <string name="sign_up_pw_condition">*최소 8글자 이상, 숫자, 문자(a-z, A-Z), 특수문자 포함.</string>
     <string name="sign_up_pw_hint">비밀번호를 입력해주세요</string>
-    <string name="sign_up_nick_text">*한 글자 이상 입력해주세요.</string>
-    <string name="sign_up_nick_hint">닉네임을 입력해주세요</string>
+    <string name="sign_up_nickname_text">*한 글자 이상 입력해주세요.</string>
+    <string name="sign_up_nickname_hint">닉네임을 입력해주세요</string>
     <string name="sign_up_etc_text">*한 글자 이상 입력해주세요.</string>
     <string name="sign_up_etc_hint">하고싶은 말을 입력해주세요</string>
     <string name="sign_up_success">회원가입에 성공했습니다.</string>
@@ -32,7 +32,7 @@
     <string name="sign_up_error_blank">모든 항목을 입력해주세요.</string>
     <string name="sign_up_error_id">아이디를 다시 설정하세요.</string>
     <string name="sign_up_error_pw">비밀번호를 다시 설정하세요.</string>
-    <string name="sign_up_error_nick">닉네임을 다시 설정하세요.</string>
+    <string name="sign_up_error_nickname">닉네임을 다시 설정하세요.</string>
     <string name="sign_up_error_etc">하고싶은 말을 다시 설정하세요.</string>
     <string name="sign_up_phone_text">*(-)하이픈을 포함해 입력해주세요.</string>
     <string name="sign_up_phone_hint">예시)010-0000-0000</string>

@@ -33,7 +33,7 @@ class UserInfoViewModel : ViewModel() {
                         isSuccess = true,
                         message = "회원 정보 불러오기에 성공했습니다.",
                         userId = data?.data?.authenticationId,
-                        userNick = data?.data?.nickname,
+                        userNickname = data?.data?.nicknamename,
                         userPhone = data?.data?.phone
                     )
                 } else {
