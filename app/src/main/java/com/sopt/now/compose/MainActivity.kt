@@ -1,7 +1,6 @@
 package com.sopt.now.compose
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -35,6 +34,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.sopt.now.compose.presentation.main.home.HomeScreen
+import com.sopt.now.compose.presentation.main.home.HomeViewModel
+import com.sopt.now.compose.presentation.main.mypage.ProfileScreen
+import com.sopt.now.compose.presentation.main.mypage.UserInfoViewModel
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 
 class MainActivity : ComponentActivity() {

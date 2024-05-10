@@ -1,4 +1,4 @@
-package com.sopt.now.compose
+package com.sopt.now.compose.presentation.auth.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -34,6 +34,10 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.sopt.now.compose.MainActivity
+import com.sopt.now.compose.R
+import com.sopt.now.compose.data.remote.dto.request.RequestLoginDto
+import com.sopt.now.compose.presentation.auth.signup.SignUpActivity
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 
 class LoginActivity : ComponentActivity() {
@@ -69,7 +73,7 @@ class LoginActivity : ComponentActivity() {
             ).show()
 
             if (loginState.isSuccess) {
-                intent = Intent(this@LoginActivity,MainActivity::class.java)
+                intent = Intent(this@LoginActivity, MainActivity::class.java)
                 intent.putExtra("userId", viewModel.userId)
                 startActivity(intent)
             }

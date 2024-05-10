@@ -1,4 +1,4 @@
-package com.sopt.now.compose
+package com.sopt.now.compose.presentation.auth.signup
 
 data class SignUpState(
     val isSuccess: Boolean,

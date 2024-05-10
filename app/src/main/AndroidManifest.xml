@@ -14,7 +14,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".SignUpActivity"
+            android:name=".presentation.auth.signup.SignUpActivity"
             android:exported="false"
             android:label="@string/title_activity_sign_up"
             android:theme="@style/Theme.NOWSOPTAndroid" />
@@ -24,7 +24,7 @@
             android:label="@string/title_activity_login"
             android:theme="@style/Theme.NOWSOPTAndroid" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".presentation.auth.login.LoginActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.NOWSOPTAndroid">

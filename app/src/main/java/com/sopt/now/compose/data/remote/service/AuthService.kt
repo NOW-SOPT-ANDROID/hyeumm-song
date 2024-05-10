@@ -1,5 +1,9 @@
-package com.sopt.now.compose
+package com.sopt.now.compose.data.remote.service
 
+import com.sopt.now.compose.data.remote.dto.request.RequestLoginDto
+import com.sopt.now.compose.data.remote.dto.request.RequestSignUpDto
+import com.sopt.now.compose.data.remote.dto.response.ResponseLoginDto
+import com.sopt.now.compose.data.remote.dto.response.ResponseSignUpDto
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
