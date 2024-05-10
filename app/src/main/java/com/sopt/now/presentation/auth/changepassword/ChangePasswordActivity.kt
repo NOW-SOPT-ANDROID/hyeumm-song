@@ -6,7 +6,7 @@ import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.now.PreferenceUtil
-import com.sopt.now.data.remote.dto.request.RequestChagePwDto
+import com.sopt.now.data.remote.dto.request.RequestChagePasswordDto
 import com.sopt.now.databinding.ActivityChangePasswordBinding
 import com.sopt.now.presentation.auth.login.LoginActivity
 
@@ -43,11 +43,11 @@ class ChangePasswordActivity : AppCompatActivity() {
         }
     }
 
-    private fun getChangePasswordRequestDto(): RequestChagePwDto {
+    private fun getChangePasswordRequestDto(): RequestChagePasswordDto {
         val oldPassword = binding.etvOldPassword.text.toString()
         val newPassword = binding.etvNewPassword.text.toString()
         val checkPassword = binding.etvNewPasswordCheck.text.toString()
-        return RequestChagePwDto(
+        return RequestChagePasswordDto(
             previousPassword = oldPassword,
             newPassword = newPassword,
             newPasswordVerification = checkPassword

@@ -3,8 +3,8 @@
     <string name="login_title">Welcome to SOPT</string>
     <string name="id">ID</string>
     <string name="id_hint">아이디를 입력해주세요</string>
-    <string name="pw">비밀번호</string>
-    <string name="pw_hint">비밀번호를 입력해주세요</string>
+    <string name="password">비밀번호</string>
+    <string name="password_hint">비밀번호를 입력해주세요</string>
     <string name="login_btn">로그인 하기</string>
     <string name="main_title">NOW SOPT</string>
     <string name="main_title2">SHOUT OUR PASSION TOGETHER</string>
@@ -21,8 +21,8 @@
     <string name="sign_up_title">SIGN UP</string>
     <string name="sign_up_condition">*6-10자 입력해주세요.</string>
     <string name="sign_up_id_hint">아이디를 입력해주세요</string>
-    <string name="sign_up_pw_condition">*최소 8글자 이상, 숫자, 문자(a-z, A-Z), 특수문자 포함.</string>
-    <string name="sign_up_pw_hint">비밀번호를 입력해주세요</string>
+    <string name="sign_up_password_condition">*최소 8글자 이상, 숫자, 문자(a-z, A-Z), 특수문자 포함.</string>
+    <string name="sign_up_password_hint">비밀번호를 입력해주세요</string>
     <string name="sign_up_nickname_text">*한 글자 이상 입력해주세요.</string>
     <string name="sign_up_nickname_hint">닉네임을 입력해주세요</string>
     <string name="sign_up_etc_text">*한 글자 이상 입력해주세요.</string>
@@ -31,7 +31,7 @@
     <!--SIGN UP ERROR-->
     <string name="sign_up_error_blank">모든 항목을 입력해주세요.</string>
     <string name="sign_up_error_id">아이디를 다시 설정하세요.</string>
-    <string name="sign_up_error_pw">비밀번호를 다시 설정하세요.</string>
+    <string name="sign_up_error_password">비밀번호를 다시 설정하세요.</string>
     <string name="sign_up_error_nickname">닉네임을 다시 설정하세요.</string>
     <string name="sign_up_error_etc">하고싶은 말을 다시 설정하세요.</string>
     <string name="sign_up_phone_text">*(-)하이픈을 포함해 입력해주세요.</string>

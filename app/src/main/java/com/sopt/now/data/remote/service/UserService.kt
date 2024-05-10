@@ -1,7 +1,7 @@
 package com.sopt.now.data.remote.service
 
-import com.sopt.now.data.remote.dto.request.RequestChagePwDto
-import com.sopt.now.data.remote.dto.response.ResponseChangePwDto
+import com.sopt.now.data.remote.dto.request.RequestChagePasswordDto
+import com.sopt.now.data.remote.dto.response.ResponseChangePasswordDto
 import com.sopt.now.data.remote.dto.response.ResponseUserInfoDto
 import retrofit2.Call
 import retrofit2.http.Body
@@ -14,6 +14,6 @@ interface UserService {
 
     @PATCH("member/password")
     fun patchChangePassword(
-        @Body request : RequestChagePwDto
-    ) : Call<ResponseChangePwDto>
+        @Body request : RequestChagePasswordDto
+    ) : Call<ResponseChangePasswordDto>
 }

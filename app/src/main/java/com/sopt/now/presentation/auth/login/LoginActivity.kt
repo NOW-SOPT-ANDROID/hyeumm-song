@@ -29,7 +29,7 @@ class LoginActivity : AppCompatActivity() {
             viewModel.login(
                 RequestLoginDto(
                     authenticationId = binding.etvLoginId.text.toString(),
-                    password = binding.etvLoginPw.text.toString()
+                    password = binding.etvLoginPassword.text.toString()
                 )
             )
         }

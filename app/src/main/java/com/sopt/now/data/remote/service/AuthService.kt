@@ -1,9 +1,9 @@
 package com.sopt.now.data.remote.service
 
-import com.sopt.now.data.remote.dto.request.RequestChagePwDto
+import com.sopt.now.data.remote.dto.request.RequestChagePasswordDto
 import com.sopt.now.data.remote.dto.request.RequestLoginDto
 import com.sopt.now.data.remote.dto.request.RequestSignUpDto
-import com.sopt.now.data.remote.dto.response.ResponseChangePwDto
+import com.sopt.now.data.remote.dto.response.ResponseChangePasswordDto
 import com.sopt.now.data.remote.dto.response.ResponseLoginDto
 import com.sopt.now.data.remote.dto.response.ResponseSignUpDto
 import retrofit2.Call

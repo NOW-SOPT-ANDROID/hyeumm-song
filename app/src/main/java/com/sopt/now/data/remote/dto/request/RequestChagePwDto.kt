@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 
-data class RequestChagePwDto (
+data class RequestChagePasswordDto (
     @SerialName("previousPassword")
     val previousPassword: String,
     @SerialName("newPassword")

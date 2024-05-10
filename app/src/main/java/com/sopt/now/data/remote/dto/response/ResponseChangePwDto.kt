@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 
-data class ResponseChangePwDto (
+data class ResponseChangePasswordDto (
     @SerialName("code")
     val code: Int,
     @SerialName("message")
