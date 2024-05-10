@@ -13,6 +13,10 @@ class UserInfoViewModel : ViewModel() {
     private val userService by lazy { ServicePool.userService }
     val liveData = MutableLiveData<UserInfoState>()
 
+    init{
+        userInfo()
+    }
+
     fun userInfo() {
         userService.getUserInfo().enqueue(object : Callback<ResponseUserInfoDto> {
             override fun onResponse(

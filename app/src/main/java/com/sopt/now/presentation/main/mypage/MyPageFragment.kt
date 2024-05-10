@@ -22,7 +22,6 @@ class MyPageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMyPageBinding.inflate(inflater, container, false)
-        initViews()
         initObserver()
         moveToChangePassword()
         return binding.root
@@ -48,10 +47,6 @@ class MyPageFragment : Fragment() {
                 }
             }
         }
-    }
-
-    private fun initViews() {
-            viewModel.userInfo()
     }
 
     private fun moveToChangePassword(){
