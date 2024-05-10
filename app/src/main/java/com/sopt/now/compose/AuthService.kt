@@ -6,12 +6,12 @@ import retrofit2.http.POST
 
 interface AuthService {
     @POST("member/join") //http 메소드
-    fun signUp(
+    fun postSignUp(
         @Body request: RequestSignUpDto
     ): Call<ResponseSignUpDto> //비동기->callback
 
     @POST("member/login")
-    fun login(
+    fun postLogin(
         @Body request : RequestLoginDto
     ) : Call<ResponseLoginDto>
 }

@@ -16,7 +16,7 @@ class SignUpViewModel : ViewModel() {
     val liveData = MutableLiveData<SignUpState>()
 
     fun signUp(request: RequestSignUpDto) {
-        authService.signUp(request).enqueue(object : Callback<ResponseSignUpDto> {
+        authService.postSignUp(request).enqueue(object : Callback<ResponseSignUpDto> {
             override fun onResponse(
                 call: Call<ResponseSignUpDto>,
                 response: Response<ResponseSignUpDto>,

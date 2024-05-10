@@ -6,7 +6,7 @@ import retrofit2.http.Header
 
 interface UserService {
     @GET("/member/info")
-    fun userInfo(
+    fun getUserInfo(
         @Header("memberId") userId : Int
     ) : Call<ResponseUserInfoDto>
 }
