@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.sopt.now.compose.R
 
 @Composable
-fun ProfileScreen(userNick: String, userId: String, userPhone: String) {
+fun ProfileScreen(userNickname: String, userId: String, userPhone: String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -34,7 +34,7 @@ fun ProfileScreen(userNick: String, userId: String, userPhone: String) {
             fontSize = 20.sp
         )
         Text(
-            text = userNick,
+            text = userNickname,
             fontSize = 15.sp
         )
         Spacer(modifier = Modifier.height(50.dp))
