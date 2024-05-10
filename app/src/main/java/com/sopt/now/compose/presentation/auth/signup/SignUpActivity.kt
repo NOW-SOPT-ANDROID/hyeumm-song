@@ -42,17 +42,17 @@ class SignUpActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     var id by remember { mutableStateOf("") }
-                    var pw by remember { mutableStateOf("") }
+                    var password by remember { mutableStateOf("") }
                     var nickname by remember { mutableStateOf("") }
                     var phone by remember { mutableStateOf("") }
 
                     SignUpScreen(
                         id,
-                        pw,
+                        password,
                         nickname,
                         phone,
                         onIdChange = { id = it },
-                        onPwChange = { pw = it },
+                        onPasswordChange = { password = it },
                         onNicknameChange = { nickname = it },
                         onPhoneChange = { phone = it })
 
@@ -78,13 +78,13 @@ class SignUpActivity : ComponentActivity() {
 
     private fun getSignUpRequestDto(
         id: String,
-        pw: String,
+        password: String,
         nickname: String,
         phone: String
     ): RequestSignUpDto {
         return RequestSignUpDto(
             authenticationId = id,
-            password = pw,
+            password = password,
             nickname = nickname,
             phone = phone
         )
@@ -93,11 +93,11 @@ class SignUpActivity : ComponentActivity() {
     @Composable
     fun SignUpScreen(
         id: String,
-        pw: String,
+        password: String,
         nickname: String,
         phone: String,
         onIdChange: (String) -> Unit,
-        onPwChange: (String) -> Unit,
+        onPasswordChange: (String) -> Unit,
         onNicknameChange: (String) -> Unit,
         onPhoneChange: (String) -> Unit
     ) {
@@ -125,14 +125,14 @@ class SignUpActivity : ComponentActivity() {
             )
             Spacer(modifier = Modifier.height(50.dp))
             Text(
-                text = stringResource(R.string.text_pw),
+                text = stringResource(R.string.text_password),
                 fontSize = 20.sp
             )
             TextField(
-                value = pw,
-                label = { Text(stringResource(R.string.tf_label_pw)) },
-                onValueChange = onPwChange,
-                placeholder = { Text(stringResource(R.string.tf_ph_pw)) },
+                value = password,
+                label = { Text(stringResource(R.string.tf_label_password)) },
+                onValueChange = onPasswordChange,
+                placeholder = { Text(stringResource(R.string.tf_ph_password)) },
                 singleLine = true
             )
             Spacer(modifier = Modifier.height(50.dp))
@@ -162,7 +162,7 @@ class SignUpActivity : ComponentActivity() {
             Spacer(modifier = Modifier.weight(1f))
             Button(
                 onClick = {
-                    viewModel.signUp(getSignUpRequestDto(id, pw, nickname, phone))
+                    viewModel.signUp(getSignUpRequestDto(id, password, nickname, phone))
                 },
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -177,11 +177,11 @@ class SignUpActivity : ComponentActivity() {
         NOWSOPTAndroidTheme {
             SignUpScreen(
                 id = "아이디",
-                pw = "비밀번호",
+                password = "비밀번호",
                 nickname = "닉네임",
                 phone = "전화번호",
                 onIdChange = {},
-                onPwChange = {},
+                onPasswordChange = {},
                 onNicknameChange = {},
                 onPhoneChange = {}
             )

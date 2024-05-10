@@ -51,13 +51,13 @@ class LoginActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     var id by remember { mutableStateOf("") }
-                    var pw by remember { mutableStateOf("") }
+                    var password by remember { mutableStateOf("") }
 
                     LoginScreen(
                         id,
-                        pw,
+                        password,
                         onIdChange = { id = it },
-                        onPwChange = { pw = it })
+                        onPasswordChange = { password = it })
                 }
             }
         }
@@ -82,20 +82,20 @@ class LoginActivity : ComponentActivity() {
 
     private fun getLoginRequestDto(
         id: String,
-        pw: String
+        password: String
     ): RequestLoginDto {
         return RequestLoginDto(
             authenticationId = id,
-            password = pw
+            password = password
         )
     }
 
     @Composable
     fun LoginScreen(
         id: String,
-        pw: String,
+        password: String,
         onIdChange: (String) -> Unit,
-        onPwChange: (String) -> Unit
+        onPasswordChange: (String) -> Unit
     ) {
         val context = LocalContext.current
 
@@ -124,14 +124,14 @@ class LoginActivity : ComponentActivity() {
                 leadingIcon = { Icon(Icons.Filled.Person, contentDescription = "User Icon") }
             )
             Spacer(modifier = Modifier.height(30.dp))
-            Text(text = stringResource(R.string.text_pw))
+            Text(text = stringResource(R.string.text_password))
             TextField(
-                value = pw,
-                onValueChange = onPwChange,
+                value = password,
+                onValueChange = onPasswordChange,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(10.dp),
-                placeholder = { Text(stringResource(R.string.tf_login_pw)) },
+                placeholder = { Text(stringResource(R.string.tf_login_password)) },
                 singleLine = true,
                 visualTransformation = PasswordVisualTransformation(),
                 leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = "Lock Icon") },
@@ -139,7 +139,7 @@ class LoginActivity : ComponentActivity() {
             Spacer(modifier = Modifier.weight(1f))
             Button(
                 onClick = {
-                    viewModel.login(getLoginRequestDto(id, pw))
+                    viewModel.login(getLoginRequestDto(id, password))
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -164,7 +164,7 @@ class LoginActivity : ComponentActivity() {
     @Composable
     fun LoginPreview() {
         NOWSOPTAndroidTheme {
-            LoginScreen("아이디", "비밀번호", onIdChange = {}, onPwChange = {})
+            LoginScreen("아이디", "비밀번호", onIdChange = {}, onPasswordChange = {})
         }
     }
 }
