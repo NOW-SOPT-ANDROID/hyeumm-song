@@ -13,9 +13,9 @@ import retrofit2.Response
 
 class SignUpViewModel : ViewModel() {
     private val authService by lazy { ServicePool.authService }
-    private val _liveData = MutableLiveData<SignUpState>()
-    val liveData: LiveData<SignUpState>
-        get() = _liveData
+    private val _signUpState = MutableLiveData<SignUpState>()
+    val signUpState: LiveData<SignUpState>
+        get() = _signUpState
 
     fun signUp(request: RequestSignUpDto) {
         authService.postSignUp(request).enqueue(object : Callback<ResponseSignUpDto> {
@@ -26,14 +26,14 @@ class SignUpViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val data: ResponseSignUpDto? = response.body()
                     val userId = response.headers()[LOCATION]
-                    _liveData.value = SignUpState(
+                    _signUpState.value = SignUpState(
                         isSuccess = true,
                         message = "회원가입 성공 유저의 ID는 $userId 입니다"
                     )
                     Log.d("SignUp", "data: $data, userId: $userId")
                 } else {
                     val error = response.message()
-                    _liveData.value = SignUpState(
+                    _signUpState.value = SignUpState(
                         isSuccess = false,
                         message = "회원가입이 실패했습니다 $error"
                     )
@@ -41,7 +41,7 @@ class SignUpViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ResponseSignUpDto>, t: Throwable) {
-                _liveData.value = SignUpState(
+                _signUpState.value = SignUpState(
                     isSuccess = false,
                     message = "서버에러"
                 )

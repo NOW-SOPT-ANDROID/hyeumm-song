@@ -68,7 +68,7 @@ class LoginActivity : ComponentActivity() {
     }
 
     private fun initObserver() {
-        viewModel.liveData.observe(this) { loginState ->
+        viewModel.loginState.observe(this) { loginState ->
             Toast.makeText(
                 this@LoginActivity,
                 loginState.message,

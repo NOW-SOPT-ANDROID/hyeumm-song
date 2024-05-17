@@ -12,9 +12,9 @@ import retrofit2.Response
 
 class UserInfoViewModel : ViewModel() {
     private val userService by lazy { ServicePool.userService }
-    private val _liveData = MutableLiveData<UserInfoState>()
-    val liveData: LiveData<UserInfoState>
-        get() = _liveData
+    private val _userInfoState = MutableLiveData<UserInfoState>()
+    val userInfoState: LiveData<UserInfoState>
+        get() = _userInfoState
 
     fun userInfo(userId: Int) {
         userService.getUserInfo().enqueue(object : Callback<ResponseUserInfoDto> {
@@ -24,7 +24,7 @@ class UserInfoViewModel : ViewModel() {
             ) {
                 if (response.isSuccessful) {
                     val data: ResponseUserInfoDto? = response.body()
-                    _liveData.value = UserInfoState(
+                    _userInfoState.value = UserInfoState(
                         isSuccess = true,
                         message = "회원 정보 불러오기에 성공했습니다.",
                         userId = data?.data?.authenticationId,
@@ -34,7 +34,7 @@ class UserInfoViewModel : ViewModel() {
                     Log.d("UserInfo", "data: $data, userId: $userId")
                 } else {
                     val error = response.message()
-                    _liveData.value = UserInfoState(
+                    _userInfoState.value = UserInfoState(
                         isSuccess = false,
                         message = "회원 정보 불러오기에 실패했습니다.  $error"
                     )
@@ -42,7 +42,7 @@ class UserInfoViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ResponseUserInfoDto>, t: Throwable) {
-                _liveData.value = UserInfoState(
+                _userInfoState.value = UserInfoState(
                     isSuccess = false,
                     message = "서버에러"
                 )

@@ -14,9 +14,9 @@ import retrofit2.Response
 
 class LoginViewModel : ViewModel() {
     private val authService by lazy { ServicePool.authService }
-    private val _liveData = MutableLiveData<LoginState>()
-    val liveData: LiveData<LoginState>
-        get() = _liveData
+    private val _loginState = MutableLiveData<LoginState>()
+    val loginState: LiveData<LoginState>
+        get() = _loginState
     var userId: String? = ""
     fun login(request: RequestLoginDto) {
         authService.postLogin(request).enqueue(object : Callback<ResponseLoginDto> {
@@ -28,14 +28,14 @@ class LoginViewModel : ViewModel() {
                     val data: ResponseLoginDto? = response.body()
                     userId = response.headers()[LOCATION]
                     userId?.let { LoginActivity.prefs.setString(USER_ID, it) }
-                    _liveData.value = LoginState(
+                    _loginState.value = LoginState(
                         isSuccess = true,
                         message = "로그인 성공 유저의 ID는 $userId 입니다"
                     )
                     Log.d("Login", "data: $data, userId: $userId")
                 } else {
                     val error = response.message()
-                    _liveData.value = LoginState(
+                    _loginState.value = LoginState(
                         isSuccess = false,
                         message = "로그인이 실패했습니다 $error"
                     )
@@ -43,7 +43,7 @@ class LoginViewModel : ViewModel() {
             }
 
             override fun onFailure(call: Call<ResponseLoginDto>, t: Throwable) {
-                _liveData.value = LoginState(
+                _loginState.value = LoginState(
                     isSuccess = false,
                     message = "서버에러"
                 )

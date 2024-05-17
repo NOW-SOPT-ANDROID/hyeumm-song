@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun initObserver() {
-        viewModel.liveData.observe(this) { userInfoState ->
+        viewModel.userInfoState.observe(this) { userInfoState ->
             Toast.makeText(
                 this,
                 userInfoState.message,
