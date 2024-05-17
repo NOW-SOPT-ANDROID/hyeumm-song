@@ -38,16 +38,15 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-
     private fun getSignUpRequestDto(): RequestSignUpDto {
         val id = binding.etvSignUpId.text.toString()
         val password = binding.etvSignUpPassword.text.toString()
-        val nicknamename = binding.etvSignUpNickname.text.toString()
+        val nickname = binding.etvSignUpNickname.text.toString()
         val phoneNumber = binding.etvSignUpPhone.text.toString()
         return RequestSignUpDto(
             authenticationId = id,
             password = password,
-            nicknamename = nicknamename,
+            nickname = nickname,
             phone = phoneNumber
         )
     }
