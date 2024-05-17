@@ -17,7 +17,7 @@ class UserInfoViewModel : ViewModel() {
         get() = _liveData
 
     fun userInfo(userId: Int) {
-        userService.getUserInfo(userId).enqueue(object : Callback<ResponseUserInfoDto> {
+        userService.getUserInfo().enqueue(object : Callback<ResponseUserInfoDto> {
             override fun onResponse(
                 call: Call<ResponseUserInfoDto>,
                 response: Response<ResponseUserInfoDto>,
