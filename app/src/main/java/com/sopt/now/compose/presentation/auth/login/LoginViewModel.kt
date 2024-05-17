@@ -27,6 +27,7 @@ class LoginViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val data: ResponseLoginDto? = response.body()
                     userId = response.headers()[LOCATION]
+                    userId?.let { LoginActivity.prefs.setString(USER_ID, it) }
                     _liveData.value = LoginState(
                         isSuccess = true,
                         message = "로그인 성공 유저의 ID는 $userId 입니다"
@@ -50,6 +51,7 @@ class LoginViewModel : ViewModel() {
         })
     }
     companion object {
+        const val USER_ID = "userId"
         const val LOCATION = "location"
     }
 }

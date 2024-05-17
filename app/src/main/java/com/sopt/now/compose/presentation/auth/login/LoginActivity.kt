@@ -35,6 +35,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sopt.now.compose.MainActivity
+import com.sopt.now.compose.PreferenceUtil
 import com.sopt.now.compose.R
 import com.sopt.now.compose.data.remote.dto.request.RequestLoginDto
 import com.sopt.now.compose.presentation.auth.signup.SignUpActivity
@@ -44,6 +45,7 @@ class LoginActivity : ComponentActivity() {
     private val viewModel by viewModels<LoginViewModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        prefs = PreferenceUtil(applicationContext)
         setContent {
             NOWSOPTAndroidTheme {
                 Surface(
@@ -166,5 +168,8 @@ class LoginActivity : ComponentActivity() {
         NOWSOPTAndroidTheme {
             LoginScreen("아이디", "비밀번호", onIdChange = {}, onPasswordChange = {})
         }
+    }
+    companion object {
+        lateinit var prefs: PreferenceUtil
     }
 }
