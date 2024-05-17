@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.sp
 import com.sopt.now.compose.MainActivity
 import com.sopt.now.compose.PreferenceUtil
 import com.sopt.now.compose.R
+import com.sopt.now.compose.component.CustomTextField
 import com.sopt.now.compose.data.remote.dto.request.RequestLoginDto
 import com.sopt.now.compose.presentation.auth.signup.SignUpActivity
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
@@ -115,14 +116,10 @@ class LoginActivity : ComponentActivity() {
             Text(
                 text = stringResource(R.string.text_id)
             )
-            TextField(
+            CustomTextField(
                 value = id,
                 onValueChange = onIdChange,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(10.dp),
-                placeholder = { Text(stringResource(R.string.tf_login_id)) },
-                singleLine = true,
+                placeholderRes = R.string.tf_login_id,
                 leadingIcon = { Icon(Icons.Filled.Person, contentDescription = "User Icon") }
             )
             Spacer(modifier = Modifier.height(30.dp))
@@ -169,6 +166,7 @@ class LoginActivity : ComponentActivity() {
             LoginScreen("아이디", "비밀번호", onIdChange = {}, onPasswordChange = {})
         }
     }
+
     companion object {
         lateinit var prefs: PreferenceUtil
     }
