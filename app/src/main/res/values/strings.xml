@@ -27,7 +27,7 @@
     <string name="sign_up_nickname_hint">닉네임을 입력해주세요</string>
     <string name="sign_up_etc_text">*한 글자 이상 입력해주세요.</string>
     <string name="sign_up_etc_hint">하고싶은 말을 입력해주세요</string>
-    <string name="sign_up_success">회원가입에 성공했습니다.</string>
+    <string name="sign_up_success">회원가입에 성공!userID %1$s</string>
     <!--SIGN UP ERROR-->
     <string name="sign_up_error_blank">모든 항목을 입력해주세요.</string>
     <string name="sign_up_error_id">아이디를 다시 설정하세요.</string>
@@ -37,10 +37,10 @@
     <string name="sign_up_phone_text">*(-)하이픈을 포함해 입력해주세요.</string>
     <string name="sign_up_phone_hint">예시)010-0000-0000</string>
     <string name="my_page_change_password_button">비밀번호 변경하기</string>
+    <string name="sign_up_failed">회원가입에 실패했습니다. %1$s</string>
     <!--Change Password-->
     <string name="change_password_old_password">기존 비밀번호를 입력해주세요.</string>
     <string name="change_password_new_password">새로운 비밀번호를 입력해주세요.</string>
     <string name="change_password_check_password">새로운 비밀번호를 한 번 더 입력해주세요.</string>
     <string name="change_password">비밀번호 변경하기</string>
-
 </resources>

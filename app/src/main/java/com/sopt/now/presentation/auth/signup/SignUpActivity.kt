@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.sopt.now.R
 import com.sopt.now.databinding.ActivitySignUpBinding
 import com.sopt.now.data.remote.dto.request.RequestSignUpDto
 
@@ -26,14 +27,20 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun initObserver() {
         viewModel.liveData.observe(this) { signUpState ->
-            Toast.makeText(
-                this@SignUpActivity,
-                signUpState.message,
-                Toast.LENGTH_SHORT
-            ).show()
-
             if (signUpState.isSuccess) {
+                Toast.makeText(
+                    this@SignUpActivity,
+                    getString(R.string.sign_up_success, signUpState.message),
+                    Toast.LENGTH_SHORT
+                ).show()
                 finish()
+            }
+            else {
+                Toast.makeText(
+                    this@SignUpActivity,
+                    getString(R.string.sign_up_failed, signUpState.message),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
