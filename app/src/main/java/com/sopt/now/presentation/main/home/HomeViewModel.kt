@@ -1,6 +1,7 @@
-package com.sopt.now
+package com.sopt.now.presentation.main.home
 
 import androidx.lifecycle.ViewModel
+import com.sopt.now.R
 
 class HomeViewModel : ViewModel() {
     val homeListData = listOf(

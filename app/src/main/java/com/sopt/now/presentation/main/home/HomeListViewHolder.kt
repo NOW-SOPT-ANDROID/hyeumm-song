@@ -1,4 +1,4 @@
-package com.sopt.now
+package com.sopt.now.presentation.main.home
 
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.now.databinding.ItemFriendBinding

@@ -1,4 +1,4 @@
-package com.sopt.now
+package com.sopt.now.presentation.main.home
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

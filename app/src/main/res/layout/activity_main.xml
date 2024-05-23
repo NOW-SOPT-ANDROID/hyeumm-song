@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".presentation.main.MainActivity">
 
     <TextView
         android:id="@+id/tv_main_title"
@@ -64,7 +64,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_main_title2" />
     <TextView
-        android:id="@+id/tv_main_nick"
+        android:id="@+id/tv_main_nickname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -86,7 +86,7 @@
         android:textSize="25sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_main_nick" />
+        app:layout_constraintTop_toBottomOf="@id/tv_main_nickname" />
     <TextView
         android:id="@+id/tv_main_id"
         android:layout_width="0dp"
@@ -98,11 +98,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_main_title_id" />
     <TextView
-        android:id="@+id/tv_main_title_pw"
+        android:id="@+id/tv_main_title_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/pw"
+        android:text="@string/password"
         android:textColor="#000000"
         android:textSize="25sp"
         android:textAlignment="center"
@@ -110,7 +110,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_main_id" />
     <TextView
-        android:id="@+id/tv_main_pw"
+        android:id="@+id/tv_main_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="#000000"
@@ -118,6 +118,6 @@
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_main_title_pw" />
+        app:layout_constraintTop_toBottomOf="@id/tv_main_title_password" />
         -->
 </androidx.constraintlayout.widget.ConstraintLayout>
