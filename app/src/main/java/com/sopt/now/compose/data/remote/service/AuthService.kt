@@ -9,6 +9,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface AuthService {
+    //suspend로 수정 후 올리겠습니다..!
     @POST("member/join") //http 메소드
     fun postSignUp(
         @Body request: RequestSignUpDto
