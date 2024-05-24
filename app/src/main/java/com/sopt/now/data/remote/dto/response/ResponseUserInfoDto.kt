@@ -16,8 +16,8 @@ data class ResponseUserInfoDto (
 data class UserInfo (
     @SerialName("authenticationId")
     val authenticationId: String,
-    @SerialName("nicknamename")
-    val nicknamename: String,
+    @SerialName("nickname")
+    val nickname: String,
     @SerialName("phone")
     val phone: String
 )

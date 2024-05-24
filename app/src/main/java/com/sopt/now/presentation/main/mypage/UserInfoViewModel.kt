@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sopt.now.ServicePool
 import com.sopt.now.data.remote.dto.response.ResponseUserInfoDto
-import com.sopt.now.data.remote.dto.response.UserInfo
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,7 +32,7 @@ class UserInfoViewModel : ViewModel() {
                         isSuccess = true,
                         message = "회원 정보 불러오기에 성공했습니다.",
                         userId = data?.data?.authenticationId,
-                        userNickname = data?.data?.nicknamename,
+                        userNickname = data?.data?.nickname,
                         userPhone = data?.data?.phone
                     )
                 } else {
@@ -50,6 +49,7 @@ class UserInfoViewModel : ViewModel() {
                     isSuccess = false,
                     message = "서버에러"
                 )
+                Log.d("asd",t.message.toString())
             }
         })
     }
