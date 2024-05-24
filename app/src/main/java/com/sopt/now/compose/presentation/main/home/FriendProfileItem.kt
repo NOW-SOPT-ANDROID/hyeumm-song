@@ -1,4 +1,4 @@
-package com.sopt.now.compose
+package com.sopt.now.compose.presentation.main.home
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer

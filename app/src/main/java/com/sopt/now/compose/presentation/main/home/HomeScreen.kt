@@ -1,4 +1,4 @@
-package com.sopt.now.compose
+package com.sopt.now.compose.presentation.main.home
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +13,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun HomeUi(viewModel: HomeViewModel) {
+fun HomeScreen(viewModel: HomeViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()

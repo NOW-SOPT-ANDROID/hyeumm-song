@@ -1,8 +1,9 @@
-package com.sopt.now.compose
+package com.sopt.now.compose.presentation.main.home
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.lifecycle.ViewModel
+import com.sopt.now.compose.R
 
 class HomeViewModel : ViewModel() {
 

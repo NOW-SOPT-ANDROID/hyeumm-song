@@ -1,8 +1,10 @@
 package com.sopt.now.compose
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,9 +34,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.sopt.now.compose.presentation.main.home.HomeScreen
+import com.sopt.now.compose.presentation.main.home.HomeViewModel
+import com.sopt.now.compose.presentation.main.mypage.ProfileScreen
+import com.sopt.now.compose.presentation.main.mypage.UserInfoViewModel
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 
 class MainActivity : ComponentActivity() {
+    private val viewModel by viewModels<UserInfoViewModel>()
+    private var userId: String = ""
+    private var userNickname: String = ""
+    private var userPhone: String = ""// 변수를 이렇게 여기에 선언해도 괜찮은지...
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -43,28 +53,37 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val userId = intent.getStringExtra("userId")
-                    val userPw = intent.getStringExtra("userPw")
-                    val userNick = intent.getStringExtra("userNick")
-                    MainScreen(
-                        userId,
-                        userPw,
-                        userNick
-                    )
+                    val userId = intent.getStringExtra("userId").toString()
+
+                    initViews(userId)
+                    MainScreen()
                 }
             }
         }
     }
-}
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MainScreen(
-    userId: String?,
-    userPw: String?,
-    userNick: String?
-) {
-    if (userId != null && userPw != null && userNick != null) {
+    private fun initObserver() {
+        viewModel.userInfoState.observe(this) { userInfoState ->
+            Toast.makeText(
+                this,
+                userInfoState.message,
+                Toast.LENGTH_SHORT,
+            ).show()
+            if (userInfoState.isSuccess) {
+                userId = userInfoState.userId ?: ""
+                userNickname = userInfoState.userNickname ?: ""
+                userPhone = userInfoState.userPhone ?: ""
+            }
+        }
+    }
+
+    private fun initViews(userId: String) {
+        viewModel.userInfo(userId.toInt())
+    }
+
+    @OptIn(ExperimentalMaterial3Api::class)
+    @Composable
+    fun MainScreen() {
         var selectedItem by remember { mutableIntStateOf(0) }
         val items = listOf(
             BottomNavigationItem(
@@ -117,7 +136,7 @@ fun MainScreen(
             ) {
                 when (selectedItem) {
                     0 -> {
-                        HomeUi(HomeViewModel())
+                        HomeScreen(HomeViewModel())
                     }
 
                     1 -> {
@@ -125,18 +144,19 @@ fun MainScreen(
                     }
 
                     2 -> {
-                        ProfileUi(userId, userPw, userNick)
+                        initObserver()
+                        ProfileScreen(userNickname, userId, userPhone)
                     }
                 }
             }
         }
     }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    NOWSOPTAndroidTheme {
-        MainScreen("아이디", "비밀번호", "닉네임")
+    @Preview(showBackground = true)
+    @Composable
+    fun GreetingPreview() {
+        NOWSOPTAndroidTheme {
+            MainScreen()
+        }
     }
 }

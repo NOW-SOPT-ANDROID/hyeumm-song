@@ -1,4 +1,4 @@
-package com.sopt.now.compose
+package com.sopt.now.compose.presentation.main.mypage
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -14,9 +14,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.sopt.now.compose.R
 
 @Composable
-fun ProfileUi(userId: String, userPw: String, userNick: String) {
+fun ProfileScreen(userNickname: String, userId: String, userPhone: String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -29,7 +30,16 @@ fun ProfileUi(userId: String, userPw: String, userNick: String) {
         )
         Spacer(modifier = Modifier.height(50.dp))
         Text(
-            text = "ID",
+            text = stringResource(R.string.text_nickname),
+            fontSize = 20.sp
+        )
+        Text(
+            text = userNickname,
+            fontSize = 15.sp
+        )
+        Spacer(modifier = Modifier.height(50.dp))
+        Text(
+            text = stringResource(R.string.text_id),
             fontSize = 20.sp
         )
         Text(
@@ -38,20 +48,11 @@ fun ProfileUi(userId: String, userPw: String, userNick: String) {
         )
         Spacer(modifier = Modifier.height(50.dp))
         Text(
-            text = stringResource(R.string.text_pw),
+            text = stringResource(R.string.text_phone),
             fontSize = 20.sp
         )
         Text(
-            text = userPw,
-            fontSize = 15.sp
-        )
-        Spacer(modifier = Modifier.height(50.dp))
-        Text(
-            text = stringResource(R.string.text_nick),
-            fontSize = 20.sp
-        )
-        Text(
-            text = userNick,
+            text = userPhone,
             fontSize = 15.sp
         )
     }
