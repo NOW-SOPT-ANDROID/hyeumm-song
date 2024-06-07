@@ -7,6 +7,7 @@ import com.sopt.now.data.remote.dto.response.ResponseChangePasswordDto
 import com.sopt.now.data.remote.dto.response.ResponseLoginDto
 import com.sopt.now.data.remote.dto.response.ResponseSignUpDto
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.PATCH
 import retrofit2.http.POST
@@ -18,8 +19,8 @@ interface AuthService {
         @Body request: RequestSignUpDto
     ): Call<ResponseSignUpDto> //비동기->callback
     @POST("member/login")
-    fun postLogin(
+    suspend fun postLogin(
         @Body request : RequestLoginDto
-    ) : Call<ResponseLoginDto>
+    ) : Response<ResponseLoginDto>
 
 }
