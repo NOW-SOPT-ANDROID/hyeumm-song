@@ -3,7 +3,7 @@ package com.sopt.now.compose
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.sopt.now.compose.data.remote.service.AuthService
 import com.sopt.now.compose.data.remote.service.UserService
-import com.sopt.now.compose.presentation.auth.login.LoginActivity
+import com.sopt.now.compose.presentation.auth.signin.SigninActivity
 import kotlinx.serialization.json.Json
 import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
@@ -38,7 +38,7 @@ object ApiFactory {
     class HeaderInterceptor : Interceptor {
         @Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): Response = with(chain) {
-            val accessToken = LoginActivity.prefs.getString(USER_ID, "")
+            val accessToken = SigninActivity.prefs.getString(USER_ID, "")
             val newRequest = request().newBuilder()
                 .addHeader("memberId", accessToken)
                 .build()
