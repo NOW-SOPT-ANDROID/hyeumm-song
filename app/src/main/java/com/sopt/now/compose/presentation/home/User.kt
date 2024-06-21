@@ -1,4 +1,4 @@
-package com.sopt.now.compose.presentation.main.home
+package com.sopt.now.compose.presentation.home
 
 data class User(
     val profileImage: Int,

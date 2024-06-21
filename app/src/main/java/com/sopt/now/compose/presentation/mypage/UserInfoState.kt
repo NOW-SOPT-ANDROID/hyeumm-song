@@ -1,4 +1,4 @@
-package com.sopt.now.compose.presentation.main.mypage
+package com.sopt.now.compose.presentation.mypage
 
 data class UserInfoState(
     val isSuccess: Boolean,
