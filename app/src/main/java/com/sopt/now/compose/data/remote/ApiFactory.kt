@@ -1,6 +1,7 @@
-package com.sopt.now.compose
+package com.sopt.now.compose.data.remote
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.sopt.now.compose.BuildConfig
 import com.sopt.now.compose.data.remote.service.AuthService
 import com.sopt.now.compose.data.remote.service.FollowerService
 import com.sopt.now.compose.data.remote.service.UserService

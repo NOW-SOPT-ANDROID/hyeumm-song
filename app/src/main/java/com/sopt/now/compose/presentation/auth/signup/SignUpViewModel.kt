@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sopt.now.compose.data.remote.dto.request.RequestSignUpDto
 import com.sopt.now.compose.data.remote.dto.response.ResponseSignUpDto
-import com.sopt.now.compose.ServicePool
+import com.sopt.now.compose.data.remote.ServicePool
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
