@@ -1,4 +1,4 @@
-package com.sopt.now.compose.presentation.main.home
+package com.sopt.now.compose.presentation.home
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
