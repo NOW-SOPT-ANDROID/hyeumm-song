@@ -1,12 +1,8 @@
-package com.sopt.now.compose
+package com.sopt.now.compose.presentation.main
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -22,29 +18,24 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults.topAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sopt.now.compose.presentation.main.home.HomeScreen
-import com.sopt.now.compose.presentation.main.home.HomeViewModel
-import com.sopt.now.compose.presentation.main.mypage.ProfileScreen
-import com.sopt.now.compose.presentation.main.mypage.UserInfoViewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
+import com.sopt.now.compose.BottomNavigationItem
+import com.sopt.now.compose.R
+import com.sopt.now.compose.presentation.home.HomeScreen
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 
 class MainActivity : ComponentActivity() {
-    private val viewModel by viewModels<UserInfoViewModel>()
-    private var userId: String = ""
-    private var userNickname: String = ""
-    private var userPhone: String = ""// 변수를 이렇게 여기에 선언해도 괜찮은지...
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -53,57 +44,38 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val userId = intent.getStringExtra("userId").toString()
-
-                    initViews(userId)
                     MainScreen()
                 }
             }
         }
     }
 
-    private fun initObserver() {
-        viewModel.userInfoState.observe(this) { userInfoState ->
-            Toast.makeText(
-                this,
-                userInfoState.message,
-                Toast.LENGTH_SHORT,
-            ).show()
-            if (userInfoState.isSuccess) {
-                userId = userInfoState.userId ?: ""
-                userNickname = userInfoState.userNickname ?: ""
-                userPhone = userInfoState.userPhone ?: ""
-            }
-        }
-    }
-
-    private fun initViews(userId: String) {
-        viewModel.userInfo(userId.toInt())
-    }
-
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun MainScreen() {
-        var selectedItem by remember { mutableIntStateOf(0) }
+        val navController = rememberNavController() //Jetpack Compose를 사용할 때 NavController를 만들려면 rememberNavController()를 호출합니다.
         val items = listOf(
             BottomNavigationItem(
                 icon = Icons.Filled.Home,
-                label = "Home"
+                label = "Home",
+                route = "home"
             ),
             BottomNavigationItem(
                 icon = Icons.Filled.Search,
-                label = "Search"
+                label = "Search",
+                route = "search"
             ),
             BottomNavigationItem(
                 icon = Icons.Filled.Person,
-                label = "Profile"
+                label = "Profile",
+                route = "profile"
             )
         )
 
         Scaffold(
             topBar = {
                 TopAppBar(
-                    colors = topAppBarColors(
+                    colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = MaterialTheme.colorScheme.primaryContainer,
                         titleContentColor = MaterialTheme.colorScheme.primary,
                     ),
@@ -117,36 +89,43 @@ class MainActivity : ComponentActivity() {
                 )
             },
             bottomBar = {
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val currentRoute = navBackStackEntry?.destination?.route
                 NavigationBar {
-                    items.forEachIndexed { index, item ->
+                    items.forEach { item ->
                         NavigationBarItem(
                             icon = { Icon(item.icon, contentDescription = item.label) },
                             label = { Text(item.label) },
-                            selected = selectedItem == index,
-                            onClick = { selectedItem = index }
+                            selected = currentRoute == item.route,
+                            onClick = {
+                                navController.navigate(item.route) {
+                                    popUpTo(navController.graph.startDestinationId) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
+                            }
                         )
                     }
                 }
             },
         ) { innerPadding ->
-            Column(
-                modifier = Modifier
-                    .padding(innerPadding),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
+            NavHost(
+                navController = navController,
+                startDestination = "home",//이 두개는 필수이다.
+                modifier = Modifier.padding(innerPadding)
             ) {
-                when (selectedItem) {
-                    0 -> {
-                        HomeScreen(HomeViewModel())
-                    }
-
-                    1 -> {
-                        Text(text = "Search")
-                    }
-
-                    2 -> {
-                        initObserver()
-                        ProfileScreen(userNickname, userId, userPhone)
-                    }
+                composable("home") {
+                    HomeScreen()
+                    //이 부분 원래 HomeScreen(HomeviewModel)이었는데 이렇게 하면 처음에만 데이터가 있는 뷰모델을 넘겨주고 아니면 데이터가 없는 애들을 넘겨줘서 다른 화면으로 갔다오면 리스트에 아무것도 존재하지 않음.
+                }
+                composable("search") {
+                    Text(text = "Search")
+                }
+                composable("profile") {
+                    Text(text = "Profile")
+                    //ProfileScreen()
                 }
             }
         }
