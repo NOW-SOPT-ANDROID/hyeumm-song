@@ -9,7 +9,7 @@ import javax.inject.Qualifier
 
 @Module
 @InstallIn(SingletonComponent::class)
-object UrlModule {
+object Qualifier {
     @AuthBaseUrl
     @Provides
     fun provideAuthBaseUrl(): String = BuildConfig.AUTH_BASE_URL
