@@ -2,6 +2,7 @@ package com.sopt.now.compose.feature.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.now.compose.R
 import com.sopt.now.compose.domain.repository.FollowerRepository
 import com.sopt.now.compose.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,23 +36,21 @@ class HomeViewModel @Inject constructor(
             }.onSuccess { response ->
                 when (response) {
                     is UiState.Success -> {
-                        _homeSideEffect.emit(HomeSideEffect.SnackBar("팔로워를 성공적으로 불러왔습니다."))
+                        _homeSideEffect.emit(HomeSideEffect.SnackBar(R.string.follower_success))
                         _followerState.value = response
                     }
                     is UiState.Failure -> {
-                        _homeSideEffect.emit(HomeSideEffect.SnackBar("팔로워를 불러오지 못했습니다."))
+                        _homeSideEffect.emit(HomeSideEffect.SnackBar(R.string.follower_failed))
                         _followerState.value = response
                     }
                     else -> {
-                        _homeSideEffect.emit(HomeSideEffect.SnackBar("알 수 없는 오류가 발생했습니다."))
-                        _followerState.value = UiState.Failure("알 수 없는 오류가 발생했습니다.")
+                        _homeSideEffect.emit(HomeSideEffect.SnackBar(R.string.follower_error))
+                        _followerState.value = UiState.Failure(R.string.follower_error)
                     }
                 }
             }.onFailure {
-                _homeSideEffect.emit(HomeSideEffect.SnackBar("팔로워를 불러오지 못했습니다."))
-                _followerState.value = UiState.Failure(
-                    errorMessage = "팔로워 불러오기 실패"
-                )
+                _homeSideEffect.emit(HomeSideEffect.SnackBar(R.string.follower_failed))
+                _followerState.value = UiState.Failure(R.string.follower_error)
             }
         }
     }

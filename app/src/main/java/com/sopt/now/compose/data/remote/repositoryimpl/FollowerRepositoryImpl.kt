@@ -21,6 +21,6 @@ class FollowerRepositoryImpl @Inject constructor(
                 return UiState.Success(followerState)
             }
         }
-        return UiState.Failure(response.message())
+        return UiState.Failure(response.message().toInt()) // errorMessage를 int로 설정해서 위와같이 설정함. 약간 애매하다
     }
 }
