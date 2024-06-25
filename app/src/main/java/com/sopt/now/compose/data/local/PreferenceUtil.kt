@@ -1,4 +1,4 @@
-package com.sopt.now.compose
+package com.sopt.now.compose.data.local
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -34,7 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sopt.now.compose.presentation.main.MainActivity
-import com.sopt.now.compose.PreferenceUtil
+import com.sopt.now.compose.data.local.PreferenceUtil
 import com.sopt.now.compose.R
 import com.sopt.now.compose.component.CustomTextField
 import com.sopt.now.compose.data.remote.dto.request.RequestSigninDto

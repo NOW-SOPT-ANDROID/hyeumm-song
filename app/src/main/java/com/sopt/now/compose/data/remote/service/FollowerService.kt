@@ -10,5 +10,4 @@ interface FollowerService {
     suspend fun getFollower(
         @Query("page") page: Int = 2
     ): Response<ResponseFollowerDto>
-
 }

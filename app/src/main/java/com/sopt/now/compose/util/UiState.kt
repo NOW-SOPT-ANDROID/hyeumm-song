@@ -1,4 +1,4 @@
-package com.sopt.now.compose
+package com.sopt.now.compose.util
 
 sealed interface UiState<out T> {
 
