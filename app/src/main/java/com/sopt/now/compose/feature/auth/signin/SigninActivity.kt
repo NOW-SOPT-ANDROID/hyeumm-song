@@ -33,12 +33,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sopt.now.compose.feature.main.MainActivity
-import com.sopt.now.compose.data.local.PreferenceUtil
 import com.sopt.now.compose.R
 import com.sopt.now.compose.component.CustomTextField
+import com.sopt.now.compose.data.local.PreferenceUtil
 import com.sopt.now.compose.data.remote.dto.request.RequestSigninDto
 import com.sopt.now.compose.feature.auth.signup.SignUpActivity
+import com.sopt.now.compose.feature.main.MainActivity
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 
 class SigninActivity : ComponentActivity() {
@@ -61,6 +61,7 @@ class SigninActivity : ComponentActivity() {
                         password,
                         onIdChange = { id = it },
                         onPasswordChange = { password = it },
+                        onSigninClick = { viewModel.signin(getSigninRequestDto(id, password)) },
                         context
                     )
                 }
@@ -94,76 +95,82 @@ class SigninActivity : ComponentActivity() {
         )
     }
 
-    @Composable
-    fun SigninScreen(
-        id: String,
-        password: String,
-        onIdChange: (String) -> Unit,
-        onPasswordChange: (String) -> Unit,
-        context: Context
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(30.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = stringResource(R.string.text_signin_title),
-                fontSize = 30.sp
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Text(
-                text = stringResource(R.string.text_id)
-            )
-            CustomTextField(
-                value = id,
-                onValueChange = onIdChange,
-                placeholderRes = R.string.tf_signin_id,
-                leadingIcon = { Icon(Icons.Filled.Person, contentDescription = "User Icon") }
-            )
-            Spacer(modifier = Modifier.height(30.dp))
-            Text(text = stringResource(R.string.text_password))
-            CustomTextField(
-                value = password,
-                onValueChange = onPasswordChange,
-                placeholderRes = R.string.tf_signin_password,
-                leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = "Lock Icon") },
-                isPassword = true
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Button(
-                onClick = {
-                    viewModel.signin(getSigninRequestDto(id, password))
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                Text(stringResource(R.string.btn_signin))
-            }
-            Spacer(modifier = Modifier.height(20.dp))
-            Button(
-                onClick = {
-                    val intent = Intent(context, SignUpActivity::class.java)
-                    context.startActivity(intent)
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                Text(stringResource(R.string.btn_sign_up))
-            }
-        }
-    }
-
     @Preview(showBackground = true)
     @Composable
     fun SigninPreview() {
         NOWSOPTAndroidTheme {
-            SigninScreen("아이디", "비밀번호", onIdChange = {}, onPasswordChange = {}, LocalContext.current)
+            SigninScreen(
+                "아이디",
+                "비밀번호",
+                onIdChange = {},
+                onPasswordChange = {},
+                onSigninClick = { viewModel.signin(getSigninRequestDto("아이디", "비밀번호")) },
+                LocalContext.current
+            )
         }
     }
 
     companion object {
         lateinit var prefs: PreferenceUtil
+    }
+}
+
+@Composable
+fun SigninScreen(
+    id: String,
+    password: String,
+    onIdChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+    onSigninClick: () -> Unit,
+    context: Context
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(30.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = stringResource(R.string.text_signin_title),
+            fontSize = 30.sp
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        Text(
+            text = stringResource(R.string.text_id)
+        )
+        CustomTextField(
+            value = id,
+            onValueChange = onIdChange,
+            placeholderRes = R.string.tf_signin_id,
+            leadingIcon = { Icon(Icons.Filled.Person, contentDescription = "User Icon") }
+        )
+        Spacer(modifier = Modifier.height(30.dp))
+        Text(text = stringResource(R.string.text_password))
+        CustomTextField(
+            value = password,
+            onValueChange = onPasswordChange,
+            placeholderRes = R.string.tf_signin_password,
+            leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = "Lock Icon") },
+            isPassword = true
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        Button(
+            onClick = onSigninClick,
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Text(stringResource(R.string.btn_signin))
+        }
+        Spacer(modifier = Modifier.height(20.dp))
+        Button(
+            onClick = {
+                val intent = Intent(context, SignUpActivity::class.java)
+                context.startActivity(intent)
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Text(stringResource(R.string.btn_sign_up))
+        }
     }
 }
