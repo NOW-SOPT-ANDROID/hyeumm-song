@@ -1,4 +1,4 @@
-package com.sopt.now.compose.presentation.auth.signin
+package com.sopt.now.compose.feature.auth.signin
 
 import android.content.Context
 import android.content.Intent
@@ -33,12 +33,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.sopt.now.compose.presentation.main.MainActivity
+import com.sopt.now.compose.feature.main.MainActivity
 import com.sopt.now.compose.data.local.PreferenceUtil
 import com.sopt.now.compose.R
 import com.sopt.now.compose.component.CustomTextField
 import com.sopt.now.compose.data.remote.dto.request.RequestSigninDto
-import com.sopt.now.compose.presentation.auth.signup.SignUpActivity
+import com.sopt.now.compose.feature.auth.signup.SignUpActivity
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 
 class SigninActivity : ComponentActivity() {

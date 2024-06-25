@@ -1,4 +1,4 @@
-package com.sopt.now.compose.presentation.auth.signin
+package com.sopt.now.compose.feature.auth.signin
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

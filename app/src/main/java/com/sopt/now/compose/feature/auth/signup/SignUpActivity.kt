@@ -1,4 +1,4 @@
-package com.sopt.now.compose.presentation.auth.signup
+package com.sopt.now.compose.feature.auth.signup
 
 import android.os.Bundle
 import android.widget.Toast

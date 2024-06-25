@@ -1,4 +1,4 @@
-package com.sopt.now.compose.presentation.home
+package com.sopt.now.compose.feature.home
 
 import com.sopt.now.compose.data.remote.dto.response.Data
 

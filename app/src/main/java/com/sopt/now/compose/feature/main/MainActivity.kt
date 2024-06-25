@@ -1,4 +1,4 @@
-package com.sopt.now.compose.presentation.main
+package com.sopt.now.compose.feature.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -31,7 +31,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.sopt.now.compose.R
-import com.sopt.now.compose.presentation.home.HomeScreen
+import com.sopt.now.compose.feature.home.HomeScreen
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 import dagger.hilt.android.AndroidEntryPoint
 

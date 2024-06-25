@@ -1,4 +1,4 @@
-package com.sopt.now.compose.presentation.mypage
+package com.sopt.now.compose.feature.mypage
 
 import android.util.Log
 import androidx.lifecycle.LiveData

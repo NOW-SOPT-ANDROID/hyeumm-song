@@ -4,7 +4,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import com.sopt.now.compose.BuildConfig
 import com.sopt.now.compose.data.remote.service.AuthService
 import com.sopt.now.compose.data.remote.service.UserService
-import com.sopt.now.compose.presentation.auth.signin.SigninActivity
+import com.sopt.now.compose.feature.auth.signin.SigninActivity
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent

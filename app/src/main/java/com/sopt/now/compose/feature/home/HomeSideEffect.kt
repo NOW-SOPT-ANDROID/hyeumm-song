@@ -1,4 +1,4 @@
-package com.sopt.now.compose.presentation.home
+package com.sopt.now.compose.feature.home
 
 sealed class HomeSideEffect {
     //data class SnackBar(val message: Int) : HomeSideEffect()

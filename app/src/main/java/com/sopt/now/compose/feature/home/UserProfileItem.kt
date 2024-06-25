@@ -1,4 +1,4 @@
-package com.sopt.now.compose.presentation.home
+package com.sopt.now.compose.feature.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column

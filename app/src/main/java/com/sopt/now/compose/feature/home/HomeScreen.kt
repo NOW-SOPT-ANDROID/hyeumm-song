@@ -1,4 +1,4 @@
-package com.sopt.now.compose.presentation.home
+package com.sopt.now.compose.feature.home
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Column
