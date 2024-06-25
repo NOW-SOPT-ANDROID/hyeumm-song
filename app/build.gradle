@@ -72,6 +72,7 @@ dependencies {
     androidTestImplementation 'androidx.compose.ui:ui-test-junit4'
     debugImplementation 'androidx.compose.ui:ui-tooling'
     debugImplementation 'androidx.compose.ui:ui-test-manifest'
+
     //view model
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
@@ -87,6 +88,7 @@ dependencies {
 
     //nav
     implementation "androidx.navigation:navigation-compose:2.7.7"
+    implementation 'androidx.hilt:hilt-navigation-compose:1.2.0'
 
     // coil
     implementation 'io.coil-kt:coil:2.6.0'
@@ -96,6 +98,6 @@ dependencies {
     ksp 'androidx.room:room-compiler:2.6.1'
 
     //hilt
-    implementation "com.google.dagger:hilt-android:2.44"
-    ksp "com.google.dagger:hilt-compiler:2.44"
+    implementation "com.google.dagger:hilt-android:2.48"
+    ksp "com.google.dagger:hilt-compiler:2.48"
 }
