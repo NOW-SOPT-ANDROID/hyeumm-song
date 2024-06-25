@@ -31,7 +31,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.sopt.now.compose.R
-import com.sopt.now.compose.feature.home.HomeScreen
+import com.sopt.now.compose.feature.home.HomeRoute
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -118,7 +118,7 @@ class MainActivity : ComponentActivity() {
                 modifier = Modifier.padding(innerPadding)
             ) {
                 composable("home") {
-                    HomeScreen()
+                    HomeRoute()
                     //이 부분 원래 HomeScreen(HomeviewModel)이었는데 이렇게 하면 처음에만 데이터가 있는 뷰모델을 넘겨주고 아니면 데이터가 없는 애들을 넘겨줘서 다른 화면으로 갔다오면 리스트에 아무것도 존재하지 않음.
                 }
                 composable("search") {
