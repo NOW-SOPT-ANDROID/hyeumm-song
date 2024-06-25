@@ -3,7 +3,6 @@ package com.sopt.now.compose.presentation.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.now.compose.domain.repository.FollowerRepository
-import com.sopt.now.compose.HomeSideEffect
 import com.sopt.now.compose.util.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

@@ -1,4 +1,4 @@
-package com.sopt.now.compose.data.remote
+package com.sopt.now.compose.di
 
 import com.sopt.now.compose.BuildConfig
 import dagger.Module

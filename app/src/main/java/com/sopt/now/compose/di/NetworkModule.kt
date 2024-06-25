@@ -1,4 +1,4 @@
-package com.sopt.now.compose.data.remote
+package com.sopt.now.compose.di
 
 import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
