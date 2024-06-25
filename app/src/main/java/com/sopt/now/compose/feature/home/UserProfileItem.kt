@@ -14,10 +14,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.sopt.now.compose.data.remote.dto.response.Data
+import com.sopt.now.compose.domain.entity.response.ResponseFollowerEntity
 
 @Composable
-fun UserProfileItem(user: Data) {
+fun UserProfileItem(user: ResponseFollowerEntity) {
     Row(
         modifier = Modifier
             .fillMaxWidth()

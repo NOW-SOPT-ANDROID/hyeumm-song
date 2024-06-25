@@ -2,6 +2,7 @@ package com.sopt.now.compose.data.remote.repositoryimpl
 
 import com.sopt.now.compose.util.UiState
 import com.sopt.now.compose.data.remote.datasource.FollowerDataSource
+import com.sopt.now.compose.data.remote.dto.response.toResponseUserList
 import com.sopt.now.compose.domain.repository.FollowerRepository
 import com.sopt.now.compose.feature.home.FollowerState
 import javax.inject.Inject
@@ -16,7 +17,7 @@ class FollowerRepositoryImpl @Inject constructor(
                 val followerState = FollowerState(
                     isSuccess = true,
                     message = "Success",
-                    followers = result.data
+                    followers = result.toResponseUserList()
                 )
                 return UiState.Success(followerState)
             }

@@ -100,4 +100,7 @@ dependencies {
     //hilt
     implementation "com.google.dagger:hilt-android:2.48"
     ksp "com.google.dagger:hilt-compiler:2.48"
+
+    // Immutable
+    implementation 'org.jetbrains.kotlinx:kotlinx-collections-immutable:0.3.7'
 }
