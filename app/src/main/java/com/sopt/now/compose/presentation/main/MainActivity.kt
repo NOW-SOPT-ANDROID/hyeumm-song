@@ -30,11 +30,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.sopt.now.compose.BottomNavigationItem
 import com.sopt.now.compose.R
 import com.sopt.now.compose.presentation.home.HomeScreen
 import com.sopt.now.compose.ui.theme.NOWSOPTAndroidTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

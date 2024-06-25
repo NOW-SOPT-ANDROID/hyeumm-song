@@ -15,14 +15,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
 import com.sopt.now.compose.HomeSideEffect
-import com.sopt.now.compose.UiState
+import com.sopt.now.compose.util.UiState
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = androidx.lifecycle.viewmodel.compose.viewModel()) { //추후에 hilt 뷰모델로 처리가능함.
+fun HomeScreen(
+    viewModel: HomeViewModel = hiltViewModel()
+    //viewModel: HomeViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
+    // 추후에 hilt 뷰모델로 처리가능함 -> 처리완료
+) {
     val followerState = viewModel.followerState.collectAsStateWithLifecycle()
     val state = followerState.value
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -66,20 +71,5 @@ fun HomeScreen(viewModel: HomeViewModel = androidx.lifecycle.viewmodel.compose.v
                 Text(text = state.errorMessage)
             }
         }
-
-// UiState 적용 전 기존 코드
-//        followerState.value?.let { state ->
-//            if (state.isSuccess) {
-//                LazyColumn {
-//                    //여기에 사용자 정보도 함께 출력하는 코드 추가 작성 필요
-//                    items(state.followers) { followers ->
-//                        UserProfileItem(followers)
-//                        HorizontalDivider(thickness = 1.dp, color = Color.DarkGray)
-//                    }
-//                }
-//            } else {
-//                Text(text = state.message)
-//            }
-//        }
     }
 }
