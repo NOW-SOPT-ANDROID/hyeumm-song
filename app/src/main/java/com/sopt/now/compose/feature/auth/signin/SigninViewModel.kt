@@ -7,7 +7,6 @@ import com.sopt.now.compose.data.remote.dto.request.RequestSigninDto
 
 
 class SigninViewModel : ViewModel() {
-    //private val authService by lazy { ServicePool.authService }
     private val _signinState = MutableLiveData<SigninState>()
     val signinState: LiveData<SigninState>
         get() = _signinState
@@ -33,41 +32,9 @@ class SigninViewModel : ViewModel() {
                 )
             }
         }
-//        authService.postLogin(request).enqueue(object : Callback<ResponseSigninDto> {
-//            override fun onResponse(
-//                call: Call<ResponseSigninDto>,
-//                response: Response<ResponseSigninDto>,
-//            ) {
-//                if (response.isSuccessful) {
-//                    val data: ResponseSigninDto? = response.body()
-//                    userId = response.headers()[LOCATION]
-//                    userId?.let { SigninActivity.prefs.setString(USER_ID, it) }
-//                    _signinState.value = SigninState(
-//                        isSuccess = true,
-//                        message = "로그인 성공 유저의 ID는 $userId 입니다"
-//                    )
-//                    Log.d("Login", "data: $data, userId: $userId")
-//                } else {
-//                    val error = response.message()
-//                    _signinState.value = SigninState(
-//                        isSuccess = false,
-//                        message = "로그인이 실패했습니다 $error"
-//                    )
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<ResponseSigninDto>, t: Throwable) {
-//                _signinState.value = SigninState(
-//                    isSuccess = false,
-//                    message = "서버에러"
-//                )
-//            }
-//        }
-//        )
     }
 
     companion object {
         const val USER_ID = "userId"
-        const val LOCATION = "location"
     }
 }
