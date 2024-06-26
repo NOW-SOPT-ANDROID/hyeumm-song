@@ -1,9 +1,10 @@
 package com.sopt.now.compose.feature.home
 
+import com.sopt.now.compose.R
 import com.sopt.now.compose.domain.entity.response.ResponseFollowerEntity
 
 data class FollowerState(
     val isSuccess: Boolean = false,
-    val message: String = "",
+    val message: Int = R.string.follower_failed,
     val followers: List<ResponseFollowerEntity> = emptyList()
 )

@@ -1,8 +1,7 @@
 package com.sopt.now.compose.domain.repository
 
-import com.sopt.now.compose.util.UiState
-import com.sopt.now.compose.feature.home.FollowerState
+import com.sopt.now.compose.domain.entity.response.ResponseFollowerEntity
 
 interface FollowerRepository {
-    suspend fun getFollower() : UiState<FollowerState>
+    suspend fun getFollower() : List<ResponseFollowerEntity>
 }

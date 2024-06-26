@@ -19,12 +19,12 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val repository: FollowerRepository
 ) : ViewModel() {
-    //stateFlow
+    // StateFlow
     private val _followerState = MutableStateFlow<UiState<FollowerState>>(UiState.Loading)
     val followerState: StateFlow<UiState<FollowerState>>
         get() = _followerState.asStateFlow()
 
-    //sharedFlow
+    // SharedFlow
     private val _homeSideEffect = MutableSharedFlow<HomeSideEffect>()
     val homeSideEffect: SharedFlow<HomeSideEffect>
         get() = _homeSideEffect.asSharedFlow()
@@ -33,24 +33,18 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             runCatching {
                 repository.getFollower()
-            }.onSuccess { response ->
-                when (response) {
-                    is UiState.Success -> {
-                        _homeSideEffect.emit(HomeSideEffect.SnackBar(R.string.follower_success))
-                        _followerState.value = response
-                    }
-                    is UiState.Failure -> {
-                        _homeSideEffect.emit(HomeSideEffect.SnackBar(R.string.follower_failed))
-                        _followerState.value = response
-                    }
-                    else -> {
-                        _homeSideEffect.emit(HomeSideEffect.SnackBar(R.string.follower_error))
-                        _followerState.value = UiState.Failure(R.string.follower_error)
-                    }
-                }
+            }.onSuccess { followers ->
+                _followerState.value = UiState.Success(
+                    FollowerState(
+                        isSuccess = true,
+                        message = R.string.follower_success,
+                        followers = followers
+                    )
+                )
+                _homeSideEffect.emit(HomeSideEffect.SnackBar(R.string.follower_success))
             }.onFailure {
+                _followerState.value = UiState.Failure(R.string.follower_failed)
                 _homeSideEffect.emit(HomeSideEffect.SnackBar(R.string.follower_failed))
-                _followerState.value = UiState.Failure(R.string.follower_error)
             }
         }
     }
