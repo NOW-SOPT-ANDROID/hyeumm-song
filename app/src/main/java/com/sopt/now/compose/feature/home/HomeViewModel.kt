@@ -20,9 +20,9 @@ class HomeViewModel @Inject constructor(
     private val repository: FollowerRepository
 ) : ViewModel() {
     // StateFlow
-    private val _followerState = MutableStateFlow<UiState<FollowerState>>(UiState.Loading)
-    val followerState: StateFlow<UiState<FollowerState>>
-        get() = _followerState.asStateFlow()
+    private val _homeState = MutableStateFlow<UiState<HomeState>>(UiState.Loading)
+    val homeState: StateFlow<UiState<HomeState>>
+        get() = _homeState.asStateFlow()
 
     // SharedFlow
     private val _homeSideEffect = MutableSharedFlow<HomeSideEffect>()
@@ -34,8 +34,8 @@ class HomeViewModel @Inject constructor(
             runCatching {
                 repository.getFollower()
             }.onSuccess { followers ->
-                _followerState.value = UiState.Success(
-                    FollowerState(
+                _homeState.value = UiState.Success(
+                    HomeState(
                         isSuccess = true,
                         message = R.string.follower_success,
                         followers = followers
@@ -43,7 +43,7 @@ class HomeViewModel @Inject constructor(
                 )
                 _homeSideEffect.emit(HomeSideEffect.SnackBar(R.string.follower_success))
             }.onFailure {
-                _followerState.value = UiState.Failure(R.string.follower_failed)
+                _homeState.value = UiState.Failure(R.string.follower_failed)
                 _homeSideEffect.emit(HomeSideEffect.SnackBar(R.string.follower_failed))
             }
         }

@@ -25,7 +25,7 @@ import com.sopt.now.compose.util.UiState
 fun HomeRoute(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-    val followerState = viewModel.followerState.collectAsStateWithLifecycle()
+    val followerState = viewModel.homeState.collectAsStateWithLifecycle()
     val state = followerState.value
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = LocalContext.current
@@ -51,7 +51,7 @@ fun HomeRoute(
 }
 
 @Composable
-fun HomeScreen(state: UiState<FollowerState>) {
+fun HomeScreen(state: UiState<HomeState>) {
     Column(
         modifier = Modifier
             .fillMaxSize()
