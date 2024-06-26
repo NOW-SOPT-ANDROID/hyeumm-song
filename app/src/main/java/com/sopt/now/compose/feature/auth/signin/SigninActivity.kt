@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -127,7 +128,8 @@ fun SigninScreen(
             value = id,
             onValueChange = onIdChange,
             placeholderRes = R.string.tf_signin_id,
-            leadingIcon = { Icon(Icons.Filled.Person, contentDescription = "User Icon") }
+            leadingIcon = { Icon(Icons.Filled.Person, contentDescription = "User Icon") },
+            singleLine = true
         )
         Spacer(modifier = Modifier.height(30.dp))
         Text(text = stringResource(R.string.text_password))
@@ -136,7 +138,8 @@ fun SigninScreen(
             onValueChange = onPasswordChange,
             placeholderRes = R.string.tf_signin_password,
             leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = "Lock Icon") },
-            isPassword = true
+            singleLine = true,
+            keyboardType = KeyboardType.Password
         )
         Spacer(modifier = Modifier.weight(1f))
         Button(
@@ -159,6 +162,7 @@ fun SigninScreen(
         }
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun SigninPreview() {
