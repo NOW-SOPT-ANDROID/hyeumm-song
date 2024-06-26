@@ -1,6 +1,6 @@
 package com.sopt.now.compose.feature.auth.signin
 
 data class SigninState(
-    val isSuccess: Boolean,
-    val message: String
+    val isSuccess: Boolean = false,
+    val message: String = ""
 )

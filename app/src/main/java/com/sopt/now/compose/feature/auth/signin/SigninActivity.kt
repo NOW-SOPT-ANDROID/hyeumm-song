@@ -73,12 +73,11 @@ class SigninActivity : ComponentActivity() {
 
     private fun initObserver() {
         viewModel.signinState.observe(this) { signinState ->
-            Toast.makeText(
-                this@SigninActivity,
-                signinState.message,
-                Toast.LENGTH_SHORT
-            ).show()
-
+//            Toast.makeText(
+//                this@SigninActivity,
+//                signinState.message,
+//                Toast.LENGTH_SHORT
+//            ).show() 질문하기
             if (signinState.isSuccess) {
                 intent = Intent(this@SigninActivity, MainActivity::class.java)
                 startActivity(intent)
