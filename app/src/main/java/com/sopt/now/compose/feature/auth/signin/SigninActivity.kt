@@ -108,10 +108,11 @@ fun SigninScreen(
     onIdChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
     onSigninClick: () -> Unit,
-    context: Context
+    context: Context,
+    modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(30.dp),
         horizontalAlignment = Alignment.CenterHorizontally

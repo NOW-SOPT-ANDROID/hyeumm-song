@@ -17,9 +17,12 @@ import coil.compose.rememberAsyncImagePainter
 import com.sopt.now.compose.domain.entity.response.ResponseFollowerEntity
 
 @Composable
-fun UserProfileItem(user: ResponseFollowerEntity) {
+fun UserProfileItem(
+    user: ResponseFollowerEntity,
+    modifier: Modifier = Modifier
+) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically

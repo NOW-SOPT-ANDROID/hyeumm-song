@@ -51,9 +51,12 @@ fun HomeRoute(
 }
 
 @Composable
-fun HomeScreen(state: UiState<HomeState>) {
+fun HomeScreen(
+    state: UiState<HomeState>,
+    modifier: Modifier = Modifier
+) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally

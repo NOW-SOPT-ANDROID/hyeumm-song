@@ -53,7 +53,9 @@ class MainActivity : ComponentActivity() {
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun MainScreen() {
+    fun MainScreen(
+        modifier: Modifier = Modifier
+    ) {
         val navController = rememberNavController() //Jetpack Compose를 사용할 때 NavController를 만들려면 rememberNavController()를 호출합니다.
         val items = listOf(
             BottomNavigationItem(
@@ -115,7 +117,7 @@ class MainActivity : ComponentActivity() {
             NavHost(
                 navController = navController,
                 startDestination = "home",//이 두개는 필수이다.
-                modifier = Modifier.padding(innerPadding)
+                modifier = modifier.padding(innerPadding)
             ) {
                 composable("home") {
                     HomeRoute()

@@ -99,10 +99,11 @@ class SignUpActivity : ComponentActivity() {
         onIdChange: (String) -> Unit,
         onPasswordChange: (String) -> Unit,
         onNicknameChange: (String) -> Unit,
-        onPhoneChange: (String) -> Unit
+        onPhoneChange: (String) -> Unit,
+        modifier: Modifier = Modifier
     ) {
         Column(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxSize()
                 .padding(30.dp),
             horizontalAlignment = Alignment.CenterHorizontally

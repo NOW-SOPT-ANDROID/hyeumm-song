@@ -17,9 +17,14 @@ import androidx.compose.ui.unit.sp
 import com.sopt.now.compose.R
 
 @Composable
-fun ProfileScreen(userNickname: String, userId: String, userPhone: String) {
+fun ProfileScreen(
+    userNickname: String,
+    userId: String,
+    userPhone: String,
+    modifier: Modifier = Modifier
+) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(30.dp),
         horizontalAlignment = Alignment.CenterHorizontally
