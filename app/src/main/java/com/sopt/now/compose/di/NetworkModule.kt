@@ -44,13 +44,4 @@ object NetworkModule {
             .client(okHttpClient)
             .addConverterFactory(json.asConverterFactory(CONTENT_TYPE.toMediaType()))
     }
-
-    @Singleton
-    @Provides
-    fun provideFriendService(
-        retrofitBuilder: Retrofit.Builder,
-        @FollowerBaseUrl url: String,
-    ): FollowerService {
-        return retrofitBuilder.baseUrl(url).build().create(FollowerService::class.java)
-    }
 }
