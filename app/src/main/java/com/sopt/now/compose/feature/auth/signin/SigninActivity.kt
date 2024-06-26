@@ -95,21 +95,6 @@ class SigninActivity : ComponentActivity() {
         )
     }
 
-    @Preview(showBackground = true)
-    @Composable
-    fun SigninPreview() {
-        NOWSOPTAndroidTheme {
-            SigninScreen(
-                "아이디",
-                "비밀번호",
-                onIdChange = {},
-                onPasswordChange = {},
-                onSigninClick = { viewModel.signin(getSigninRequestDto("아이디", "비밀번호")) },
-                LocalContext.current
-            )
-        }
-    }
-
     companion object {
         lateinit var prefs: PreferenceUtil
     }
@@ -172,5 +157,19 @@ fun SigninScreen(
         ) {
             Text(stringResource(R.string.btn_sign_up))
         }
+    }
+}
+@Preview(showBackground = true)
+@Composable
+fun SigninPreview() {
+    NOWSOPTAndroidTheme {
+        SigninScreen(
+            "아이디",
+            "비밀번호",
+            onIdChange = {},
+            onPasswordChange = {},
+            onSigninClick = { },
+            LocalContext.current
+        )
     }
 }
