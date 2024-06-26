@@ -3,7 +3,6 @@ package com.sopt.now.compose.feature.auth.signin
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -23,9 +22,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -53,17 +50,26 @@ class SigninActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    var id by remember { mutableStateOf("") }
-                    var password by remember { mutableStateOf("") }
                     val context = LocalContext.current
-
+                    val signinState by viewModel.signinState.observeAsState(SigninState())
                     SigninScreen(
-                        id,
-                        password,
-                        onIdChange = { id = it },
-                        onPasswordChange = { password = it },
-                        onSigninClick = { viewModel.signin(getSigninRequestDto(id, password)) },
-                        context
+                        id = signinState.id,
+                        password = signinState.password,
+                        onIdChange = { id ->
+                            viewModel.fetchId(id)
+                        },
+                        onPasswordChange = { password ->
+                            viewModel.fetchPassword(password)
+                        },
+                        onSigninClick = {
+                            viewModel.signin(
+                                getSigninRequestDto(
+                                    signinState.id,
+                                    signinState.password
+                                )
+                            )
+                        },
+                        context = context
                     )
                 }
             }
