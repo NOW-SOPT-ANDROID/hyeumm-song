@@ -19,6 +19,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.flowWithLifecycle
+import com.sopt.now.compose.R
 import com.sopt.now.compose.util.UiState
 
 @Composable
@@ -52,7 +53,7 @@ fun HomeRoute(
 
 @Composable
 fun HomeScreen(
-    state: UiState<HomeState>,
+    state: HomeState,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -61,13 +62,13 @@ fun HomeScreen(
             .padding(horizontal = 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        when (state) {
+        when (state.followerState) {
             is UiState.Loading ->
                 Text(text = "loading...")
 
             is UiState.Success -> {
                 LazyColumn {
-                    items(state.data.followers) { follower ->
+                    items(state.followerState.data) { follower ->
                         UserProfileItem(follower)
                         HorizontalDivider(thickness = 1.dp, color = Color.DarkGray)
                     }
@@ -75,7 +76,7 @@ fun HomeScreen(
             }
 
             is UiState.Failure -> {
-                Text(text = state.errorMessage.toString())
+                Text(text = R.string.follower_error.toString())
             }
         }
     }
