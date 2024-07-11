@@ -1,8 +1,8 @@
 package com.sopt.now.compose.data.remote.service
 
-import com.sopt.now.compose.data.remote.dto.request.RequestLoginDto
+import com.sopt.now.compose.data.remote.dto.request.RequestSigninDto
 import com.sopt.now.compose.data.remote.dto.request.RequestSignUpDto
-import com.sopt.now.compose.data.remote.dto.response.ResponseLoginDto
+import com.sopt.now.compose.data.remote.dto.response.ResponseSigninDto
 import com.sopt.now.compose.data.remote.dto.response.ResponseSignUpDto
 import retrofit2.Call
 import retrofit2.http.Body
@@ -15,8 +15,8 @@ interface AuthService {
         @Body request: RequestSignUpDto
     ): Call<ResponseSignUpDto> //비동기->callback
 
-    @POST("member/login")
+    @POST("member/signin")
     fun postLogin(
-        @Body request : RequestLoginDto
-    ) : Call<ResponseLoginDto>
+        @Body request : RequestSigninDto
+    ) : Call<ResponseSigninDto>
 }
